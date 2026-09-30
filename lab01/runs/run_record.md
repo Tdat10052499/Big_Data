@@ -1,10 +1,10 @@
 # Run record: Lab 1 (Data Quality and HDFS)
 
-Sinh viên: [ĐIỀN: họ tên, mã sinh viên]
+Sinh viên: Hồ Du Tuấn Đạt - 2374802010097
 Tài khoản Linux: tdat1 (máy DESKTOP-ANNRGGL)
 Thời gian thực hiện: 30/09/2026 đến 01/10/2026 (theo mốc thời gian trong ảnh và log). [ĐIỀN: xác nhận lại]
 
-Quy ước: mọi số dưới đây được đọc từ ảnh trong `lab01/figures/` hoặc từ file trong repo. Mục `[ĐIỀN]` là số chưa có bằng chứng, cần tự đo.
+Quy ước: mọi số dưới đây được đọc từ ảnh trong `lab01/figures/` hoặc từ file trong repo, hoặc được tính từ các số đó (có ghi công thức). Mục `[ĐIỀN]` là thông tin chưa có bằng chứng, cần tự xác nhận hoặc tự đo.
 
 ## 1. Môi trường
 
@@ -35,7 +35,7 @@ Chế độ: pseudo-distributed trên một máy, replication = 1, block size = 
 ## 3. Cấu hình đã áp dụng
 
 - Bốn file XML (core-site, hdfs-site, mapred-site, yarn-site) lưu tại `setup/`; cả bốn đều qua kiểm tra cú pháp XML (`figures/setup_06_xml_valid.png`).
-- Khối biến môi trường: `setup/bashrc_snippet.sh`.
+- Khối biến môi trường: `setup/bashrc_snippet.sh` (một khối 8 dòng export, đã dọn dòng `EOF` thừa và khối lặp).
 - Các dòng `*_USER` trong `hadoop-env.sh`: đã sửa từ `<tdat1>` thành `tdat1` (xem sự cố 1). [ĐIỀN: xác nhận đã kiểm tra cả 5 dòng và `bash -n` in `SYNTAX OK`: có/không]
 - Spark: `spark-env.sh` đặt `JAVA_HOME` và `HADOOP_CONF_DIR`; mức log đặt `warn`.
 
@@ -54,14 +54,12 @@ Chế độ: pseudo-distributed trên một máy, replication = 1, block size = 
 
 - Dữ liệu thô: `~/bda/data/raw` (ngoài repo); trong HDFS: `/user/tdat1/nyc/raw` và `/user/tdat1/nyc/ref`.
 - Mã trong `lab01/src/` (`p1_schema.py` đến `p5_card.py`, `lab01_profile.ipynb`) do giảng viên cung cấp trong `Lab01_student_files.zip`.
-- Phát hiện: `p1_schema.py` (và có thể các script khác) đặt sẵn đường dẫn HDFS `/user/thaianh/...`. Phải đổi thành `/user/tdat1/...` trước khi chạy. Các file tôi đã sửa: [ĐIỀN: liệt kê sau khi sửa, hoặc "chưa sửa"].
+- Phát hiện: các script `p1_schema.py`, `p2_nulls.py`, `p3_defects.py`, `p4_curate.py`, `p5_card.py` đặt sẵn đường dẫn HDFS `/user/thaianh/...`. Phải đổi thành `/user/tdat1/...` trước khi chạy. Tính đến commit `0868998` trong repo, các file này **chưa được sửa**. Các file tôi đã sửa: [ĐIỀN: liệt kê sau khi sửa].
 - Script `bda-start.sh`, `bda-status.sh`, `bda-stop.sh` do giảng viên cung cấp, không đưa vào repo.
 
 ## 5. Đo đạc
 
 ### 5.1. Nạp dữ liệu vào HDFS (§5.2)
-- Lệnh: `time hdfs dfs -put -f ~/bda/data/raw/*.parquet /user/tdat1/nyc/raw/`
-- Thời gian thực (`real`): [ĐIỀN]. Ảnh `data_03_hdfs_ls_time.png` chỉ có kết quả `ls`/`du`, không có dòng `real`; cần đo lại (xem Bài 9).
 - Kích thước trong HDFS (`hdfs dfs -ls -h`, `figures/data_03_hdfs_ls_time.png`):
 
 | File | Kích thước | Replication |
@@ -71,20 +69,35 @@ Chế độ: pseudo-distributed trên một máy, replication = 1, block size = 
 | yellow_tripdata_2024-03.parquet | 57.3 M | 1 |
 | taxi_zone_lookup.csv (`nyc/ref`) | 12.0 K | 1 |
 
-- Tổng dung lượng `nyc/raw` (`hdfs dfs -du -s`): 160389205 byte (cột thứ hai, gồm replication, cũng là 160389205 vì replication = 1).
-- Ghi chú: thời gian `hdfs dfs -put` gồm cả thời gian khởi động JVM; nguồn nằm trên đĩa Linux, không phải `/mnt/c`.
+- Tổng dung lượng `nyc/raw` (`hdfs dfs -du -s`): 160389205 byte (152.96 MiB, 160.39 MB). Cột thứ hai (gồm replication) cũng là 160389205 vì replication = 1.
+
+### 5.1b. Thời gian upload (ba lần, từ đường dẫn sạch)
+- Lệnh (mỗi lần: `hdfs dfs -rm -r -f -skipTrash /user/tdat1/nyc/raw`, `mkdir -p`, rồi put): `time hdfs dfs -put ~/bda/data/raw/*.parquet /user/tdat1/nyc/raw/`
+- Bằng chứng: `figures/data_04_upload_times.png`
+
+| Lần | `real` | Throughput (160.39 MB / real) |
+|---|---|---|
+| 1 | 2.093 s | 76.6 MB/s |
+| 2 | 2.254 s | 71.2 MB/s |
+| 3 | 2.536 s | 63.2 MB/s |
+
+- Trung bình thời gian: 2.294 s; nhanh nhất 2.093 s; chậm nhất 2.536 s. Throughput tính bằng tổng byte chia `real`, nên là throughput hiệu dụng của cả lệnh (gồm khởi động JVM), không phải tốc độ ghi thuần của HDFS.
+- Ghi chú: nguồn nằm trên đĩa Linux, không phải `/mnt/c`; có thể có hiệu ứng bộ nhớ đệm của hệ điều hành giữa các lần chạy. Số này sẽ được dùng lại cho Bài 9 (cần bổ sung phép đo Spark `count`).
 
 ### 5.2. Trạng thái cluster sau khi nạp
 - Trang NameNode (`figures/setup_08b_namenode_ui.png`): Live Nodes = 1, Dead Nodes = 0, Safemode off; 17 files and directories, 5 blocks; DFS Used = 154.21 MB (0.01%); Configured Capacity = 1006.85 GB; Started Thu Oct 01 01:13:29 +0700 2026.
 - `bda-status.sh` (`figures/setup_11_bda_status.png`): NameNode, DataNode, ResourceManager, NodeManager, JobHistoryServer và sshd `UP`; Spark History Server, Kafka, MongoDB `DOWN` (chưa cài, không cần cho Lab 1); Live datanodes (1); Safe mode OFF.
 
-### 5.3. Block và lưu trữ (§6) [chưa thực hiện]
-- Kết quả `hdfs fsck /user/tdat1/nyc/raw -files -blocks -locations`: [ĐIỀN]
-- Số block mỗi file: [ĐIỀN]
-- Kích thước thư mục NameNode (`du -sh /opt/hadoop/data/nn`): [ĐIỀN]
-- Kích thước thư mục DataNode (`du -sh /opt/hadoop/data/dn`): [ĐIỀN]
-- Tỷ lệ DataNode / NameNode: [ĐIỀN]
-- Nhận định một câu (tự viết từ số đo): [ĐIỀN]
+### 5.3. Block và lưu trữ (§6)
+- Lệnh: `hdfs fsck /user/tdat1/nyc/raw -files -blocks` (bằng chứng: `figures/hdfs_01_fsck_raw.png`, 25 dòng cuối của output).
+- Kết quả: `The filesystem under path '/user/tdat1/nyc/raw' is HEALTHY`; Minimally replicated blocks: 3 (100.0 %); Over/Under/Mis-replicated blocks: 0; Default replication factor: 1; Average block replication: 1.0; Missing blocks: 0; Corrupt blocks: 0; Missing replicas: 0 (0.0 %).
+- Số block: 3 block cho 3 file, tức mỗi file một block (suy ra từ "Minimally replicated blocks: 3" và 3 file trong `nyc/raw`; ảnh chỉ chụp phần cuối nên không thấy dòng liệt kê block của từng file). Giải thích: mỗi file nhỏ hơn block size 128 MB (47.6, 48.0, 57.3 MB) nên HDFS không cần cắt.
+- Thứ tự thời gian: lệnh `fsck` kết thúc lúc Wed Sep 30 18:29:04 UTC 2026, trước ba lần nạp lại lúc khoảng 18:40 (UTC, theo `ls`). Dữ liệu nạp lại giống hệt nên kết luận về block vẫn áp dụng; ghi chú để thứ tự được nêu đúng.
+- Thư mục lưu trữ (`figures/hdfs_02_nn_vs_dn.png`):
+  - NameNode (`du -sh /opt/hadoop/data/nn`): 2.1M; chứa metadata nhỏ: `VERSION` (213 byte), các file `edits_*` (có file 1048576 byte).
+  - DataNode (`du -sh /opt/hadoop/data/dn`): 155M; chứa các file `blk_1073741825` đến `blk_1073741829` (5 block, khớp "5 blocks" trên trang NameNode: 3 Parquet, 1 CSV, 1 `hello.txt`). Tên file gốc không xuất hiện trong thư mục này.
+  - Tỷ lệ DataNode / NameNode: khoảng 73.8 lần (155 / 2.1; dùng giá trị `du -sh` đã làm tròn nên chỉ là ước lượng).
+- Nhận định (bản nháp từ số đo, cần tự đọc lại và sửa cho đúng ý): thư mục NameNode nhỏ (2.1M) nhưng là phần duy nhất nối các block `blk_*` ẩn danh với tên file, nên tôi sẽ sao lưu thư mục NameNode thường xuyên hơn; thư mục DataNode lớn hơn khoảng 74 lần nên sao lưu tốn kém hơn và nhờ replication ở cluster thật mới được bảo vệ. Giới hạn: chỉ có 5 file, nên tỷ lệ này không ngoại suy được cho cluster lớn (kích thước NameNode phụ thuộc số file và số block, không phụ thuộc số byte).
 
 ### 5.4. MapReduce (§10) [chưa thực hiện]
 - Map input / Map output / Reduce input / Reduce output records: [ĐIỀN]
@@ -110,6 +123,6 @@ Chế độ: pseudo-distributed trên một máy, replication = 1, block size = 
 
 ## 8. Khai báo hỗ trợ AI (bản nháp, cần xác nhận)
 
-Tôi dùng trợ lý AI (Claude) để: đọc và tóm tắt tài liệu Lab 1; hướng dẫn thứ tự các bước cài đặt; giải thích lỗi và đề xuất cách sửa (sự cố 1 đến 7); soạn mẫu cấu trúc repo; và đọc ảnh minh chứng trong repo để điền bản ghi này.
-Cách tôi kiểm chứng: [ĐIỀN: ví dụ, tôi tự chạy từng lệnh trên máy mình và đối chiếu với Expected output trong tài liệu].
+Tôi dùng trợ lý AI (Claude) để: đọc và tóm tắt tài liệu Lab 1; hướng dẫn thứ tự các bước cài đặt; giải thích lỗi và đề xuất cách sửa (sự cố 1 đến 7); soạn mẫu cấu trúc repo; đọc ảnh minh chứng trong repo và soạn bản ghi này (kể cả bản nháp nhận định ở mục 5.3).
+Cách tôi kiểm chứng: [ĐIỀN: ví dụ, tôi tự chạy từng lệnh trên máy mình, đối chiếu với Expected output trong tài liệu, và kiểm tra lại các số trong bản ghi với ảnh gốc].
 Phần bài tập và nhận định: [ĐIỀN: tự viết / có tham khảo AI ở phần nào]. Mọi số liệu trong bản ghi này lấy từ ảnh và file do tôi tạo trên máy của mình.
