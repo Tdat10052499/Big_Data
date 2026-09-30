@@ -3,4 +3,4 @@ File: yellow_tripdata_2024-03.parquet, size = 60078280 bytes
 Block size = 16777216 bytes (16 MB)
 Calculation: 60078280 / 16777216 = 3.580944538116455, rounded up (ceil) = 4
 Predicted blocks = 4
-Reasoning: Write your own reasoning here: full blocks are 16 MB, the last block holds the remainder.
+Reasoning: The file is 60,078,280 bytes, so it fills 3 full blocks of 16,777,216 bytes (50,331,648 bytes) and the remaining 9,746,632 bytes need a fourth, partly filled block, giving 4 blocks.
