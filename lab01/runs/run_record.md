@@ -2,7 +2,6 @@
 
 Sinh viên: Hồ Du Tuấn Đạt - 2374802010097
 Tài khoản Linux: tdat1 (máy DESKTOP-ANNRGGL)
-Thời gian thực hiện: 30/09/2026 đến 01/10/2026 (theo mốc thời gian trong ảnh và log). [ĐIỀN: xác nhận lại]
 
 Quy ước: mọi số dưới đây được đọc từ ảnh trong `lab01/figures/` hoặc từ file trong repo, hoặc được tính từ các số đó (có ghi công thức). Mục `[ĐIỀN]` là thông tin chưa có bằng chứng, cần tự xác nhận hoặc tự đo.
 
