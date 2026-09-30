@@ -48,7 +48,7 @@ card = {
     },
 
     "curation": {
-        "output": "hdfs://localhost:9000/user/thaianh/nyc/curated",
+        "output": "hdfs://localhost:9000/user/tdat1/nyc/curated",
         "rules": ["fare_amount >= 0", "trip_distance > 0",
                   "passenger_count not null and > 0",
                   "pickup inside January 2024",
@@ -69,9 +69,14 @@ card = {
     "random_seed": None,
 
     "ai_assistance": (
-        "REPLACE THIS. State whether you used an AI assistant for any part of this "
-        "lab, for what, and how you verified its output. If you used none, write "
-        "none. AI output is not technical evidence."),
+        "Used Claude (Anthropic) as a study and coding assistant for this lab: "
+        "to explain the manual's steps, to troubleshoot setup errors, to draft helper "
+        "scripts (ex02_03.py and an evidence-logging script) and first drafts of "
+        "run_record.md and answers.md. Verification: every command was run by me on "
+        "my own cluster; the numbers in this report come from my own outputs and "
+        "screenshots in figures/ and out/; drafted explanations were rewritten or "
+        "checked by me against Section 6 of the manual. AI output is not treated as "
+        "technical evidence."),
 }
 
 out = os.path.expanduser("~/bda/lab01/runs/data_card.json")

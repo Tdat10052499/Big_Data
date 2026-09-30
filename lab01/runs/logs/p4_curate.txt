@@ -1,0 +1,12 @@
+Wed Sep 30 19:51:05 UTC 2026
+
+  raw     2,964,624
+  kept    2,724,143
+  dropped 240,481
+  share   8.11% of the 2,964,624 January rows
+
+Found 4 items
+-rw-r--r--   1 tdat1 supergroup          0 2026-09-30 19:51 /user/tdat1/nyc/curated/_SUCCESS
+-rw-r--r--   1 tdat1 supergroup   22563953 2026-09-30 19:51 /user/tdat1/nyc/curated/part-00000-dafcf7f8-1ce0-4b21-a2e5-434f6557de19-c000.snappy.parquet
+-rw-r--r--   1 tdat1 supergroup   22362651 2026-09-30 19:51 /user/tdat1/nyc/curated/part-00001-dafcf7f8-1ce0-4b21-a2e5-434f6557de19-c000.snappy.parquet
+-rw-r--r--   1 tdat1 supergroup   15362426 2026-09-30 19:51 /user/tdat1/nyc/curated/part-00003-dafcf7f8-1ce0-4b21-a2e5-434f6557de19-c000.snappy.parquet

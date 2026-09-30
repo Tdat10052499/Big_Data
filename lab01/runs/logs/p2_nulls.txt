@@ -1,0 +1,22 @@
+Wed Sep 30 19:45:34 UTC 2026
+
+Columns with missing values:
+
+  passenger_count            140,162   4.73%
+  RatecodeID                 140,162   4.73%
+  store_and_fwd_flag         140,162   4.73%
+  congestion_surcharge       140,162   4.73%
+  Airport_fee                140,162   4.73%
+
+  rows where ALL FIVE are null: 140,162
+
++------------+-------+
+|payment_type|   rows|
++------------+-------+
+|           0| 140162|
+|           1|2319046|
+|           2| 439191|
+|           3|  19597|
+|           4|  46628|
++------------+-------+
+

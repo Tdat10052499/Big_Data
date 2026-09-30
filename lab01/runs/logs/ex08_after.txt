@@ -1,0 +1,8 @@
+Wed Sep 30 19:33:05 UTC 2026
+11447 DataNode
+2137 NameNode
+2554 SecondaryNameNode
+"LocationID","Borough","Zone","service_zone"
+1,"EWR","Newark Airport","EWR"
+2,"Queens","Jamaica Bay","Boro Zone"
+Live datanodes (1):

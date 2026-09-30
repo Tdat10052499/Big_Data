@@ -1,0 +1,65 @@
+{
+  "dataset": "NYC TLC Yellow Taxi trip records",
+  "source_url": "https://d37ci6vzurychx.cloudfront.net/trip-data/",
+  "publisher": "NYC Taxi and Limousine Commission",
+  "licence": "Public, redistributable. See the TLC trip record data page.",
+  "retrieved": "2026-09-30",
+  "files": [
+    "yellow_tripdata_2024-01.parquet",
+    "yellow_tripdata_2024-02.parquet",
+    "yellow_tripdata_2024-03.parquet",
+    "taxi_zone_lookup.csv"
+  ],
+  "sha256_file": "runs/source_checksums.txt",
+  "january_rows": 2964624,
+  "january_columns": 19,
+  "personal_data": "No direct identifiers. The publisher removed the medallion and licence numbers present in older releases. Pickup and dropoff are reported as one of 265 zones, not as coordinates, which limits how precisely a single trip can be located.",
+  "known_defects": {
+    "single_population_nulls": {
+      "rows": 140162,
+      "columns": [
+        "passenger_count",
+        "RatecodeID",
+        "store_and_fwd_flag",
+        "congestion_surcharge",
+        "Airport_fee"
+      ],
+      "evidence": "All five null in the same 140162 rows, which are exactly the rows with payment_type = 0.",
+      "share_of_january": "4.728% of the 2964624 January rows"
+    },
+    "negative_fare_rows": 37448,
+    "zero_distance_with_fare_rows": 56569,
+    "pickup_outside_january_rows": 18,
+    "observed_pickup_range": [
+      "2002-12-31 22:59:39",
+      "2024-02-01 00:01:15"
+    ],
+    "exact_duplicates": 0
+  },
+  "curation": {
+    "output": "hdfs://localhost:9000/user/tdat1/nyc/curated",
+    "rules": [
+      "fare_amount >= 0",
+      "trip_distance > 0",
+      "passenger_count not null and > 0",
+      "pickup inside January 2024",
+      "dropoff strictly after pickup"
+    ],
+    "rows_kept": 2724143,
+    "rows_dropped": 240481,
+    "share_dropped": "8.11% of the 2964624 January rows"
+  },
+  "software": {
+    "os": "Ubuntu 26.04 LTS",
+    "java": "openjdk version \"17.0.20.1\" 2026-08-18",
+    "hadoop": "Hadoop 3.4.3",
+    "spark": "3.5.9",
+    "python": "Python 3.14.4"
+  },
+  "spark_settings": {
+    "master": "local[4]",
+    "shuffle_partitions": 8
+  },
+  "random_seed": null,
+  "ai_assistance": "Used Claude (Anthropic) as a study and coding assistant for this lab: to explain the manual's steps, to troubleshoot setup errors, to draft helper scripts (ex02_03.py and an evidence-logging script) and first drafts of run_record.md and answers.md. Verification: every command was run by me on my own cluster; the numbers in this report come from my own outputs and screenshots in figures/ and out/; drafted explanations were rewritten or checked by me against Section 6 of the manual. AI output is not treated as technical evidence."
+}

@@ -1,0 +1,27 @@
+Wed Sep 30 19:45:58 UTC 2026
+
+Observed ranges
++-------------------+-------------------+--------+--------+--------+--------+
+|min_pickup         |max_pickup         |min_fare|max_fare|min_dist|max_dist|
++-------------------+-------------------+--------+--------+--------+--------+
+|2002-12-31 22:59:39|2024-02-01 00:01:15|-899.0  |5000.0  |0.0     |312722.3|
++-------------------+-------------------+--------+--------+--------+--------+
+
+Quality checks. Every share is of the 2,964,624 January rows.
+
+  fare_amount below zero             37,448   1.263%
+  fare_amount exactly zero              893   0.030%
+  total_amount below zero            35,504   1.198%
+  passenger_count is zero            31,465   1.061%
+  passenger_count is null           140,162   4.728%
+  trip_distance is zero              60,371   2.036%
+  zero distance but fare above 0     56,569   1.908%
+  trip_distance above 100 miles          59   0.002%
+  pickup outside January 2024            18   0.001%
+  dropoff before pickup                  56   0.002%
+  dropoff equal to pickup               814   0.027%
+  unknown pickup zone 264 or 265     12,018   0.405%
+  exact duplicate rows                    0   0.000%
+
+  cohort size (denominator): 2,964,624
+  written: /home/tdat1/bda/lab01/out/quality_report.csv

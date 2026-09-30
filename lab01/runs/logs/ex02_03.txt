@@ -1,0 +1,31 @@
+Wed Sep 30 19:49:54 UTC 2026
+
+=== Exercise 2: March ===
+rows    3,582,628
+columns 19
+same column names and order: True
+columns that differ in name or type (column, jan, mar): none
+
+=== Exercise 3: February, cohort = 3,007,526 rows of that month ===
+  passenger_count            185,610  6.172% of February rows
+  RatecodeID                 185,610  6.172% of February rows
+  store_and_fwd_flag         185,610  6.172% of February rows
+  congestion_surcharge       185,610  6.172% of February rows
+  Airport_fee                185,610  6.172% of February rows
+  rows where ALL FIVE are null:              185,610
+  rows with payment_type = 0:                185,610
+  all five null AND payment_type = 0:        185,610
+  all five null AND payment_type != 0:       0
+  payment_type = 0 AND NOT all five null:    0
+
+=== Exercise 3: January (for comparison), cohort = 2,964,624 rows of that month ===
+  passenger_count            140,162  4.728% of January (for comparison) rows
+  RatecodeID                 140,162  4.728% of January (for comparison) rows
+  store_and_fwd_flag         140,162  4.728% of January (for comparison) rows
+  congestion_surcharge       140,162  4.728% of January (for comparison) rows
+  Airport_fee                140,162  4.728% of January (for comparison) rows
+  rows where ALL FIVE are null:              140,162
+  rows with payment_type = 0:                140,162
+  all five null AND payment_type = 0:        140,162
+  all five null AND payment_type != 0:       0
+  payment_type = 0 AND NOT all five null:    0
