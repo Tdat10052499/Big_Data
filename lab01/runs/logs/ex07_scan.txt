@@ -1,0 +1,64 @@
+Wed Sep 30 20:33:14 UTC 2026
+
+January rows: 2,964,624. Every share names its own cohort.
+
+tip_amount below zero                                                        102    0.003% of all January rows (2,964,624)
+tolls_amount below zero                                                    2,035    0.069% of all January rows (2,964,624)
+extra below zero                                                          17,548    0.592% of all January rows (2,964,624)
+mta_tax below zero                                                        34,434    1.161% of all January rows (2,964,624)
+improvement_surcharge below zero                                          35,502    1.198% of all January rows (2,964,624)
+congestion_surcharge below zero                                           28,825    1.021% of rows with non-null congestion_surcharge (2,824,462)
+Airport_fee below zero                                                     4,921    0.174% of rows with non-null Airport_fee (2,824,462)
+total_amount differs from sum of its components by more than 0.01        761,838   25.698% of all January rows (2,964,624)
+RatecodeID = 99                                                           28,663    1.015% of rows with non-null RatecodeID (2,824,462)
+RatecodeID not in 1-6 or 99                                                    0    0.000% of rows with non-null RatecodeID (2,824,462)
+store_and_fwd_flag not Y or N                                                  0    0.000% of rows with non-null store_and_fwd_flag (2,824,462)
+PULocationID outside 1-265                                                     0    0.000% of all January rows (2,964,624)
+DOLocationID outside 1-265                                                     0    0.000% of all January rows (2,964,624)
+trip duration above 24 hours                                                  16    0.001% of rows with dropoff after pickup (2,963,754)
+implied speed above 100 mph                                                1,024    0.035% of rows with distance > 0 and dropoff after pickup (2,904,141)
+tip_amount > 0 on cash trips (payment_type = 2)                              128    0.029% of rows with payment_type = 2 (439,191)
+
+VendorID values:
++--------+-------+
+|VendorID|  count|
++--------+-------+
+|       1| 729732|
+|       2|2234632|
+|       6|    260|
++--------+-------+
+
+RatecodeID values:
++----------+-------+
+|RatecodeID|  count|
++----------+-------+
+|      NULL| 140162|
+|         1|2663350|
+|         2|  98713|
+|         3|   7954|
+|         4|   6365|
+|         5|  19410|
+|         6|      7|
+|        99|  28663|
++----------+-------+
+
+store_and_fwd_flag values:
++------------------+-------+
+|store_and_fwd_flag|  count|
++------------------+-------+
+|              NULL| 140162|
+|                 N|2813126|
+|                 Y|  11336|
++------------------+-------+
+
+Sample rows where total_amount differs from the sum of its components:
++-----------+-----+-------+----------+------------+---------------------+--------------------+-----------+------------+-------------------+
+|fare_amount|extra|mta_tax|tip_amount|tolls_amount|improvement_surcharge|congestion_surcharge|Airport_fee|total_amount|diff               |
++-----------+-----+-------+----------+------------+---------------------+--------------------+-----------+------------+-------------------+
+|10.0       |3.5  |0.5    |3.75      |0.0         |1.0                  |2.5                 |0.0        |18.75       |-2.5               |
+|23.3       |3.5  |0.5    |3.0       |0.0         |1.0                  |2.5                 |0.0        |31.3        |-2.4999999999999964|
+|10.0       |3.5  |0.5    |2.0       |0.0         |1.0                  |2.5                 |0.0        |17.0        |-2.5               |
+|7.9        |3.5  |0.5    |3.2       |0.0         |1.0                  |2.5                 |0.0        |16.1        |-2.5               |
+|29.6       |3.5  |0.5    |6.9       |0.0         |1.0                  |2.5                 |0.0        |41.5        |-2.5               |
++-----------+-----+-------+----------+------------+---------------------+--------------------+-----------+------------+-------------------+
+
