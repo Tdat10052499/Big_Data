@@ -110,11 +110,6 @@ The report still showed one live node because the NameNode declares a DataNode d
 - Not shown by this evidence: the hourly chart is city-wide, not per zone, and trip counts measure trips that happened (supply met), not unmet demand.
 - Evidence: `figures/ex10_table.png`, `figures/ex10_checks.png`, `figures/ex10_hourly_trips.png`, `out/ex10_top_zones.csv`, `out/ex10_hourly.csv`, `runs/logs/ex10_profile.txt`, `src/ex10_profile.py`
 
-## Exercise 11: Reproducibility, tested by someone else (12đ)
-- Số đã tái tạo và có khớp không:
-- Thông tin còn thiếu trong record của bạn đó:
-- Điều đã sửa trong record của mình:
-
 ## Exercise 12: Defend the treatment of the 140,162 rows (12 points)
 1. **Decision.** Keep them and flag them: in a curated dataset I would keep the 140,162 January rows where `passenger_count`, `RatecodeID`, `store_and_fwd_flag`, `congestion_surcharge` and `Airport_fee` are all null (`payment_type = 0`) and add a boolean column marking them, so that any analysis needing those five columns can filter them out explicitly. The Lab 1 dataset `/user/tdat1/nyc/curated` still follows the manual's rule (it drops them) so that Labs 2 to 4 start from the same rows; the raw files keep all 140,162 rows, so nothing is lost either way.
 2. **Evidence from my runs.** The rows are 4.728% of the 2,964,624 January rows, and in February the same pattern covers 185,610 rows = 6.172% of the 3,007,526 February rows; in both months the five null sets coincide with the `payment_type = 0` rows (both set differences are 0), so this is one systematic population, not scattered noise. It is not one vendor's artefact: the rows come from VendorID 1 (48,455), 2 (91,447) and 6 (260), computed as each vendor's rows minus its rows in the non-null cohort. The rows are usable for the other columns: 115,239 of them (82.2% of the 140,162) pass the other four curation rules, and in 125,088 (89.245%) `total_amount` exceeds the itemised charges by 2.5 USD, so they carry a charge that is simply not itemised. Keeping the 115,239 rows that pass the other rules changes the mean `fare_amount` from 18.4394 to 18.5173 USD (+0.422%) but the added rows average 20.3573 USD, 10.4% above the kept set, so dropping them silently removes a group that differs from the rest.
