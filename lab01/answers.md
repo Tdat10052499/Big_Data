@@ -31,10 +31,10 @@
 - Evidence:
 
 ## Exercise 5: Change the block size and predict first (8đ)
-- Dự đoán (ghi TRƯỚC khi chạy, kèm thời điểm):
-- Kết quả đo (fsck):
-- Khớp hay không, giải thích:
-- Evidence:
+- Prediction (recorded 2026-09-30 19:07:03 UTC, before any measurement): 4 blocks. The March file is 60,078,280 bytes and the target block size is 16,777,216 bytes (16 MB); 60,078,280 / 16,777,216 = 3.58, rounded up to 4. Reasoning: the file fills 3 full blocks (50,331,648 bytes) and the remaining 9,746,632 bytes need a fourth, partly filled block. (The reasoning sentence in `ex05_prediction.txt` was completed after the first timestamp but before loading the file with the 16 MB block size; the predicted number 4 did not change.)
+- Measurement (`hdfs dfs -D dfs.blocksize=16777216 -put ...`, then `hdfs fsck ... -files -blocks -locations`, run 2026-09-30 19:16:49 UTC): 4 blocks, `blocksize=16777216`, replication 1, status HEALTHY. Block lengths: 16,777,216 / 16,777,216 / 16,777,216 / 9,746,632 bytes (sum = 60,078,280 bytes, equal to the file size).
+- Do they agree? Yes. The measured block count (4) equals the prediction, and the last block (9,746,632 bytes) equals the remainder I computed beforehand. Reducing the block size from 128 MB to 16 MB turned the same 57.3 MB file from 1 block into 4, since each block holds at most the configured block size and the last one holds only the remainder.
+- Evidence: `runs/ex05_prediction.txt`, `figures/ex05_prediction.png`, `figures/ex05_fsck_16mb.png`
 
 ## Exercise 6: The cost of the wrong curation rule (8đ)
 - Số dòng mới / chênh lệch so với 2,724,143:
