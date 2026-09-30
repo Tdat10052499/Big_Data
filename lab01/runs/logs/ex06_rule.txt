@@ -1,0 +1,15 @@
+Wed Sep 30 20:28:24 UTC 2026
+
+Cohort: the 2,964,624 January rows
+Rule A (drop null passenger_count, Lab 1): rows 2,724,143  mean fare_amount 18.4394  sd 17.4356
+Rule B (keep null passenger_count):        rows 2,839,382  mean fare_amount 18.5173  sd 17.2865
+Matches the Lab 1 curated count (2,724,143): True
+Rows added by rule B: 115,239  (= rows passing the other four rules with null passenger_count: 115,239; consistent: True)
+  as a share of rule A rows: 4.230%;  as a share of the 2,964,624 January rows: 3.887%
+Mean fare_amount of the added rows: 20.3573  (sd 13.1475)
+Mean difference B - A: +0.0778 USD = +0.422% of the rule A mean = +0.0045 x the rule A standard deviation
+
+Yardstick: month-to-month variation of mean fare_amount under rule A, each month's own cohort
+  January   kept rows 2,724,143  mean fare_amount 18.4394
+  February  kept rows 2,719,979  mean fare_amount 18.3807
+  March     kept rows 3,036,531  mean fare_amount 19.1536
