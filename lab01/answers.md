@@ -4,13 +4,13 @@
 > Mọi phần trăm phải nêu mẫu số (cohort).
 
 ## Exercise 1: Load February and report its blocks (5đ)
-- Dự đoán / kết quả:
-- Kích thước file:
-- Số block:
-- Block size:
-- Replication:
-- Giải thích (1 câu):
-- Evidence: `figures/`
+- Prediction / result: The February file was already in HDFS from the upload in Section 5.2, so it was not reloaded. Result measured with `hdfs fsck ... -files -blocks -locations` and `hdfs dfs -stat`.
+- File size: 50,349,284 bytes (about 48.0 MiB, matching the `48.0 M` shown by `hdfs dfs -ls -h`)
+- Number of blocks: 1 (confirm from the `1 block(s)` line in the fsck screenshot)
+- Block size: 134,217,728 bytes (128 MB)
+- Replication: 1
+- Explanation (1 sentence): The file is smaller than the 128 MB block size, so HDFS does not need to split it and stores it as a single block that occupies only the file's own size on disk.
+- Evidence: `figures/ex01_fsck_feb.png`
 
 ## Exercise 2: Profile March (5đ)
 - Số dòng:
