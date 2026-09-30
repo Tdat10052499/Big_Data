@@ -1,5 +1,5 @@
 """Lab 1, Section 9: produce the curated dataset that Labs 2, 3 and 4 consume.
-Writes hdfs://localhost:9000/user/thaianh/nyc/curated  (January 2024 only).
+Writes hdfs://localhost:9000/user/tdat1/nyc/curated  (January 2024 only).
 Run:  spark-submit ~/bda/lab01/src/p4_curate.py
 """
 from pyspark.sql import SparkSession, functions as F
@@ -8,7 +8,7 @@ spark = (SparkSession.builder.appName("lab01-curate").master("local[4]").getOrCr
 spark.sparkContext.setLogLevel("ERROR")
 
 HDFS = "hdfs://localhost:9000"
-jan = spark.read.parquet(f"{HDFS}/user/thaianh/nyc/raw/yellow_tripdata_2024-01.parquet")
+jan = spark.read.parquet(f"{HDFS}/user/tdat1/nyc/raw/yellow_tripdata_2024-01.parquet")
 RAW_ROWS = jan.count()
 
 curated = (jan
@@ -26,9 +26,9 @@ curated = (jan
       (F.col("tpep_dropoff_datetime").cast("timestamp").cast("long")
      - F.col("tpep_pickup_datetime").cast("timestamp").cast("long")) / 60.0))
 
-curated.write.mode("overwrite").parquet(f"{HDFS}/user/thaianh/nyc/curated")
+curated.write.mode("overwrite").parquet(f"{HDFS}/user/tdat1/nyc/curated")
 
-kept = spark.read.parquet(f"{HDFS}/user/thaianh/nyc/curated").count()
+kept = spark.read.parquet(f"{HDFS}/user/tdat1/nyc/curated").count()
 dropped = RAW_ROWS - kept
 
 print()

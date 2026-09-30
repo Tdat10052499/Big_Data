@@ -7,7 +7,7 @@ from pyspark.sql import SparkSession, functions as F
 spark = (SparkSession.builder.appName("lab01-nulls").master("local[4]").getOrCreate())
 spark.sparkContext.setLogLevel("ERROR")
 
-RAW = "hdfs://localhost:9000/user/thaianh/nyc/raw"
+RAW = "hdfs://localhost:9000/user/tdat1/nyc/raw"
 jan = spark.read.parquet(f"{RAW}/yellow_tripdata_2024-01.parquet")
 TOTAL = jan.count()
 

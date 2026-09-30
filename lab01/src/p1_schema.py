@@ -9,7 +9,7 @@ spark = (SparkSession.builder
          .getOrCreate())
 spark.sparkContext.setLogLevel("ERROR")
 
-RAW = "hdfs://localhost:9000/user/thaianh/nyc/raw"
+RAW = "hdfs://localhost:9000/user/tdat1/nyc/raw"
 jan = spark.read.parquet(f"{RAW}/yellow_tripdata_2024-01.parquet")
 
 print()
