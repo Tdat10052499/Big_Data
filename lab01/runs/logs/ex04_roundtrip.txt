@@ -1,0 +1,13 @@
+Wed Sep 30 20:23:20 UTC 2026
+$ hdfs dfs -get /user/tdat1/nyc/curated /home/tdat1/bda/tmp_ex04/curated
+$ hdfs dfs -put /home/tdat1/bda/tmp_ex04/curated /user/tdat1/nyc/curated_copy
+$ hdfs dfs -du -s /user/tdat1/nyc/curated /user/tdat1/nyc/curated_copy
+60289030  60289030  /user/tdat1/nyc/curated
+60289030  60289030  /user/tdat1/nyc/curated_copy
+$ hdfs dfs -ls /user/tdat1/nyc/curated_copy
+Found 4 items
+-rw-r--r--   1 tdat1 supergroup          0 2026-09-30 20:23 /user/tdat1/nyc/curated_copy/_SUCCESS
+-rw-r--r--   1 tdat1 supergroup   22563953 2026-09-30 20:23 /user/tdat1/nyc/curated_copy/part-00000-dafcf7f8-1ce0-4b21-a2e5-434f6557de19-c000.snappy.parquet
+-rw-r--r--   1 tdat1 supergroup   22362651 2026-09-30 20:23 /user/tdat1/nyc/curated_copy/part-00001-dafcf7f8-1ce0-4b21-a2e5-434f6557de19-c000.snappy.parquet
+-rw-r--r--   1 tdat1 supergroup   15362426 2026-09-30 20:23 /user/tdat1/nyc/curated_copy/part-00003-dafcf7f8-1ce0-4b21-a2e5-434f6557de19-c000.snappy.parquet
+curated rows 2,724,143; curated_copy rows 2,724,143; equal: True
