@@ -1,6 +1,3 @@
-# Điền sau khi cài đặt (§9.1)
-java:
-hadoop:
-spark:
-python:
-os:
+java: openjdk version "17.0.20.1" 2026-08-18
+hadoop: Hadoop 3.4.3
+os: Ubuntu 26.04 LTS
