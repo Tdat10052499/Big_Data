@@ -94,11 +94,12 @@ The report still showed one live node because the NameNode declares a DataNode d
 
 **Limits.** Single run on a pseudo-distributed cluster with one DataNode and one small file (one block). It shows that data availability depends on DataNode availability when replication = 1; it does not measure how long re-replication or recovery takes.
 
-## Exercise 9: Measure the cost of moving data (12đ)
-- Ba lần `time hdfs dfs -put`:
-- Throughput (MB/s):
-- Thời gian Spark count:
-- Claim (tối đa 3 câu) và một điều kiện làm claim sai:
+## Exercise 9: Measure the cost of moving data (12 points)
+- Move (`time hdfs dfs -put` of the three Parquet files, 160,389,205 bytes, from a clean target path `/user/tdat1/nyc/ex09`, 2026-09-30 19:39:42 UTC): run 1 = 3.083 s (52.0 MB/s), run 2 = 2.319 s (69.2 MB/s), run 3 = 2.189 s (73.3 MB/s); mean 2.530 s. Throughput = 160.39 MB / time, MB = 10^6 bytes; it includes JVM start-up of the `hdfs` client. (An earlier series made during setup, `figures/data_04_upload_times.png`, gave 2.093 / 2.254 / 2.536 s for the same data.)
+- Count (`spark-submit src/ex09_count.py`, `local[4]`, 2026-09-30 20:42:48 UTC, same three files already in HDFS `/user/tdat1/nyc/raw`, 9,554,778 rows = 2,964,624 + 3,007,526 + 3,582,628): wall-clock of the whole command 19.824 s / 20.121 s / 19.750 s. Inside the process: session start 1.464 / 1.333 / 1.348 s; reading the schema 3.082 / 2.965 / 2.953 s; first `count()` 1.591 / 1.623 / 1.582 s; second `count()` in the same session 0.252 / 0.291 / 0.266 s; `sum(fare_amount)` (forces reading one column) 0.796 / 0.801 / 0.832 s.
+- Claim (at most three sentences) [DRAFT, rewrite in your own words]: On this single machine, loading the 160,389,205 bytes into HDFS took 2.189 to 3.083 s (52.0 to 73.3 MB/s), while the `spark-submit` command that counts the same data took 19.750 to 20.121 s wall-clock, of which the first count itself took only 1.58 to 1.62 s (0.25 to 0.29 s when repeated in the same session). For data this small, the fixed cost of starting Spark, not of reading the data, therefore dominates the count command. This conclusion would not hold for data much larger than 160 MB, where the time spent reading would grow past the fixed start-up cost.
+- Limits: one machine with `local[4]`, three runs per measurement, operating-system cache not controlled. The two commands do different work (moving bytes versus reading and counting records), so the comparison is about cost on this setup, not about which system is faster. I did not itemise the roughly 12.6 s of the `spark-submit` wall-clock that is outside the timed sections (19.8 s wall-clock minus about 6.1 s for session start, schema read and first count, averaged, computed from the log). `count()` may not read every byte of the files; the `sum(fare_amount)` over one column took 0.80 to 0.83 s against 0.25 to 0.29 s for the repeated count, which is consistent with that but does not prove it.
+- Evidence: `figures/ex09_put_timing.png`, `runs/logs/ex09_put_timing.txt`, `figures/ex09_spark_count.png`, `runs/logs/ex09_count.txt`, `src/ex09_count.py`
 
 ## Exercise 10: A profile that supports a decision (12đ)
 - Top 5 zone và số chuyến:
