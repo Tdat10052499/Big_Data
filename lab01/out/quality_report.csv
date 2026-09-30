@@ -1,0 +1,14 @@
+check,rows,share_of_january
+fare_amount below zero,37448,1.263%
+fare_amount exactly zero,893,0.030%
+total_amount below zero,35504,1.198%
+passenger_count is zero,31465,1.061%
+passenger_count is null,140162,4.728%
+trip_distance is zero,60371,2.036%
+zero distance but fare above 0,56569,1.908%
+trip_distance above 100 miles,59,0.002%
+pickup outside January 2024,18,0.001%
+dropoff before pickup,56,0.002%
+dropoff equal to pickup,814,0.027%
+unknown pickup zone 264 or 265,12018,0.405%
+exact duplicate rows,0,0.000%
