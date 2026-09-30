@@ -1,0 +1,17 @@
+Wed Sep 30 20:42:48 UTC 2026
+data: 3 Parquet files in /user/tdat1/nyc/raw, 160,389,205 bytes; expected rows = 2,964,624 + 3,007,526 + 3,582,628 = 9,554,778
+run 1: wall-clock for the whole spark-submit = 19.824 s
+RESULT session start 1.464 s; spark.read.parquet (schema only) 3.082 s
+RESULT count #1: 9,554,778 rows in 1.591 s (inside the process)
+RESULT count #2: 9,554,778 rows in 0.252 s (inside the process)
+RESULT sum(fare_amount) = 175,092,421.01 in 0.796 s (forces reading one column)
+run 2: wall-clock for the whole spark-submit = 20.121 s
+RESULT session start 1.333 s; spark.read.parquet (schema only) 2.965 s
+RESULT count #1: 9,554,778 rows in 1.623 s (inside the process)
+RESULT count #2: 9,554,778 rows in 0.291 s (inside the process)
+RESULT sum(fare_amount) = 175,092,421.01 in 0.801 s (forces reading one column)
+run 3: wall-clock for the whole spark-submit = 19.750 s
+RESULT session start 1.348 s; spark.read.parquet (schema only) 2.953 s
+RESULT count #1: 9,554,778 rows in 1.582 s (inside the process)
+RESULT count #2: 9,554,778 rows in 0.266 s (inside the process)
+RESULT sum(fare_amount) = 175,092,421.01 in 0.832 s (forces reading one column)
