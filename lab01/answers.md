@@ -51,11 +51,13 @@ Rows where all five are null: **185,610**. Rows with `payment_type = 0`: 185,610
 - Do they agree? Yes. The measured block count (4) equals the prediction, and the last block (9,746,632 bytes) equals the remainder I computed beforehand. Reducing the block size from 128 MB to 16 MB turned the same 57.3 MB file from 1 block into 4, since each block holds at most the configured block size and the last one holds only the remainder.
 - Evidence: `runs/ex05_prediction.txt`, `figures/ex05_prediction.png`, `figures/ex05_fsck_16mb.png`
 
-## Exercise 6: The cost of the wrong curation rule (8đ)
-- Số dòng mới / chênh lệch so với 2,724,143:
-- Mean fare_amount (quy tắc gốc / quy tắc mới):
-- Ngưỡng "đáng kể" (định nghĩa trước) và so với cái gì:
-- Evidence:
+## Exercise 6: The cost of the wrong curation rule (8 points)
+- Rule changed: keep rows where `passenger_count` is null (rows with `passenger_count = 0` are still dropped, and the other four Lab 1 rules still apply). Script `src/ex06_rule.py`, run 2026-09-30 20:28:24 UTC on the January file (cohort: the 2,964,624 January rows).
+- Row counts: rule A (Lab 1, drop nulls) keeps 2,724,143 rows (equal to the Lab 1 curated count); rule B (keep nulls) keeps 2,839,382 rows. Difference: +115,239 rows = 4.230% of the 2,724,143 rule A rows, or 3.887% of the 2,964,624 January rows. These are exactly the rows with null `passenger_count` that pass the other four rules (115,239); the other 140,162 - 115,239 = 24,923 null rows fail at least one of the other rules.
+- Mean `fare_amount`: rule A = 18.4394 USD; rule B = 18.5173 USD; difference = +0.0778 USD (+0.422% of the rule A mean). The 115,239 added rows have a mean fare of 20.3573 USD (10.4% above the rule A mean), so the overall mean moves only by about 4.06% (their share of rule B rows) x 1.92 USD = 0.078 USD.
+- Is the change material? [DRAFT, decide and justify in your own words] For the mean fare, I judge it small: it is 0.422% of the mean, 0.0045 of the rule A standard deviation (17.4356 USD), and smaller than the difference between months' means under rule A (January 18.4394 USD, February 18.3807 USD, March 19.1536 USD; each month's own cohort): it is about the same size as January versus February (0.0587 USD) and about one ninth of January versus March (0.7142 USD). I am comparing against the natural month-to-month variation of the same statistic and against the spread of fares within January.
+- Limits: this checks one statistic (the mean fare). The added rows are not a random sample: their mean fare is 10.4% higher and they are the `payment_type = 0` rows, so keeping them would change other statistics differently (for example anything that uses `passenger_count`, which is null in every added row). The month comparison is only a yardstick: the months may differ for reasons unrelated to curation.
+- Evidence: `figures/ex06_rule.png`, `runs/logs/ex06_rule.txt`, `src/ex06_rule.py`
 
 ## Exercise 7: Find a defect this manual did not list (8đ)
 - Kiểm tra (code):
