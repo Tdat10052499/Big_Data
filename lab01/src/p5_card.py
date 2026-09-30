@@ -65,7 +65,7 @@ card = {
         "spark": "3.5.9",
         "python": sh("python3 --version"),
     },
-    "spark_settings": {"master": "local[4]", "shuffle_partitions": 8},
+    "spark_settings": {"master": "local[4]", "shuffle_partitions": 200},
     "random_seed": None,
 
     "ai_assistance": (

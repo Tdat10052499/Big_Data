@@ -58,7 +58,7 @@
   },
   "spark_settings": {
     "master": "local[4]",
-    "shuffle_partitions": 8
+    "shuffle_partitions": 200
   },
   "random_seed": null,
   "ai_assistance": "Used Claude (Anthropic) as a study and coding assistant for this lab: to explain the manual's steps, to troubleshoot setup errors, to draft helper scripts (ex02_03.py and an evidence-logging script) and first drafts of run_record.md and answers.md. Verification: every command was run by me on my own cluster; the numbers in this report come from my own outputs and screenshots in figures/ and out/; drafted explanations were rewritten or checked by me against Section 6 of the manual. AI output is not treated as technical evidence."
