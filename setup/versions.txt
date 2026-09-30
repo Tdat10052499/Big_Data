@@ -1,3 +1,5 @@
+os: Ubuntu 26.04 LTS
 java: openjdk version "17.0.20.1" 2026-08-18
 hadoop: Hadoop 3.4.3
-os: Ubuntu 26.04 LTS
+spark:    /___/ .__/\_,_/_/ /_/\_\   version 3.5.9
+python: Python 3.14.4

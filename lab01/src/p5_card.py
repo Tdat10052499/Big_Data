@@ -1,0 +1,82 @@
+"""Lab 1, Section 8: write the provenance record.
+This is plain Python and needs no Spark, so it runs in a second.
+Run:  python3 ~/bda/lab01/src/p5_card.py
+"""
+import json, os, subprocess, datetime
+
+
+def sh(cmd):
+    return subprocess.run(cmd, shell=True, capture_output=True, text=True).stdout.strip()
+
+
+card = {
+    "dataset": "NYC TLC Yellow Taxi trip records",
+    "source_url": "https://d37ci6vzurychx.cloudfront.net/trip-data/",
+    "publisher": "NYC Taxi and Limousine Commission",
+    "licence": "Public, redistributable. See the TLC trip record data page.",
+    "retrieved": datetime.date.today().isoformat(),
+    "files": [
+        "yellow_tripdata_2024-01.parquet",
+        "yellow_tripdata_2024-02.parquet",
+        "yellow_tripdata_2024-03.parquet",
+        "taxi_zone_lookup.csv",
+    ],
+    "sha256_file": "runs/source_checksums.txt",
+    "january_rows": 2964624,
+    "january_columns": 19,
+
+    "personal_data": (
+        "No direct identifiers. The publisher removed the medallion and licence "
+        "numbers present in older releases. Pickup and dropoff are reported as one "
+        "of 265 zones, not as coordinates, which limits how precisely a single trip "
+        "can be located."),
+
+    "known_defects": {
+        "single_population_nulls": {
+            "rows": 140162,
+            "columns": ["passenger_count", "RatecodeID", "store_and_fwd_flag",
+                        "congestion_surcharge", "Airport_fee"],
+            "evidence": ("All five null in the same 140162 rows, which are exactly "
+                         "the rows with payment_type = 0."),
+            "share_of_january": "4.728% of the 2964624 January rows",
+        },
+        "negative_fare_rows": 37448,
+        "zero_distance_with_fare_rows": 56569,
+        "pickup_outside_january_rows": 18,
+        "observed_pickup_range": ["2002-12-31 22:59:39", "2024-02-01 00:01:15"],
+        "exact_duplicates": 0,
+    },
+
+    "curation": {
+        "output": "hdfs://localhost:9000/user/thaianh/nyc/curated",
+        "rules": ["fare_amount >= 0", "trip_distance > 0",
+                  "passenger_count not null and > 0",
+                  "pickup inside January 2024",
+                  "dropoff strictly after pickup"],
+        "rows_kept": 2724143,
+        "rows_dropped": 240481,
+        "share_dropped": "8.11% of the 2964624 January rows",
+    },
+
+    "software": {
+        "os": sh("lsb_release -ds"),
+        "java": sh("java -version 2>&1 | head -1"),
+        "hadoop": sh("hadoop version 2>/dev/null | head -1"),
+        "spark": "3.5.9",
+        "python": sh("python3 --version"),
+    },
+    "spark_settings": {"master": "local[4]", "shuffle_partitions": 8},
+    "random_seed": None,
+
+    "ai_assistance": (
+        "REPLACE THIS. State whether you used an AI assistant for any part of this "
+        "lab, for what, and how you verified its output. If you used none, write "
+        "none. AI output is not technical evidence."),
+}
+
+out = os.path.expanduser("~/bda/lab01/runs/data_card.json")
+os.makedirs(os.path.dirname(out), exist_ok=True)
+with open(out, "w") as f:
+    json.dump(card, f, indent=2)
+
+print(f"written: {out}")
