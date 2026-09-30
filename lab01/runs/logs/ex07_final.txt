@@ -1,0 +1,40 @@
+Wed Sep 30 20:39:07 UTC 2026
+
+Cohort: rows with non-null congestion_surcharge and Airport_fee = 2,824,462 (of the 2,964,624 January rows)
+total_amount differs from the sum of its 8 components by more than 0.01: 635,915 = 22.515% of the 2,824,462 cohort rows
+  of those, diff equals minus congestion_surcharge (+-0.01): 590,944 = 92.928% of the 635,915 mismatched rows
+  net sum of (total_amount - components) over mismatched rows: -1,594,137.45 USD; sum of absolute differences: 1,615,447.15 USD
+
+Most common diff values among mismatched cohort rows:
++-----+------+
+| diff| count|
++-----+------+
+| -2.5|591045|
+|-4.25| 22451|
+|-1.75| 18149|
+|  2.5|  4244|
+| 1.95|    23|
+| -1.0|     2|
++-----+------+
+only showing top 6 rows
+
+Mismatch share by VendorID (cohort = cohort rows with that VendorID):
++--------+-------+----------+------------------+---------+
+|VendorID|   rows|mismatched|diff_eq_minus_cong|share_pct|
++--------+-------+----------+------------------+---------+
+|       1| 681277|    631480|            590942|   92.691|
+|       2|2143185|      4435|                 2|    0.207|
++--------+-------+----------+------------------+---------+
+
+Rows with null congestion_surcharge (and null Airport_fee): diff when null is treated as 0
+  rows: 140,162
++----+------+
+|diff| count|
++----+------+
+| 2.5|125088|
+| 0.0| 14239|
+| 4.5|   792|
+| 2.0|    42|
+|1.75|     1|
++----+------+
+
