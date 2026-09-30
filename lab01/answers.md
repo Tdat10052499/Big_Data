@@ -47,11 +47,32 @@
 - Số dòng và tỷ lệ (nêu cohort):
 - Vì sao là lỗi chứ không chỉ bất thường (2 câu):
 
-## Exercise 8: Kill a service and read the failure (8đ)
-- Trước / trong / sau (screenshot):
-- Lỗi chính xác của `hdfs dfs -cat`:
-- Live nodes theo `dfsadmin -report`:
-- Giải thích (liên hệ §6):
+## Exercise 8 — DataNode failure
+
+**Evidence:** `figures/ex08_before.png`, `figures/ex08_during.png`, `figures/ex08_after.png`, `runs/logs/ex08_after.txt`
+
+**Before (2026-09-30, prior to the kill).** `jps` listed NameNode (PID 2137), SecondaryNameNode (2554) and DataNode (2282). `hdfs dfs -cat /user/tdat1/nyc/ref/taxi_zone_lookup.csv` printed the CSV header (`"LocationID","Borough","Zone","service_zone"`) and the first rows. `hdfs dfsadmin -report` showed `Live datanodes (1)`.
+
+**During (19:27 UTC, DataNode process stopped).** `jps` showed only NameNode and SecondaryNameNode. `hdfs dfs -ls /user/tdat1/nyc/ref` still succeeded: `-rw-r--r-- 1 tdat1 supergroup 12331 2026-09-30 18:16 /user/tdat1/nyc/ref/taxi_zone_lookup.csv` (the `1` is the replication factor).
+
+Exact error of `hdfs dfs -cat`:
+
+```
+org.apache.hadoop.hdfs.BlockMissingException: Could not obtain block: BP-1007978907-127.0.1.1-1790790094014:blk_1073741829_1005 file=/user/tdat1/nyc/ref/taxi_zone_lookup.csv No live nodes contain current block Block locations: DatanodeInfoWithStorage[127.0.0.1:9866,DS-542c9b39-cc8f-4ed6-919c-6a861e32d40e,DISK] Dead nodes: DatanodeInfoWithStorage[127.0.0.1:9866,DS-542c9b39-cc8f-4ed6-919c-6a861e32d40e,DISK]
+cat: Could not obtain block: ...
+```
+
+Earlier in the same run the client also logged `java.net.ConnectException: Connection refused` when it tried to open a block reader to the DataNode.
+
+**Live nodes per `dfsadmin -report`.** At 19:27:02 UTC, i.e. shortly after the kill, the report still showed `Live datanodes (1)`.
+
+**After (DataNode restarted with `hdfs --daemon start datanode`, checked at 19:33:05 UTC).** `jps` lists DataNode again with a new PID (11447; the old one was 2282) next to NameNode (2137) and SecondaryNameNode (2554). `hdfs dfs -cat /user/tdat1/nyc/ref/taxi_zone_lookup.csv` printed the CSV header and first rows again, and `hdfs dfsadmin -report` showed `Live datanodes (1)`. The block data had stayed on the DataNode's disk, so nothing was lost; only availability was interrupted.
+
+**Explanation (link to §6.2).** [DRAFT — rewrite in your own words.] HDFS separates metadata from data. The NameNode keeps the namespace and the mapping file → block → DataNode location, in memory. The DataNode stores the block bytes on local disk. `-ls` only needs the NameNode, so it kept working. `-cat` needs the NameNode for the block location and then the DataNode for the bytes; the client received the location 127.0.0.1:9866, could not connect, and raised `BlockMissingException` because no other node holds a copy. The replication factor is 1 (visible in the `-ls` output) and the cluster has a single DataNode, so this block has no replica to fall back on. With replication ≥ 2 on several DataNodes, the client would read from another replica.
+
+The report still showed one live node because the NameNode declares a DataNode dead only after missed heartbeats exceed a timeout (about 10.5 minutes with default settings: 2 × recheck-interval 300 s + 10 × heartbeat 3 s). The report therefore lags behind the real state for some minutes; I did not wait for the dead state, so that part is not observed here.
+
+**Limits.** Single run on a pseudo-distributed cluster with one DataNode and one small file (one block). It shows that data availability depends on DataNode availability when replication = 1; it does not measure how long re-replication or recovery takes.
 
 ## Exercise 9: Measure the cost of moving data (12đ)
 - Ba lần `time hdfs dfs -put`:
