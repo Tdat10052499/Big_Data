@@ -1,0 +1,58 @@
+Wed Sep 30 20:48:28 UTC 2026
+
+=== Section 8.3: zone lookup ===
+zone rows       265
+zones in lookup 265
+zones used (January raw pickups)     260
+zones used (January curated pickups) 254
+names of zones 264 and 265: [(264, ('Unknown', 'N/A')), (265, ('N/A', 'Outside of NYC'))]
+curated rows whose PULocationID has no name in the lookup: 0
+
+=== Exercise 10: top pickup zones, curated January cohort = 2,724,143 trips ===
+ 1. 132 JFK Airport                          Queens          136,998  5.029% of 2,724,143 curated trips; raw 145,240, dropped 5.675% of this zone's 145,240 raw January rows
+ 2. 237 Upper East Side South                Manhattan       135,470  4.973% of 2,724,143 curated trips; raw 142,708, dropped 5.072% of this zone's 142,708 raw January rows
+ 3. 161 Midtown Center                       Manhattan       134,981  4.955% of 2,724,143 curated trips; raw 143,471, dropped 5.918% of this zone's 143,471 raw January rows
+ 4. 236 Upper East Side North                Manhattan       128,108  4.703% of 2,724,143 curated trips; raw 136,465, dropped 6.124% of this zone's 136,465 raw January rows
+ 5. 162 Midtown East                         Manhattan       101,257  3.717% of 2,724,143 curated trips; raw 106,717, dropped 5.116% of this zone's 106,717 raw January rows
+ 6. 186 Penn Station/Madison Sq West         Manhattan        99,461  3.651% of 2,724,143 curated trips; raw 104,523, dropped 4.843% of this zone's 104,523 raw January rows
+ 7. 230 Times Sq/Theatre District            Manhattan        98,974  3.633% of 2,724,143 curated trips; raw 106,324, dropped 6.913% of this zone's 106,324 raw January rows
+ 8. 142 Lincoln Square East                  Manhattan        97,638  3.584% of 2,724,143 curated trips; raw 104,080, dropped 6.189% of this zone's 104,080 raw January rows
+ 9. 138 LaGuardia Airport                    Queens           86,580  3.178% of 2,724,143 curated trips; raw 89,533, dropped 3.298% of this zone's 89,533 raw January rows
+10. 239 Upper West Side South                Manhattan        81,344  2.986% of 2,724,143 curated trips; raw 88,474, dropped 8.059% of this zone's 88,474 raw January rows
+
+=== Trips by pickup hour (curated January, 2,724,143 trips) ===
+  hour  0:   69,195  2.540% of 2,724,143
+  hour  1:   45,385  1.666% of 2,724,143
+  hour  2:   31,945  1.173% of 2,724,143
+  hour  3:   20,551  0.754% of 2,724,143
+  hour  4:   12,792  0.470% of 2,724,143
+  hour  5:   15,632  0.574% of 2,724,143
+  hour  6:   35,584  1.306% of 2,724,143
+  hour  7:   74,324  2.728% of 2,724,143
+  hour  8:  105,141  3.860% of 2,724,143
+  hour  9:  119,409  4.383% of 2,724,143
+  hour 10:  130,058  4.774% of 2,724,143
+  hour 11:  141,282  5.186% of 2,724,143
+  hour 12:  153,626  5.639% of 2,724,143
+  hour 13:  159,105  5.841% of 2,724,143
+  hour 14:  171,290  6.288% of 2,724,143
+  hour 15:  176,998  6.497% of 2,724,143
+  hour 16:  178,428  6.550% of 2,724,143
+  hour 17:  191,280  7.022% of 2,724,143
+  hour 18:  195,936  7.193% of 2,724,143
+  hour 19:  170,610  6.263% of 2,724,143
+  hour 20:  149,281  5.480% of 2,724,143
+  hour 21:  148,404  5.448% of 2,724,143
+  hour 22:  130,544  4.792% of 2,724,143
+  hour 23:   97,343  3.573% of 2,724,143
+peak hour 18 with 195,936 trips (7.193% of 2,724,143)
+
+=== Checks for the limitation ===
+(a) curated trips with pickup zone 264 or 265: 9,562 = 0.351% of the 2,724,143 curated trips
+(b) top 5 zone ids, curated:  [132, 237, 161, 236, 162]
+    top 5 zone ids, January raw (no curation): [132, 161, 237, 236, 162]
+    same ids in the same order: False
+(c) top 5 zone ids, February raw (no curation, cohort = that month's raw rows): [161, 237, 236, 132, 162]; same set as January curated top 5: True
+(c) top 5 zone ids, March raw (no curation, cohort = that month's raw rows): [161, 132, 237, 236, 162]; same set as January curated top 5: True
+
+chart written: /home/tdat1/bda/lab01/figures/ex10_hourly_trips.png

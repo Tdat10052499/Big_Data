@@ -1,0 +1,11 @@
+rank,PULocationID,Borough,Zone,curated_trips,share_of_2724143_curated_trips,raw_trips_in_zone,share_of_zone_raw_rows_dropped
+1,132,Queens,JFK Airport,136998,5.029%,145240,5.675%
+2,237,Manhattan,Upper East Side South,135470,4.973%,142708,5.072%
+3,161,Manhattan,Midtown Center,134981,4.955%,143471,5.918%
+4,236,Manhattan,Upper East Side North,128108,4.703%,136465,6.124%
+5,162,Manhattan,Midtown East,101257,3.717%,106717,5.116%
+6,186,Manhattan,Penn Station/Madison Sq West,99461,3.651%,104523,4.843%
+7,230,Manhattan,Times Sq/Theatre District,98974,3.633%,106324,6.913%
+8,142,Manhattan,Lincoln Square East,97638,3.584%,104080,6.189%
+9,138,Queens,LaGuardia Airport,86580,3.178%,89533,3.298%
+10,239,Manhattan,Upper West Side South,81344,2.986%,88474,8.059%
