@@ -38,11 +38,12 @@ Rows where all five are null: **185,610**. Rows with `payment_type = 0`: 185,610
 
 **Limit.** Two months only; this shows that the null rows and the `payment_type = 0` rows coincide, not why the source system leaves those fields empty.
 
-## Exercise 4: Round trip and verify (5đ)
-- Lệnh dùng:
-- Số dòng hai bản:
-- Vì sao so sánh kích thước là chưa đủ:
-- Evidence:
+## Exercise 4: Round trip and verify (5 points)
+- Commands (run 2026-09-30 20:23:20 UTC): `hdfs dfs -get /user/tdat1/nyc/curated /home/tdat1/bda/tmp_ex04/curated`, then `hdfs dfs -put /home/tdat1/bda/tmp_ex04/curated /user/tdat1/nyc/curated_copy`. Comparison: `hdfs dfs -du -s` on both paths for size, and a Spark job (`src/ex04_compare.py`, `spark.read.parquet(...).count()` on each path) for the row count. Note: the row count is obtained with Spark, not with an HDFS shell command; the only HDFS command I used to compare the two copies is `hdfs dfs -du -s` (and `-ls` to list the files).
+- Rows in the two copies: `/user/tdat1/nyc/curated` = 2,724,143 rows; `/user/tdat1/nyc/curated_copy` = 2,724,143 rows; equal. Sizes: both 60,289,030 bytes (22,563,953 + 22,362,651 + 15,362,426 bytes in the three `part-*` files, the same in both directories).
+- Why a size comparison alone is not enough for a Parquet dataset: a size is a byte count, not a record count. Parquet stores data column by column with compression and encoding, so two datasets with different rows can have the same number of bytes, and the same rows written with a different compression, encoding or row-group layout can have different sizes. Equal sizes therefore neither prove that the row counts match nor that the content matches. Here the sizes are equal because `-get` and `-put` copy the bytes unchanged, so equal size was expected; the row count obtained by reading the files is the independent check.
+- Limit: matching row counts show that no rows were lost or added; they do not prove that every value is identical (that would need a checksum of the files, e.g. `hdfs dfs -checksum`, or a comparison of the data itself; neither was run here).
+- Evidence: `figures/ex04_roundtrip.png`, `runs/logs/ex04_roundtrip.txt`, `src/ex04_compare.py`
 
 ## Exercise 5: Change the block size and predict first (8đ)
 - Prediction (recorded 2026-09-30 19:07:03 UTC, before any measurement): 4 blocks. The March file is 60,078,280 bytes and the target block size is 16,777,216 bytes (16 MB); 60,078,280 / 16,777,216 = 3.58, rounded up to 4. Reasoning: the file fills 3 full blocks (50,331,648 bytes) and the remaining 9,746,632 bytes need a fourth, partly filled block. (The reasoning sentence in `ex05_prediction.txt` was completed after the first timestamp but before loading the file with the 16 MB block size; the predicted number 4 did not change.)
