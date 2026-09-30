@@ -12,17 +12,31 @@
 - Explanation (1 sentence): The file is smaller than the 128 MB block size, so HDFS does not need to split it and stores it as a single block that occupies only the file's own size on disk.
 - Evidence: `figures/ex01_fsck_feb.png`
 
-## Exercise 2: Profile March (5đ)
-- Số dòng:
-- Số cột:
-- Schema giống tháng 1? Cột khác:
-- Evidence:
+## Exercise 2 — Profile March
 
-## Exercise 3: The null pattern in another month (5đ)
-- Số null theo cột (February):
-- Số dòng null đồng thời ở tất cả cột bị ảnh hưởng:
-- Kết luận (một quần thể hay không) và cách chứng minh:
-- Evidence:
+**Evidence:** `figures/ex02_03_profile.png` (script `src/ex02_03.py`)
+
+March 2024 has **3,582,628 rows** and **19 columns**. The column names, their order and their Spark types are identical to January's (`jan.columns == mar.columns` is `True`; the list of columns differing in name or type is empty). The comparison covers names and Spark data types only; I did not compare nullability or Parquet metadata.
+
+## Exercise 3 — The null pattern in February
+
+**Evidence:** `figures/ex02_03_profile.png` (script `src/ex02_03.py`, same method as Section 7: null count per column, then the all-five-null count, here extended with a cross-check against `payment_type`)
+
+February cohort: 3,007,526 rows. Five columns have missing values, each with the same count:
+
+| Column | Null rows | Share of the 3,007,526 February rows |
+|---|---|---|
+| passenger_count | 185,610 | 6.172% |
+| RatecodeID | 185,610 | 6.172% |
+| store_and_fwd_flag | 185,610 | 6.172% |
+| congestion_surcharge | 185,610 | 6.172% |
+| Airport_fee | 185,610 | 6.172% |
+
+Rows where all five are null: **185,610**. Rows with `payment_type = 0`: 185,610. Rows with all five null AND `payment_type = 0`: 185,610. Rows with all five null AND `payment_type != 0`: 0. Rows with `payment_type = 0` but NOT all five null: 0.
+
+**Conclusion.** The single-population pattern found in January (140,162 rows = 4.728% of the 2,964,624 January rows; all five null exactly on the `payment_type = 0` rows) also holds in February: the five null sets coincide with each other and with the `payment_type = 0` set, because both set differences are empty. What does not carry over is the size: 6.172% of February rows versus 4.728% of January rows. The structure repeats, the rate does not.
+
+**Limit.** Two months only; this shows that the null rows and the `payment_type = 0` rows coincide, not why the source system leaves those fields empty.
 
 ## Exercise 4: Round trip and verify (5đ)
 - Lệnh dùng:
