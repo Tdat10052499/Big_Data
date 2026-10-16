@@ -1,0 +1,19 @@
+Fri Oct 16 03:23:02 UTC 2026
+
+  settings: master local[4], spark.sql.adaptive.enabled=true, spark.sql.shuffle.partitions=200
+  input: curated_q1 (8,480,687 rows); 1 warm-up pass not scored, 3 scored passes
+
+  line                run 1 s   run 2 s   run 3 s    best s   Spark jobs per run
+  a filter             0.0118    0.0122    0.0093    0.0093   0 / 0 / 0
+  b select             0.0121    0.0218    0.0143    0.0121   0 / 0 / 0
+  c groupBy.count      0.0197    0.0145    0.0173    0.0145   0 / 0 / 0
+  d orderBy            0.0161    0.0113    0.0079    0.0079   0 / 0 / 0
+  e take(5)            0.6558    0.5635    0.4263    0.4263   2 / 2 / 2
+
+  result of e (run 3):
+    PULocationID  132   count 400,718
+    PULocationID  161   count 279,334
+    PULocationID  138   count 272,507
+    PULocationID  186   count 213,901
+    PULocationID  162   count 204,639
+
