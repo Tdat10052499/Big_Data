@@ -21,7 +21,7 @@ Conventions: every number is copied from a log in `runs/`. Timings are 1 warm-up
 
 ## 2. Changes to the lecturer's code
 - `/user/thaianh/` replaced by `/user/tdat1/` in q1-q6 (no `thaianh` left).
-- Added `common.py`, `ex01_janfeb.py`, `ex02_lines.py`, `ex03_plan.py`, `ex04_job.py`, `ex04_capture.py`, `log_to_png.py`.
+- Added `common.py`, `ex01_janfeb.py`, `ex02_lines.py`, `ex03_plan.py`, `ex04_job.py`, `ex04_capture.py`, `ex05_partitions.py`, `log_to_png.py`.
 
 ## 3. Runs
 
@@ -31,6 +31,7 @@ Conventions: every number is copied from a log in `runs/`. Timings are 1 warm-up
 | 03:03:29 | Ex1, `ex01_janfeb.py` | `ex01_janfeb.log` | raw 5,972,150 (01: 2,964,624; 02: 3,007,526); kept 5,444,135; dropped 528,015 = 8.84% of the 5,972,150 raw Jan+Feb rows; 5 partitions in memory; count 1 / 5 / 120,323,100 bytes |
 | 03:23:02 | Ex2, `ex02_lines.py` (AQE on, 200 shuffle partitions) | `ex02_lines.log` | best of 3 (s): a 0.0093, b 0.0121, c 0.0145, d 0.0079, e 0.4263; Spark jobs per run: a-d 0, e 2; all runs in `answers.md` |
 | 03:32:56 | Ex3, `ex03_plan.py` (AQE on, 200 shuffle partitions; plan before execution) | `ex03_plan.log` | scan reads 2 of 22 columns; no PushedFilters; 1 Exchange `hashpartitioning(payment_type, 200)` |
+| 03:52:47 | Ex4, `ex04_job.py` + `ex04_capture.py` (AQE off, 200 shuffle partitions) | `ex04_job.log`, `ex04_ui.log` | 6 jobs; longest job 3 (3.009 s): 3 stages, 205 tasks; first stage 4: 4 tasks, 8,480,687 input records, 536,217 shuffle records; 2 shuffles; wide aggregation 230,729 groups; screenshots by headless Chromium on the student machine |
 
 Note on Ex1: the output has 4 part files but the read-back DataFrame has 5 partitions in memory. This is an inference, not a measurement: when reading, Spark splits files larger than its split size and packs small splits together, so the partition count need not equal the file count.
 

@@ -64,3 +64,20 @@ Evidence: `runs/ex03_plan.log` (2026-10-16 03:32:56 UTC), `figures/lab02_ex03_pl
 Reading: column pruning applies even with no filter, because only the grouping key and the averaged column are needed. Nothing is pushed down because the query has no `filter`/`where`; the Scan node therefore carries no `PushedFilters` entry (Spark omits the line when the list is empty). The single Exchange sits between the partial `HashAggregate (2)` (`partial_avg`) and the final `HashAggregate (4)` (`avg`), so each of the 200 requested shuffle partitions receives per-partition partial sums and counts, not raw rows. The plan was taken before execution (`isFinalPlan=false`), so AQE may still change the number of partitions actually read after the shuffle; Exercise 6 prints the final plan.
 
 Result printed after the plan (run once): payment_type 1: 4.2010; 2: 0.0002; 3: 0.0064; 4: 0.0157 (average `tip_amount`, over `curated_q1` rows of each type). Only four payment types appear in `curated_q1`. The near-zero average for type 2 is a measured value; the usual explanation (cash tips are not recorded in TLC data) is background knowledge, not something this lab measured.
+
+## Exercise 4: Count the stages (7 points)
+
+Scripts `src/ex04_job.py` (three actions on `curated_q1`, then keeps the UI open) and `src/ex04_capture.py` (reads the counts from the running UI's REST API and screenshots the Jobs tab and one Stage page with headless Chromium on the same machine). Settings: `local[4]`, **AQE off** (so that one action is one job and stage boundaries equal shuffles), `spark.sql.shuffle.partitions` = 200.
+Evidence: `runs/ex04_job.log` (03:52:47 UTC), `runs/ex04_ui.log` (03:53:07 UTC), `figures/lab02_ex04_jobs.png`, `figures/lab02_ex04_stage.png`, `figures/lab02_ex04_numbers.png`.
+
+| Question | Answer | Where it shows |
+|---|---|---|
+| Number of jobs | **6** (jobs 0-5) | Jobs tab: "Completed Jobs: 6"; `ex04_ui.log` job table |
+| Stages in the longest job | **3**: job 3 (action 2, wide aggregation), 3.009 s, stages 4, 5, 6, none skipped | Jobs tab row 3: "Stages 3/3", "Tasks 205/205" |
+| Tasks in its first stage | **4** (stage 4) | Stage 4 page: "Summary Metrics for 4 Completed Tasks", "Tasks (4)" |
+| Shuffles implied | **2** (3 stages − 1) | — |
+
+Reading. The first stage (stage 4) read all 8,480,687 input records (17.5 MiB) in 4 tasks, one per input partition, and wrote 536,217 shuffle records: each task pre-aggregates its own rows before the shuffle (partial count). The job's 205 tasks are consistent with 4 + 200 + 1, i.e. a 4-task scan stage, a 200-task stage after the first shuffle (`spark.sql.shuffle.partitions` = 200) and a 1-task stage after the second shuffle that counts the groups; this breakdown is inferred from the totals, the per-stage task counts of stages 5 and 6 were not captured. The two shuffles are therefore the group-by on (PULocationID, DOLocationID, pickup_hour) and the global `count` of the 230,729 groups.
+
+Other jobs: jobs 0 and 1 are the parquet and CSV reads (schema/file listing, 1 task each); action 1 (`count`) is job 2 with 2 stages; action 3 (join + group by Borough) appears as two jobs, a 1-task job 4 and a 2-stage job 5 with 204 tasks. That the 1-task job is the broadcast of the 265-row zone table is a hypothesis; the plan of action 3 was not printed here (Exercise 7 does that).
+Limits: the counts depend on the setting (AQE off, 200 partitions) and on `curated_q1` having 4 input partitions on this machine; with AQE on, each shuffle stage is submitted as its own job (seen in a synthetic-data test before the real run, not in this evidence).
