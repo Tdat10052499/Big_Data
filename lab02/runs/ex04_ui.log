@@ -1,0 +1,20 @@
+Fri Oct 16 03:53:07 UTC 2026
+
+  UI http://localhost:4040   application local-1792122770969
+  number of jobs: 6
+   job  group    status     duration s  stages  skipped  tasks  description
+     0           SUCCEEDED       0.670       1        0      1  parquet at NativeMethodAccessorImpl.java:0
+     1           SUCCEEDED       0.232       1        0      1  csv at NativeMethodAccessorImpl.java:0
+     2  ex04-1   SUCCEEDED       0.424       2        0      5  action 1: count curated_q1
+     3  ex04-2   SUCCEEDED       3.009       3        0    205  action 2: wide aggregation, count groups
+     4  ex04-3   SUCCEEDED       0.089       1        0      1  action 3: join zones, trips per borough
+     5  ex04-3   SUCCEEDED       1.173       2        0    204  action 3: join zones, trips per borough
+
+  longest job (by duration): job 3, 3.009 s
+    stages in that job: 3 (ids [4, 5, 6]), of which skipped: 0
+    first stage that ran: stage 4, 4 tasks, name: count at NativeMethodAccessorImpl.java:0
+    shuffles implied by the stages that ran: 2 (stages that ran - 1)
+  job with the most stages: job 3, 3 stages, 3.009 s
+
+  screenshots: figures/lab02_ex04_jobs.png, figures/lab02_ex04_stage.png
+

@@ -1,0 +1,10 @@
+Fri Oct 16 03:52:47 UTC 2026
+
+  settings: master local[4], spark.sql.adaptive.enabled=false, spark.sql.shuffle.partitions=200
+  application id local-1792122770969, UI http://10.255.255.254:4040
+
+  action 1  count curated_q1                     8,480,687 rows
+  action 2  wide aggregation groups               230,729
+  action 3  join + groupBy(Borough) rows          8
+
+  UI is up; waiting for ex04_ui.stop (max 20 min)

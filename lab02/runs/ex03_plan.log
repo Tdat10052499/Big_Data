@@ -1,0 +1,91 @@
+Fri Oct 16 03:32:56 UTC 2026
+
+  settings: spark.sql.adaptive.enabled=true, spark.sql.shuffle.partitions=200
+  columns in curated_q1: 22
+
+  ==== Part 1: plan as printed by explain(mode='formatted') ====
+== Physical Plan ==
+AdaptiveSparkPlan (5)
++- HashAggregate (4)
+   +- Exchange (3)
+      +- HashAggregate (2)
+         +- Scan parquet  (1)
+
+
+(1) Scan parquet 
+Output [2]: [payment_type#9L, tip_amount#13]
+Batched: true
+Location: InMemoryFileIndex [hdfs://localhost:9000/user/tdat1/nyc/curated_q1]
+ReadSchema: struct<payment_type:bigint,tip_amount:double>
+
+(2) HashAggregate
+Input [2]: [payment_type#9L, tip_amount#13]
+Keys [1]: [payment_type#9L]
+Functions [1]: [partial_avg(tip_amount#13)]
+Aggregate Attributes [2]: [sum#71, count#72L]
+Results [3]: [payment_type#9L, sum#73, count#74L]
+
+(3) Exchange
+Input [3]: [payment_type#9L, sum#73, count#74L]
+Arguments: hashpartitioning(payment_type#9L, 200), ENSURE_REQUIREMENTS, [plan_id=11]
+
+(4) HashAggregate
+Input [3]: [payment_type#9L, sum#73, count#74L]
+Keys [1]: [payment_type#9L]
+Functions [1]: [avg(tip_amount#13)]
+Aggregate Attributes [1]: [avg(tip_amount#13)#66]
+Results [2]: [payment_type#9L, avg(tip_amount#13)#66 AS avg_tip#67]
+
+(5) AdaptiveSparkPlan
+Output [2]: [payment_type#9L, avg_tip#67]
+Arguments: isFinalPlan=false
+
+
+  ==== Part 2: the same plan, answers marked by this script ====
+== Physical Plan ==
+AdaptiveSparkPlan (5)
++- HashAggregate (4)
+   +- Exchange (3)
+      +- HashAggregate (2)
+         +- Scan parquet  (1)
+
+
+[33m(1) Scan parquet    <== [2] pushed filters: none[0m
+[33mOutput [2]: [payment_type#9L, tip_amount#13]   <== [1] scan reads 2 of 22 columns[0m
+Batched: true
+Location: InMemoryFileIndex [hdfs://localhost:9000/user/tdat1/nyc/curated_q1]
+ReadSchema: struct<payment_type:bigint,tip_amount:double>
+
+(2) HashAggregate
+Input [2]: [payment_type#9L, tip_amount#13]
+Keys [1]: [payment_type#9L]
+Functions [1]: [partial_avg(tip_amount#13)]
+Aggregate Attributes [2]: [sum#71, count#72L]
+Results [3]: [payment_type#9L, sum#73, count#74L]
+
+[33m(3) Exchange   <== [3] Exchange 1 of 1[0m
+Input [3]: [payment_type#9L, sum#73, count#74L]
+Arguments: hashpartitioning(payment_type#9L, 200), ENSURE_REQUIREMENTS, [plan_id=11]
+
+(4) HashAggregate
+Input [3]: [payment_type#9L, sum#73, count#74L]
+Keys [1]: [payment_type#9L]
+Functions [1]: [avg(tip_amount#13)]
+Aggregate Attributes [1]: [avg(tip_amount#13)#66]
+Results [2]: [payment_type#9L, avg(tip_amount#13)#66 AS avg_tip#67]
+
+(5) AdaptiveSparkPlan
+Output [2]: [payment_type#9L, avg_tip#67]
+Arguments: isFinalPlan=false
+
+
+  [1] columns read by the scan : 2 of 22  (Output [2]: [payment_type#9L, tip_amount#13])
+  [2] filter pushed down       : no  (no PushedFilters line in the Scan parquet node)
+  [3] Exchange steps           : 1
+
+  result (action run after the plan was printed):
+    payment_type 1   avg_tip 4.2010
+    payment_type 2   avg_tip 0.0002
+    payment_type 3   avg_tip 0.0064
+    payment_type 4   avg_tip 0.0157
+
