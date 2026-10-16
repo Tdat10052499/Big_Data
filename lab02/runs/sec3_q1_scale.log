@@ -1,0 +1,9 @@
+Fri Oct 16 03:02:52 UTC 2026
+
+  raw rows, all three months   9,554,778
+  curated_q1 rows              8,480,687
+  dropped                      1,074,091
+  share dropped                11.24% of the 9,554,778 raw rows
+  partitions in memory         4
+
+           1            5          187967005 /user/tdat1/nyc/curated_q1

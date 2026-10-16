@@ -1,0 +1,19 @@
+Fri Oct 16 03:03:29 UTC 2026
+
+  window                       pickup in [2024-01-01, 2024-03-01)
+  raw rows, 2024-01 file       2,964,624
+  raw rows, 2024-02 file       3,007,526
+  raw rows, Jan+Feb            5,972,150
+  curated_jan_feb rows (kept)  5,444,135
+  dropped                      528,015
+  share dropped                8.84% of the 5,972,150 raw Jan+Feb rows
+  pickup_date range kept       2024-01-01 .. 2024-02-29
+  partitions in memory         5
+
+           1            5          120323100 /user/tdat1/nyc/curated_jan_feb
+Found 5 items
+-rw-r--r--   1 tdat1 supergroup          0 2026-10-16 03:03 /user/tdat1/nyc/curated_jan_feb/_SUCCESS
+-rw-r--r--   1 tdat1 supergroup   45016726 2026-10-16 03:03 /user/tdat1/nyc/curated_jan_feb/part-00000-b13b798a-8d62-450e-b24a-a2864b692608-c000.snappy.parquet
+-rw-r--r--   1 tdat1 supergroup   44553556 2026-10-16 03:03 /user/tdat1/nyc/curated_jan_feb/part-00001-b13b798a-8d62-450e-b24a-a2864b692608-c000.snappy.parquet
+-rw-r--r--   1 tdat1 supergroup   15390311 2026-10-16 03:03 /user/tdat1/nyc/curated_jan_feb/part-00002-b13b798a-8d62-450e-b24a-a2864b692608-c000.snappy.parquet
+-rw-r--r--   1 tdat1 supergroup   15362507 2026-10-16 03:03 /user/tdat1/nyc/curated_jan_feb/part-00003-b13b798a-8d62-450e-b24a-a2864b692608-c000.snappy.parquet

@@ -1,0 +1,40 @@
+Fri Oct 16 03:01:15 UTC 2026
+
+  Big Data Analytics lab services
+  -------------------------------------------------------------------
+  [0;32mUP  [0m  HDFS NameNode              http://localhost:9870
+  [0;32mUP  [0m  HDFS DataNode              
+  [0;32mUP  [0m  YARN ResourceManager       http://localhost:8088
+  [0;32mUP  [0m  YARN NodeManager           
+  [0;32mUP  [0m  MapReduce JobHistoryServer http://localhost:19888
+  [0;31mDOWN[0m  Spark History Server       run: bda-start.sh spark
+  [0;31mDOWN[0m  Kafka broker               run: bda-start.sh kafka
+  [0;31mDOWN[0m  MongoDB                    run: bda-start.sh mongo
+  [0;32mUP  [0m  sshd                       
+  -------------------------------------------------------------------
+
+  HDFS capacity
+    Configured Capacity: 1081101176832 (1006.85 GB)
+    DFS Remaining: 990366076928 (922.35 GB)
+    DFS Used: 573648896 (547.07 MB)
+    DFS Used%: 0.06%
+    Live datanodes (1):
+    Configured Capacity: 1081101176832 (1006.85 GB)
+    DFS Used: 573648896 (547.07 MB)
+    DFS Remaining: 990366076928 (922.35 GB)
+    DFS Used%: 0.05%
+    DFS Remaining%: 91.61%
+
+  Safe mode: Safe mode is OFF
+
+Found 6 items
+drwxr-xr-x   - tdat1 supergroup          0 2026-09-30 19:51 /user/tdat1/nyc/curated
+drwxr-xr-x   - tdat1 supergroup          0 2026-10-16 02:08 /user/tdat1/nyc/curated_q1
+drwxr-xr-x   - tdat1 supergroup          0 2026-09-30 19:40 /user/tdat1/nyc/ex09
+drwxr-xr-x   - tdat1 supergroup          0 2026-09-30 20:09 /user/tdat1/nyc/out
+drwxr-xr-x   - tdat1 supergroup          0 2026-09-30 18:40 /user/tdat1/nyc/raw
+drwxr-xr-x   - tdat1 supergroup          0 2026-09-30 18:16 /user/tdat1/nyc/ref
+           1            4           60289030 /user/tdat1/nyc/curated
+           1            5          187967005 /user/tdat1/nyc/curated_q1
+   /___/ .__/\_,_/_/ /_/\_\   version 3.5.9
+Python 3.14.4
