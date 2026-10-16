@@ -49,3 +49,18 @@ Evidence: `runs/ex02_lines.log` (2026-10-16 03:23:02 UTC), `figures/lab02_ex02_t
 Limits: the 0.01-0.02 s of lines a-d is driver-side work (building and analysing the logical plan), not data reading; the job count, not the timing, is the direct evidence. Why `take(5)` produced 2 jobs rather than 1 was not measured; a plausible explanation (hypothesis) is that with AQE on, the shuffle for the group-by runs as one job and the ordered `take` on its output runs as a second one. Run-to-run spread for line e is 0.4263-0.6558 s on one laptop.
 
 Result of e (run 3; among `curated_q1` trips with `fare_amount > 10`): PULocationID 132: 400,718; 161: 279,334; 138: 272,507; 186: 213,901; 162: 204,639.
+
+## Exercise 3: Read a plan (7 points)
+
+Script `src/ex03_plan.py`: `curated_q1.groupBy("payment_type").agg(avg("tip_amount"))`, plan taken with `explain(mode="formatted")` before any action. Settings: AQE on (default), `spark.sql.shuffle.partitions` = 200 (default).
+Evidence: `runs/ex03_plan.log` (2026-10-16 03:32:56 UTC), `figures/lab02_ex03_plan.png` (Part 1 is the plan as printed by Spark; Part 2 is the same plan with the three answers marked in yellow by the script).
+
+| Question | Answer | Plan line |
+|---|---|---|
+| Columns the scan reads | **2 of the 22** columns of `curated_q1` | `(1) Scan parquet` → `Output [2]: [payment_type#9L, tip_amount#13]`, `ReadSchema: struct<payment_type:bigint,tip_amount:double>` |
+| Filter pushed down | **No** | the `(1) Scan parquet` node has no `PushedFilters` line |
+| Exchange steps | **1** | `(3) Exchange` → `hashpartitioning(payment_type#9L, 200), ENSURE_REQUIREMENTS` |
+
+Reading: column pruning applies even with no filter, because only the grouping key and the averaged column are needed. Nothing is pushed down because the query has no `filter`/`where`; the Scan node therefore carries no `PushedFilters` entry (Spark omits the line when the list is empty). The single Exchange sits between the partial `HashAggregate (2)` (`partial_avg`) and the final `HashAggregate (4)` (`avg`), so each of the 200 requested shuffle partitions receives per-partition partial sums and counts, not raw rows. The plan was taken before execution (`isFinalPlan=false`), so AQE may still change the number of partitions actually read after the shuffle; Exercise 6 prints the final plan.
+
+Result printed after the plan (run once): payment_type 1: 4.2010; 2: 0.0002; 3: 0.0064; 4: 0.0157 (average `tip_amount`, over `curated_q1` rows of each type). Only four payment types appear in `curated_q1`. The near-zero average for type 2 is a measured value; the usual explanation (cash tips are not recorded in TLC data) is background knowledge, not something this lab measured.
