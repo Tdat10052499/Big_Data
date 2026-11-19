@@ -1,6 +1,6 @@
 # Rules for Claude Code working in lab04/ on the student's machine
 
-Student: Hồ Du Tuấn Đạt, 2374802010097, HDFS user `tdat1`, WSL Ubuntu, Spark 3.5.9, Hadoop 3.4.3, Java 17, Python 3.14.4 (venv `~/bda/venv`), MongoDB started only by `bda-start.sh`.
+Student: Hồ Du Tuấn Đạt, 2374802010097, HDFS user `tdat1`, WSL Ubuntu (new laptop from 2026-11-19, set up with `setup_laptop/`), Spark 3.5.9, Hadoop 3.4.3, Java 17, venv `~/bda/venv` (exact versions in `runs/ex00_env.log`), MongoDB started only by `bda-start.sh`.
 
 1. Never invent, edit or round a number. Every number in a log, answer or image comes from a command you actually ran in this session. If a run fails, save the failing output and report it; do not retry silently more than once.
 2. Logs: stdout to `runs/<name>.log` with `date -u` on the first line; Spark stderr to `runs/<name>.err`. Never edit a log after it is written.
