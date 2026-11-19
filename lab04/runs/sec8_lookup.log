@@ -1,0 +1,12 @@
+Thu Nov 19 18:51:49 UTC 2026
+
+  collection bda.zone_summary, 258 documents, query {'zone_id': 132}
+
+                     plan              returned   keys   docs   ms
+  no index           COLLSCAN                 1      0    258    0
+  index on zone_id   FETCH > IXSCAN           1      1      1    1
+
+  1,000 lookups of random zones, one at a time, from Python
+    no index           median 0.491 ms   95th percentile 0.708 ms
+    index on zone_id   median 0.425 ms   95th percentile 0.643 ms
+

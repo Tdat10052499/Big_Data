@@ -1,0 +1,10 @@
+Thu Nov 19 18:49:52 UTC 2026
+:: loading settings :: url = jar:file:/opt/spark/jars/ivy-2.5.3.jar!/org/apache/ivy/core/settings/ivysettings.xml
+
+  format                          delta
+  table rewritten                 6 times in 35 s
+  the two whole sizes             2,724,143 and 1,596,003 rows
+  reads made while it ran         47
+  reads that saw a whole table    47
+  reads that saw anything else    0
+
