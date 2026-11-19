@@ -1,0 +1,17 @@
+Thu Nov 19 18:28:28 UTC 2026
+--- agg
+/user/tdat1/nyc/agg/q1_by_date
+/user/tdat1/nyc/agg/q1_by_date_repart
+/user/tdat1/nyc/agg/zone_hour
+/user/tdat1/nyc/agg/zone_summary
+--- stream/ck
+ls: `/user/tdat1/nyc/stream/ck': No such file or directory
+--- count (dirs files bytes path)
+           1            4           60289030 /user/tdat1/nyc/curated
+           1            5          187967005 /user/tdat1/nyc/curated_q1
+           0            1              12331 /user/tdat1/nyc/ref/taxi_zone_lookup.csv
+           1            2               7529 /user/tdat1/nyc/agg/zone_summary
+           1            2              47886 /user/tdat1/nyc/agg/zone_hour
+--- section 3: du
+7.4 K   7.4 K   /user/tdat1/nyc/agg/zone_summary
+57.5 M  57.5 M  /user/tdat1/nyc/curated

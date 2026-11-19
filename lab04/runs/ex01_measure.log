@@ -1,0 +1,20 @@
+Thu Nov 19 18:31:18 UTC 2026
+:: loading settings :: url = jar:file:/opt/spark/jars/ivy-2.5.3.jar!/org/apache/ivy/core/settings/ivysettings.xml
+
+  2024-02, 2,720,001 rows, 22 columns, the same rows in both formats
+
+                                 CSV     Parquet    ratio
+  stored on HDFS            356.0 MB     57.4 MB     6.2x
+
+                               bytes read           time, best of 3   
+  query                          CSV     Parquet        CSV    Parquet
+    [timing] count the rows / CSV               warm-up 0.650 s | runs 0.474 / 0.374 / 0.409 s | best 0.374 s
+    [timing] count the rows / Parquet           warm-up 0.159 s | runs 0.164 / 0.185 / 0.189 s | best 0.164 s
+  count the rows            356.0 MB       29 KB     0.37 s     0.16 s
+    [timing] sum one column / CSV               warm-up 1.054 s | runs 1.028 / 1.004 / 0.995 s | best 0.995 s
+    [timing] sum one column / Parquet           warm-up 0.159 s | runs 0.191 / 0.172 / 0.169 s | best 0.169 s
+  sum one column            356.0 MB      3.5 MB     1.00 s     0.17 s
+    [timing] count every column / CSV           warm-up 2.568 s | runs 2.695 / 2.790 / 2.547 s | best 2.547 s
+    [timing] count every column / Parquet       warm-up 0.953 s | runs 0.741 / 0.717 / 0.865 s | best 0.717 s
+  count every column        356.0 MB     57.3 MB     2.55 s     0.72 s
+

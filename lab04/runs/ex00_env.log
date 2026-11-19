@@ -1,0 +1,19 @@
+Thu Nov 19 18:28:11 UTC 2026
+  HDFS NameNode                [32mUP[0m
+  HDFS DataNode                [32mUP[0m
+  YARN ResourceManager         [31mDOWN[0m
+  YARN NodeManager             [31mDOWN[0m
+  MongoDB                      [32mUP[0m
+
+  Live datanodes (1):
+  Safe mode is OFF
+--- versions
+db version v8.0.38
+2.14.3
+jq-1.7
+pymongo 4.20.1
+pyarrow 26.0.1
+   /___/ .__/\_,_/_/ /_/\_\   version 3.5.9
+Hadoop 3.4.3
+openjdk version "17.0.21.1" 2026-11-17
+Python 3.12.3

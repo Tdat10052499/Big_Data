@@ -1,0 +1,21 @@
+Thu Nov 19 18:30:26 UTC 2026
+largest file: /user/tdat1/nyc/fmt/2024-01/parquet/part-00000-576dc54c-f44a-4bef-90a8-a68d923f745f-c000.snappy.parquet
+Found 4 items
+-rw-r--r--   1 tdat1 supergroup          0 2026-11-19 18:29 /user/tdat1/nyc/fmt/2024-01/parquet/_SUCCESS
+-rw-r--r--   1 tdat1 supergroup   22563953 2026-11-19 18:29 /user/tdat1/nyc/fmt/2024-01/parquet/part-00000-576dc54c-f44a-4bef-90a8-a68d923f745f-c000.snappy.parquet
+-rw-r--r--   1 tdat1 supergroup   22362651 2026-11-19 18:29 /user/tdat1/nyc/fmt/2024-01/parquet/part-00001-576dc54c-f44a-4bef-90a8-a68d923f745f-c000.snappy.parquet
+-rw-r--r--   1 tdat1 supergroup   15362426 2026-11-19 18:29 /user/tdat1/nyc/fmt/2024-01/parquet/part-00002-576dc54c-f44a-4bef-90a8-a68d923f745f-c000.snappy.parquet
+
+  file          out/sample.parquet
+  rows          1,010,014
+  row groups    1
+  columns       22
+  written by    parquet-mr version 1.13.1
+
+  row group 0: 1,010,014 rows, 27.0 MB before compression
+    column                     codec     stored                    min                    max
+    tpep_pickup_datetime      SNAPPY   5,223 KB    2024-01-01 00:00:00    2024-01-13 23:51:06
+    trip_distance             SNAPPY   1,497 KB                   0.01               10879.28
+    fare_amount               SNAPPY   1,285 KB                    0.0                 1616.5
+    pickup_date               SNAPPY       3 KB             2024-01-01             2024-01-13
+
