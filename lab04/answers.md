@@ -192,5 +192,25 @@ Every partial count in the Parquet runs lies between two whole sizes (for exampl
 
 Difference between the two Parquet runs (1 partial read of 57 against 6 of 33). Explanation, not directly measured: a Parquet append becomes visible file by file as Spark moves each task's output into the directory when the job commits, and a reader that lists the directory in the middle of that sees only part of the batch. With 64 files per append there are more files to move, so each append spends longer in a half-visible state, and a larger share of reads fell into it. The number of files Spark wrote per append in the default run was not logged, so this is a hypothesis. Delta saw only whole tables in both runs because a new version exists only once its commit file appears in `_delta_log`.
 
-## Exercises 9-10
-Not yet done.
+## Exercise 9: How many lookups a second (16 points)
+
+Evidence: `src/e9_loadtest.py`, `out/loadtest.csv`, `runs/ex09_loadtest.log` (one run, 20:34:23 UTC).
+Q1 = one zone by `zone_id`, a random zone per request (seed 42 + thread number). Stores: MongoDB `bda.zone_summary` (258 documents, index on `zone_id`) through one shared `MongoClient`; Spark on Parquet `agg/zone_summary` (258 rows, `local[4]`) through one shared session. Each level: 2 s warm-up (not scored), then 10 s measured. Machine: AMD Ryzen AI 7 350, 16 cores, 15 GiB, WSL; client and servers on the same machine.
+
+| Store | Threads | Requests | Requests per second | Median (ms) | 95th percentile (ms) |
+|---|---|---|---|---|---|
+| MongoDB, indexed | 1 | 34,126 | 3,412.3 | 0.264 | 0.472 |
+| MongoDB, indexed | 4 | 25,416 | 2,540.8 | 1.496 | 2.646 |
+| MongoDB, indexed | 16 | 21,388 | 2,133.7 | 7.302 | 11.219 |
+| Spark on Parquet | 1 | 248 | 24.7 | 37.392 | 64.745 |
+| Spark on Parquet | 4 | 1,107 | 110.5 | 35.684 | 47.916 |
+
+Claim. MongoDB kept its 95th percentile under 10 ms at 1 and 4 threads and not at 16 (11.219 ms); the highest measured rate with p95 under 10 ms is 3,412.3 requests per second, at 1 thread. Spark on Parquet never kept p95 under 10 ms at the levels measured (64.745 ms at 1 thread, 47.916 ms at 4), although four threads raised its rate from 24.7 to 110.5 requests per second. So for a page that must answer Q1 in under 10 ms at the 95th percentile, only MongoDB qualified on this machine, and only up to the load of 4 client threads.
+
+Limits of these numbers (two things on my machine that limit them, then the rest):
+1. The load generator is one Python process. Python threads share one interpreter lock, so adding threads lowered MongoDB's total rate (3,412.3 -> 2,540.8 -> 2,133.7 requests per second) while latency rose. That pattern suggests the client, not MongoDB, was the bottleneck; it is an interpretation, not measured separately (server CPU was not recorded).
+2. Client, MongoDB, HDFS and Spark all ran on the same 16-core laptop inside WSL, so they competed for the same CPU and memory; Spark was limited to `local[4]`. A separate client machine would give different numbers.
+3. One 10 s run per level, warm caches, 258 small documents, and nobody writing during the test. Rates between the measured levels (for example 8 threads) were not measured, so "highest rate under 10 ms" means highest among the levels tried.
+
+## Exercise 10: The decision record (16 points)
+See `out/ADR-001.md`.
