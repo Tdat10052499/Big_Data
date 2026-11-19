@@ -1,0 +1,8 @@
+Thu Nov 19 20:15:31 UTC 2026
+--- what the nightly job does now
+def nightly_job():
+    for i in range(REWRITES):
+        to_append.write.format(FMT).mode("append").save(TARGET)
+    done.set()
+--- the check
+33:sizes = [n_jan + k * n_short for k in range(REWRITES + 1)]

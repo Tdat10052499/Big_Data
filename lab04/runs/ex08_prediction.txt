@@ -1,0 +1,4 @@
+Exercise 08 prediction, written by the student before measuring.
+Recorded: Thu Nov 19 20:24:10 UTC 2026
+---
+Parquet: the dashboard will see No prediction written.. Delta: the dashboard will see No prediction written.. Why: No prediction written.

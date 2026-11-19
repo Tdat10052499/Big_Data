@@ -1,0 +1,24 @@
+Thu Nov 19 20:15:03 UTC 2026
+documents in bda.trips_jan: 2724143
+
+== 1. no index but _id   indexes: _id_
+  Q-a zone 132               nReturned   136998  keys        0  docs  2724143  ms runs 594 / 606 / 618 best 594  plan COLLSCAN
+  Q-b zone 132 on 15 Jan     nReturned     5379  keys        0  docs  2724143  ms runs 658 / 636 / 632 best 632  plan COLLSCAN
+  Q-c all trips on 15 Jan    nReturned    71497  keys        0  docs  2724143  ms runs 716 / 727 / 735 best 716  plan COLLSCAN
+
+== 2. after createIndex({PULocationID: 1, pickup_date: 1})   indexes: _id_, PULocationID_1_pickup_date_1
+  Q-a zone 132               nReturned   136998  keys   136998  docs   136998  ms runs 137 / 136 / 144 best 136  plan FETCH > IXSCAN(PULocationID_1_pickup_date_1)
+  Q-b zone 132 on 15 Jan     nReturned     5379  keys     5379  docs     5379  ms runs 6 / 6 / 5 best 5  plan FETCH > IXSCAN(PULocationID_1_pickup_date_1)
+  Q-c all trips on 15 Jan    nReturned    71497  keys        0  docs  2724143  ms runs 730 / 711 / 721 best 711  plan COLLSCAN
+
+== 3. after adding createIndex({pickup_date: 1}) for the third query   indexes: _id_, PULocationID_1_pickup_date_1, pickup_date_1
+  Q-a zone 132               nReturned   136998  keys   136998  docs   136998  ms runs 145 / 142 / 139 best 139  plan FETCH > IXSCAN(PULocationID_1_pickup_date_1)
+  Q-b zone 132 on 15 Jan     nReturned     5379  keys     5379  docs     5379  ms runs 5 / 6 / 5 best 5  plan FETCH > IXSCAN(PULocationID_1_pickup_date_1)
+  Q-c all trips on 15 Jan    nReturned    71497  keys    71497  docs    71497  ms runs 45 / 45 / 46 best 45  plan FETCH > IXSCAN(pickup_date_1)
+
+== index sizes, db.trips_jan.stats().indexSizes (bytes)
+{
+  _id_: 30420992,
+  PULocationID_1_pickup_date_1: 22065152,
+  pickup_date_1: 13996032
+}
