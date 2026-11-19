@@ -100,5 +100,97 @@ Evidence: `runs/ex04_acl.log`, in this order. Store: HDFS. Path: `/user/tdat1/ny
 
 What the rule does not protect against: `hadoop.security.authentication` is `simple` (`runs/sec10_acl.log`), so HDFS believes whatever name the client sends. I became `2374802010097` just by setting `HADOOP_USER_NAME`; anyone on this machine can equally claim `tdat1`, which owns the NameNode and is therefore the HDFS superuser, to whom no permission check applies. The rule stops mistakes, not attackers; proving identity would need Kerberos, which this course does not set up.
 
-## Exercises 5-10
+## Exercise 5: Predict the bytes before you read them (10 points)
+
+Evidence: prediction `runs/ex05_prediction.txt` (committed 53883a4, 19:48:47 UTC), facts `runs/ex05_facts.log`, measurement `runs/ex05_measure.log` (19:48:55 UTC).
+Store: HDFS. Dataset: `fmt/2024-01/{csv,parquet}`, 2,724,143 January rows.
+
+What was recorded as the prediction. The prediction file holds, verbatim, a worked example that an AI assistant gave me for the Section 4 query `sum of fare_amount` (its first line says so). I submitted it unchanged because I was out of time. So the recorded prediction is: Parquet reads about 3.4 MB (footer column size x 2,724,143 / 1,010,014 rows), CSV reads about 356.5 MB (the whole CSV copy), and it was not worked out separately for the two Exercise 5 queries. This is declared in the AI assistance statement of `runs/run_record.md`.
+
+Measurement (bytes read from HDFS, Spark task input metrics; best of three after a warm-up):
+
+| Query | CSV bytes | Parquet bytes | CSV best | Parquet best |
+|---|---|---|---|---|
+| sum tip_amount | 356.5 MB | 3.9 MB | 1.04 s | 0.10 s |
+| avg fare_amount by payment_type | 356.5 MB | 3.9 MB | 1.06 s | 0.14 s |
+
+Comparison with the recorded prediction:
+
+| Query, store | Recorded prediction | Measured | Off by |
+|---|---|---|---|
+| sum tip_amount, Parquet | about 3.4 MB | 3.9 MB | x1.15 |
+| sum tip_amount, CSV | about 356.5 MB | 356.5 MB | x1.0 |
+| avg fare by payment, Parquet | about 3.4 MB | 3.9 MB | x1.15 |
+| avg fare by payment, CSV | about 356.5 MB | 356.5 MB | x1.0 |
+
+No prediction was off by more than a factor of two. Explanation of the gap, worked out after the measurement from the footer in `runs/ex05_facts.log`: the recorded number used the `fare_amount` column (1,285 KB in the largest file). The first query reads `tip_amount` instead, which is larger in the footer (1,438 KB); scaled by rows, 1,438 KB x 2,724,143 / 1,010,014 = about 3.79 MB. The second query reads two columns, `payment_type` (222 KB) and `fare_amount` (1,285 KB), so about (222 + 1,285) KB x 2,724,143 / 1,010,014 = about 3.97 MB. Both are close to the measured 3.9 MB, so the rule "Parquet reads only the column chunks the query needs" holds; the recorded number was low because it counted the wrong column, not because the rule failed. The CSV reader read the full 356.5 MB for both, as it did for every query in Section 4.
+
+## Exercise 6: Predict a MERGE (10 points)
+
+Evidence: prediction `runs/ex06_prediction.txt` (committed 93d3f09, 19:58:13 UTC), facts `runs/ex06_facts.log`, measurement `runs/ex06_merge.log` (19:58:23 UTC), restore `runs/ex06_restore.log`.
+Store: Delta Lake on HDFS, `lake/zone_summary`, reset to version 0 (258 rows, one Parquet file of 7,543 bytes) by `d1_create.py`. Corrections (`src/e6_merge.py`): 7 rows, for zones 132, 161, 236, 237 (in the table) and 103, 104, 109 (not in the table, `runs/ex06_facts.log`). The correction values are hypothetical inputs chosen for the exercise.
+
+Prediction: none. I filled the template with "No prediction written." in every field (`runs/ex06_prediction.txt`), so there is no prediction to compare.
+
+Measured:
+
+| Item | Value |
+|---|---|
+| Version, operation | 1, MERGE |
+| Rows after | 261 |
+| numSourceRows | 7 |
+| numTargetRowsUpdated | 4 |
+| numTargetRowsInserted | 3 |
+| numTargetRowsCopied | 254 |
+| numTargetFilesRemoved | 1 |
+| numTargetFilesAdded | 1 |
+| Data files in the table before / after | 1 / 1 |
+
+Explanation of the copied rows from the number of files. At version 0 the table is one data file holding all 258 rows. Four of them match a correction and are updated; Delta never edits a Parquet file in place, so it rewrote that whole file: the 4 updated rows, the 258 - 4 = 254 untouched rows copied as they were, and the 3 inserted rows, giving one new file of 254 + 4 + 3 = 261 rows (7,605 bytes). Commit 1 removes the old file and adds the new one (1 removed, 1 added); the old file stays on HDFS for version 0. Afterwards the table was put back to the manual's state (version 0 + the Section 5 MERGE, 260 rows, `runs/ex06_restore.log`), because the final project keeps `lake/zone_summary`.
+
+## Exercise 7: Find where the index pays (10 points)
+
+Evidence: prediction `runs/ex07_prediction.txt` (committed f505589, 20:14:56 UTC), facts `runs/ex07_facts.log`, measurement `runs/ex07_index.log` (20:15:03 UTC), script `src/e7_index.js`.
+Store: MongoDB 8.0.38, collection `bda.trips_jan`, 2,724,143 documents (January trips). `executionTimeMillis` is the best of three explains after one warm-up; all three are in the log.
+
+Prediction: none ("No prediction written." in every field).
+
+| Query | Index state | nReturned | totalKeysExamined | totalDocsExamined | executionTimeMillis (best) | Plan |
+|---|---|---|---|---|---|---|
+| zone 132 | `_id` only | 136,998 | 0 | 2,724,143 | 594 | COLLSCAN |
+| zone 132 on 15 Jan | `_id` only | 5,379 | 0 | 2,724,143 | 632 | COLLSCAN |
+| all trips on 15 Jan | `_id` only | 71,497 | 0 | 2,724,143 | 716 | COLLSCAN |
+| zone 132 | + `{PULocationID: 1, pickup_date: 1}` | 136,998 | 136,998 | 136,998 | 136 | IXSCAN (compound) |
+| zone 132 on 15 Jan | + compound | 5,379 | 5,379 | 5,379 | 5 | IXSCAN (compound) |
+| all trips on 15 Jan | + compound | 71,497 | 0 | 2,724,143 | 711 | COLLSCAN |
+
+The compound index served the first two queries and not the third: both of the first two filter on `PULocationID`, the index's first field, while the third filters only on `pickup_date`, its second field, and the plan stayed a COLLSCAN.
+
+Index added for the third query: `{pickup_date: 1}`. With it, "all trips on 15 Jan" examined 71,497 keys and 71,497 documents and took 45 ms (best), against 716 ms with no index (the first two queries kept the compound index: 139 ms and 5 ms).
+
+Index sizes (`db.trips_jan.stats().indexSizes`, bytes): `_id_` 30,420,992; `PULocationID_1_pickup_date_1` 22,065,152; `pickup_date_1` 13,996,032.
+
+Compared with Section 8. In Section 8, on 258 documents, the index cut the documents examined from 258 to 1, but the median lookup moved only from 0.491 ms to 0.425 ms (`runs/sec8_lookup.log`), within the spread. Here, on 2,724,143 documents, the same idea cut the documents examined for zone 132 on 15 January from 2,724,143 to 5,379 and the time from 632 ms to 5 ms, so the index pays once a scan of the whole collection costs far more than the lookup itself.
+
+## Exercise 8: Append instead of overwrite (10 points)
+
+Evidence: prediction `runs/ex08_prediction.txt` (committed b471166, 20:24:10 UTC), script `src/e8_append.py`, outputs `runs/ex08_parquet.log`, `runs/ex08_delta.log`, `runs/ex08_parquet64.log`, `runs/ex08_delta64.log`. A first Parquet attempt at 20:24:17 failed before writing anything because HDFS refused the connection (`runs/ex08_parquet_fail1.log`); it was run once more at 20:25:40.
+Store: Parquet directory and Delta table on HDFS (`lake/append_parquet`, `lake/append_delta`). Dataset: January trips (`curated`, 2,724,143 rows) plus the short trips (trip_distance <= 2, 1,596,003 rows) appended six times. A whole table has 2,724,143 + k x 1,596,003 rows, k = 0..6.
+
+Prediction: none ("No prediction written." in every field); no second prediction for the 64-file runs.
+
+| Run | Reads | Saw a whole table | Saw anything else |
+|---|---|---|---|
+| Parquet, files as Spark writes them | 57 | 56 | 1 (11,883,832 rows) |
+| Delta, files as Spark writes them | 15 | 15 | 0 |
+| Parquet, 64 files per append | 33 | 27 | 6 (3,347,588; 5,217,909; 7,013,410; 8,659,287; 10,205,416; 11,801,419 rows) |
+| Delta, 64 files per append | 29 | 29 | 0 |
+
+(Six appends took 10 s, 15 s, 54 s and 52 s respectively.)
+
+Every partial count in the Parquet runs lies between two whole sizes (for example 11,883,832 is between k = 5, 10,704,158, and k = 6, 12,300,161), so the reader saw some of one append's files but not all. No read returned 0 rows or an error, unlike the overwrite in Section 6 (`runs/sec6_parquet.log`: 146 reads of 0 rows, 3 FileNotFoundException), because appending deletes nothing.
+
+Difference between the two Parquet runs (1 partial read of 57 against 6 of 33). Explanation, not directly measured: a Parquet append becomes visible file by file as Spark moves each task's output into the directory when the job commits, and a reader that lists the directory in the middle of that sees only part of the batch. With 64 files per append there are more files to move, so each append spends longer in a half-visible state, and a larger share of reads fell into it. The number of files Spark wrote per append in the default run was not logged, so this is a hypothesis. Delta saw only whole tables in both runs because a new version exists only once its commit file appears in `_delta_log`.
+
+## Exercises 9-10
 Not yet done.
