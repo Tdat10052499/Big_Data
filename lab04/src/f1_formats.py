@@ -44,6 +44,9 @@ queries = [
     ("count the rows",      lambda df: df.count()),
     ("sum one column",      lambda df: df.agg(F.sum("fare_amount")).collect()),
     ("count every column",  lambda df: df.agg(*[F.count(c) for c in df.columns]).collect()),
+    # Exercise 5: two new queries, added after the student's prediction was recorded
+    ("sum tip_amount",      lambda df: df.agg(F.sum("tip_amount")).collect()),
+    ("avg fare by payment", lambda df: df.groupBy("payment_type").agg(F.avg("fare_amount")).collect()),
 ]
 
 csv_bytes, pq_bytes = hdfs_bytes(CSV), hdfs_bytes(PARQUET)
