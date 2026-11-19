@@ -1,0 +1,33 @@
+Thu Nov 19 19:58:23 UTC 2026
+:: loading settings :: url = jar:file:/opt/spark/jars/ivy-2.5.3.jar!/org/apache/ivy/core/settings/ivysettings.xml
+
+  the corrections
++-------+------+--------+------------+
+|zone_id| trips|avg_fare|avg_distance|
++-------+------+--------+------------+
+|    132|404900|    63.5|       16.02|
+|    161|418500|   15.82|        2.36|
+|    237|410700|   12.59|        1.75|
+|    236|400000|    13.0|         1.9|
+|    103|     1|    20.0|         3.0|
+|    104|     1|    20.0|         3.0|
+|    109|     1|    20.0|         3.0|
++-------+------+--------+------------+
+
+  version 1, operation MERGE
+    numSourceRows                  7
+    numTargetRowsUpdated           4
+    numTargetRowsInserted          3
+    numTargetRowsCopied          254
+    numTargetFilesRemoved          1
+    numTargetFilesAdded            1
+  data files in the table before the MERGE  1
+  data files in the table after the MERGE   1
+
+  rows in the table now  261
+
+--- files in the table
+Found 3 items
+drwxr-xr-x   - tdat1 supergroup          0 2026-11-19 19:58 /user/tdat1/nyc/lake/zone_summary/_delta_log
+-rw-r--r--   1 tdat1 supergroup       7543 2026-11-19 19:50 /user/tdat1/nyc/lake/zone_summary/part-00000-228e4936-fbd3-4cb5-ae79-58466433705a-c000.snappy.parquet
+-rw-r--r--   1 tdat1 supergroup       7605 2026-11-19 19:58 /user/tdat1/nyc/lake/zone_summary/part-00000-a1eb6a1d-dd8e-4fdf-979b-dcb9ca886650-c000.snappy.parquet

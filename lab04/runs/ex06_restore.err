@@ -1,0 +1,304 @@
+26/11/19 19:59:12 WARN Utils: Your hostname, LAPTOP-21KJQDU4 resolves to a loopback address: 127.0.1.1; using 10.255.255.254 instead (on interface lo)
+26/11/19 19:59:12 WARN Utils: Set SPARK_LOCAL_IP if you need to bind to another address
+Ivy Default Cache set to: /home/tdat1/.ivy2/cache
+The jars for the packages stored in: /home/tdat1/.ivy2/jars
+io.delta#delta-spark_2.12 added as a dependency
+org.mongodb.spark#mongo-spark-connector_2.12 added as a dependency
+:: resolving dependencies :: org.apache.spark#spark-submit-parent-4e258223-b30a-4fb9-907a-9b66fc2c2173;1.0
+	confs: [default]
+	found io.delta#delta-spark_2.12;3.2.1 in central
+	found io.delta#delta-storage;3.2.1 in central
+	found org.antlr#antlr4-runtime;4.9.3 in central
+	found org.mongodb.spark#mongo-spark-connector_2.12;10.4.0 in central
+	found org.mongodb#mongodb-driver-sync;5.1.4 in central
+	[5.1.4] org.mongodb#mongodb-driver-sync;[5.1.1,5.1.99)
+	found org.mongodb#bson;5.1.4 in central
+	found org.mongodb#mongodb-driver-core;5.1.4 in central
+	found org.mongodb#bson-record-codec;5.1.4 in central
+:: resolution report :: resolve 1032ms :: artifacts dl 12ms
+	:: modules in use:
+	io.delta#delta-spark_2.12;3.2.1 from central in [default]
+	io.delta#delta-storage;3.2.1 from central in [default]
+	org.antlr#antlr4-runtime;4.9.3 from central in [default]
+	org.mongodb#bson;5.1.4 from central in [default]
+	org.mongodb#bson-record-codec;5.1.4 from central in [default]
+	org.mongodb#mongodb-driver-core;5.1.4 from central in [default]
+	org.mongodb#mongodb-driver-sync;5.1.4 from central in [default]
+	org.mongodb.spark#mongo-spark-connector_2.12;10.4.0 from central in [default]
+	---------------------------------------------------------------------
+	|                  |            modules            ||   artifacts   |
+	|       conf       | number| search|dwnlded|evicted|| number|dwnlded|
+	---------------------------------------------------------------------
+	|      default     |   8   |   1   |   0   |   0   ||   8   |   0   |
+	---------------------------------------------------------------------
+:: retrieving :: org.apache.spark#spark-submit-parent-4e258223-b30a-4fb9-907a-9b66fc2c2173
+	confs: [default]
+	0 artifacts copied, 8 already retrieved (0kB/11ms)
+26/11/19 19:59:24 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+26/11/19 19:59:26 INFO SparkContext: Running Spark version 3.5.9
+26/11/19 19:59:26 INFO SparkContext: OS info Linux, 6.18.58.1-microsoft-standard-WSL2, amd64
+26/11/19 19:59:26 INFO SparkContext: Java version 17.0.21.1
+26/11/19 19:59:26 INFO ResourceUtils: ==============================================================
+26/11/19 19:59:26 INFO ResourceUtils: No custom resources configured for spark.driver.
+26/11/19 19:59:26 INFO ResourceUtils: ==============================================================
+26/11/19 19:59:26 INFO SparkContext: Submitted application: lab04-delta-create
+26/11/19 19:59:26 INFO ResourceProfile: Default ResourceProfile created, executor resources: Map(cores -> name: cores, amount: 1, script: , vendor: , memory -> name: memory, amount: 1024, script: , vendor: , offHeap -> name: offHeap, amount: 0, script: , vendor: ), task resources: Map(cpus -> name: cpus, amount: 1.0)
+26/11/19 19:59:26 INFO ResourceProfile: Limiting resource is cpu
+26/11/19 19:59:26 INFO ResourceProfileManager: Added ResourceProfile id: 0
+26/11/19 19:59:26 INFO SecurityManager: Changing view acls to: tdat1
+26/11/19 19:59:26 INFO SecurityManager: Changing modify acls to: tdat1
+26/11/19 19:59:26 INFO SecurityManager: Changing view acls groups to: 
+26/11/19 19:59:26 INFO SecurityManager: Changing modify acls groups to: 
+26/11/19 19:59:26 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: tdat1; groups with view permissions: EMPTY; users with modify permissions: tdat1; groups with modify permissions: EMPTY
+26/11/19 19:59:26 INFO Utils: Successfully started service 'sparkDriver' on port 39531.
+26/11/19 19:59:26 INFO SparkEnv: Registering MapOutputTracker
+26/11/19 19:59:26 INFO SparkEnv: Registering BlockManagerMaster
+26/11/19 19:59:26 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+26/11/19 19:59:26 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+26/11/19 19:59:26 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
+26/11/19 19:59:26 INFO DiskBlockManager: Created local directory at /tmp/blockmgr-7ab7c326-0ee0-4629-b233-529d32ff6416
+26/11/19 19:59:26 INFO MemoryStore: MemoryStore started with capacity 434.4 MiB
+26/11/19 19:59:26 INFO SparkEnv: Registering OutputCommitCoordinator
+26/11/19 19:59:26 INFO JettyUtils: Start Jetty 0.0.0.0:4040 for SparkUI
+26/11/19 19:59:26 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+26/11/19 19:59:26 INFO SparkContext: Added JAR file:///home/tdat1/.ivy2/jars/io.delta_delta-spark_2.12-3.2.1.jar at spark://10.255.255.254:39531/jars/io.delta_delta-spark_2.12-3.2.1.jar with timestamp 1795118366370
+26/11/19 19:59:26 INFO SparkContext: Added JAR file:///home/tdat1/.ivy2/jars/org.mongodb.spark_mongo-spark-connector_2.12-10.4.0.jar at spark://10.255.255.254:39531/jars/org.mongodb.spark_mongo-spark-connector_2.12-10.4.0.jar with timestamp 1795118366370
+26/11/19 19:59:26 INFO SparkContext: Added JAR file:///home/tdat1/.ivy2/jars/io.delta_delta-storage-3.2.1.jar at spark://10.255.255.254:39531/jars/io.delta_delta-storage-3.2.1.jar with timestamp 1795118366370
+26/11/19 19:59:26 INFO SparkContext: Added JAR file:///home/tdat1/.ivy2/jars/org.antlr_antlr4-runtime-4.9.3.jar at spark://10.255.255.254:39531/jars/org.antlr_antlr4-runtime-4.9.3.jar with timestamp 1795118366370
+26/11/19 19:59:26 INFO SparkContext: Added JAR file:///home/tdat1/.ivy2/jars/org.mongodb_mongodb-driver-sync-5.1.4.jar at spark://10.255.255.254:39531/jars/org.mongodb_mongodb-driver-sync-5.1.4.jar with timestamp 1795118366370
+26/11/19 19:59:26 INFO SparkContext: Added JAR file:///home/tdat1/.ivy2/jars/org.mongodb_bson-5.1.4.jar at spark://10.255.255.254:39531/jars/org.mongodb_bson-5.1.4.jar with timestamp 1795118366370
+26/11/19 19:59:26 INFO SparkContext: Added JAR file:///home/tdat1/.ivy2/jars/org.mongodb_mongodb-driver-core-5.1.4.jar at spark://10.255.255.254:39531/jars/org.mongodb_mongodb-driver-core-5.1.4.jar with timestamp 1795118366370
+26/11/19 19:59:26 INFO SparkContext: Added JAR file:///home/tdat1/.ivy2/jars/org.mongodb_bson-record-codec-5.1.4.jar at spark://10.255.255.254:39531/jars/org.mongodb_bson-record-codec-5.1.4.jar with timestamp 1795118366370
+26/11/19 19:59:26 INFO SparkContext: Added file file:///home/tdat1/Big_Data/lab04/src/l0_common.py at file:///home/tdat1/Big_Data/lab04/src/l0_common.py with timestamp 1795118366370
+26/11/19 19:59:26 INFO Utils: Copying /home/tdat1/Big_Data/lab04/src/l0_common.py to /tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/l0_common.py
+26/11/19 19:59:26 INFO SparkContext: Added file file:///home/tdat1/.ivy2/jars/io.delta_delta-spark_2.12-3.2.1.jar at file:///home/tdat1/.ivy2/jars/io.delta_delta-spark_2.12-3.2.1.jar with timestamp 1795118366370
+26/11/19 19:59:26 INFO Utils: Copying /home/tdat1/.ivy2/jars/io.delta_delta-spark_2.12-3.2.1.jar to /tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/io.delta_delta-spark_2.12-3.2.1.jar
+26/11/19 19:59:26 INFO SparkContext: Added file file:///home/tdat1/.ivy2/jars/org.mongodb.spark_mongo-spark-connector_2.12-10.4.0.jar at file:///home/tdat1/.ivy2/jars/org.mongodb.spark_mongo-spark-connector_2.12-10.4.0.jar with timestamp 1795118366370
+26/11/19 19:59:26 INFO Utils: Copying /home/tdat1/.ivy2/jars/org.mongodb.spark_mongo-spark-connector_2.12-10.4.0.jar to /tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/org.mongodb.spark_mongo-spark-connector_2.12-10.4.0.jar
+26/11/19 19:59:26 INFO SparkContext: Added file file:///home/tdat1/.ivy2/jars/io.delta_delta-storage-3.2.1.jar at file:///home/tdat1/.ivy2/jars/io.delta_delta-storage-3.2.1.jar with timestamp 1795118366370
+26/11/19 19:59:26 INFO Utils: Copying /home/tdat1/.ivy2/jars/io.delta_delta-storage-3.2.1.jar to /tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/io.delta_delta-storage-3.2.1.jar
+26/11/19 19:59:26 INFO SparkContext: Added file file:///home/tdat1/.ivy2/jars/org.antlr_antlr4-runtime-4.9.3.jar at file:///home/tdat1/.ivy2/jars/org.antlr_antlr4-runtime-4.9.3.jar with timestamp 1795118366370
+26/11/19 19:59:26 INFO Utils: Copying /home/tdat1/.ivy2/jars/org.antlr_antlr4-runtime-4.9.3.jar to /tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/org.antlr_antlr4-runtime-4.9.3.jar
+26/11/19 19:59:26 INFO SparkContext: Added file file:///home/tdat1/.ivy2/jars/org.mongodb_mongodb-driver-sync-5.1.4.jar at file:///home/tdat1/.ivy2/jars/org.mongodb_mongodb-driver-sync-5.1.4.jar with timestamp 1795118366370
+26/11/19 19:59:26 INFO Utils: Copying /home/tdat1/.ivy2/jars/org.mongodb_mongodb-driver-sync-5.1.4.jar to /tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/org.mongodb_mongodb-driver-sync-5.1.4.jar
+26/11/19 19:59:26 INFO SparkContext: Added file file:///home/tdat1/.ivy2/jars/org.mongodb_bson-5.1.4.jar at file:///home/tdat1/.ivy2/jars/org.mongodb_bson-5.1.4.jar with timestamp 1795118366370
+26/11/19 19:59:26 INFO Utils: Copying /home/tdat1/.ivy2/jars/org.mongodb_bson-5.1.4.jar to /tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/org.mongodb_bson-5.1.4.jar
+26/11/19 19:59:26 INFO SparkContext: Added file file:///home/tdat1/.ivy2/jars/org.mongodb_mongodb-driver-core-5.1.4.jar at file:///home/tdat1/.ivy2/jars/org.mongodb_mongodb-driver-core-5.1.4.jar with timestamp 1795118366370
+26/11/19 19:59:26 INFO Utils: Copying /home/tdat1/.ivy2/jars/org.mongodb_mongodb-driver-core-5.1.4.jar to /tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/org.mongodb_mongodb-driver-core-5.1.4.jar
+26/11/19 19:59:26 INFO SparkContext: Added file file:///home/tdat1/.ivy2/jars/org.mongodb_bson-record-codec-5.1.4.jar at file:///home/tdat1/.ivy2/jars/org.mongodb_bson-record-codec-5.1.4.jar with timestamp 1795118366370
+26/11/19 19:59:26 INFO Utils: Copying /home/tdat1/.ivy2/jars/org.mongodb_bson-record-codec-5.1.4.jar to /tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/org.mongodb_bson-record-codec-5.1.4.jar
+26/11/19 19:59:27 INFO Executor: Starting executor ID driver on host 10.255.255.254
+26/11/19 19:59:27 INFO Executor: OS info Linux, 6.18.58.1-microsoft-standard-WSL2, amd64
+26/11/19 19:59:27 INFO Executor: Java version 17.0.21.1
+26/11/19 19:59:27 INFO Executor: Starting executor with user classpath (userClassPathFirst = false): ''
+26/11/19 19:59:27 INFO Executor: Created or updated repl class loader org.apache.spark.util.MutableURLClassLoader@4e6b3ac7 for default.
+26/11/19 19:59:27 INFO Executor: Fetching file:///home/tdat1/.ivy2/jars/io.delta_delta-spark_2.12-3.2.1.jar with timestamp 1795118366370
+26/11/19 19:59:27 INFO Utils: /home/tdat1/.ivy2/jars/io.delta_delta-spark_2.12-3.2.1.jar has been previously copied to /tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/io.delta_delta-spark_2.12-3.2.1.jar
+26/11/19 19:59:27 INFO Executor: Fetching file:///home/tdat1/.ivy2/jars/org.mongodb_bson-record-codec-5.1.4.jar with timestamp 1795118366370
+26/11/19 19:59:27 INFO Utils: /home/tdat1/.ivy2/jars/org.mongodb_bson-record-codec-5.1.4.jar has been previously copied to /tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/org.mongodb_bson-record-codec-5.1.4.jar
+26/11/19 19:59:27 INFO Executor: Fetching file:///home/tdat1/.ivy2/jars/org.mongodb.spark_mongo-spark-connector_2.12-10.4.0.jar with timestamp 1795118366370
+26/11/19 19:59:27 INFO Utils: /home/tdat1/.ivy2/jars/org.mongodb.spark_mongo-spark-connector_2.12-10.4.0.jar has been previously copied to /tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/org.mongodb.spark_mongo-spark-connector_2.12-10.4.0.jar
+26/11/19 19:59:27 INFO Executor: Fetching file:///home/tdat1/Big_Data/lab04/src/l0_common.py with timestamp 1795118366370
+26/11/19 19:59:27 INFO Utils: /home/tdat1/Big_Data/lab04/src/l0_common.py has been previously copied to /tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/l0_common.py
+26/11/19 19:59:27 INFO Executor: Fetching file:///home/tdat1/.ivy2/jars/org.mongodb_mongodb-driver-core-5.1.4.jar with timestamp 1795118366370
+26/11/19 19:59:27 INFO Utils: /home/tdat1/.ivy2/jars/org.mongodb_mongodb-driver-core-5.1.4.jar has been previously copied to /tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/org.mongodb_mongodb-driver-core-5.1.4.jar
+26/11/19 19:59:27 INFO Executor: Fetching file:///home/tdat1/.ivy2/jars/org.mongodb_bson-5.1.4.jar with timestamp 1795118366370
+26/11/19 19:59:27 INFO Utils: /home/tdat1/.ivy2/jars/org.mongodb_bson-5.1.4.jar has been previously copied to /tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/org.mongodb_bson-5.1.4.jar
+26/11/19 19:59:27 INFO Executor: Fetching file:///home/tdat1/.ivy2/jars/io.delta_delta-storage-3.2.1.jar with timestamp 1795118366370
+26/11/19 19:59:27 INFO Utils: /home/tdat1/.ivy2/jars/io.delta_delta-storage-3.2.1.jar has been previously copied to /tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/io.delta_delta-storage-3.2.1.jar
+26/11/19 19:59:27 INFO Executor: Fetching file:///home/tdat1/.ivy2/jars/org.antlr_antlr4-runtime-4.9.3.jar with timestamp 1795118366370
+26/11/19 19:59:27 INFO Utils: /home/tdat1/.ivy2/jars/org.antlr_antlr4-runtime-4.9.3.jar has been previously copied to /tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/org.antlr_antlr4-runtime-4.9.3.jar
+26/11/19 19:59:27 INFO Executor: Fetching file:///home/tdat1/.ivy2/jars/org.mongodb_mongodb-driver-sync-5.1.4.jar with timestamp 1795118366370
+26/11/19 19:59:27 INFO Utils: /home/tdat1/.ivy2/jars/org.mongodb_mongodb-driver-sync-5.1.4.jar has been previously copied to /tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/org.mongodb_mongodb-driver-sync-5.1.4.jar
+26/11/19 19:59:27 INFO Executor: Fetching spark://10.255.255.254:39531/jars/org.mongodb_bson-5.1.4.jar with timestamp 1795118366370
+26/11/19 19:59:27 INFO TransportClientFactory: Successfully created connection to /10.255.255.254:39531 after 18 ms (0 ms spent in bootstraps)
+26/11/19 19:59:27 INFO Utils: Fetching spark://10.255.255.254:39531/jars/org.mongodb_bson-5.1.4.jar to /tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/fetchFileTemp2108894140218539149.tmp
+26/11/19 19:59:27 INFO Utils: /tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/fetchFileTemp2108894140218539149.tmp has been previously copied to /tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/org.mongodb_bson-5.1.4.jar
+26/11/19 19:59:27 INFO Executor: Adding file:/tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/org.mongodb_bson-5.1.4.jar to class loader default
+26/11/19 19:59:27 INFO Executor: Fetching spark://10.255.255.254:39531/jars/org.mongodb_mongodb-driver-core-5.1.4.jar with timestamp 1795118366370
+26/11/19 19:59:27 INFO Utils: Fetching spark://10.255.255.254:39531/jars/org.mongodb_mongodb-driver-core-5.1.4.jar to /tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/fetchFileTemp9017666673791906002.tmp
+26/11/19 19:59:27 INFO Utils: /tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/fetchFileTemp9017666673791906002.tmp has been previously copied to /tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/org.mongodb_mongodb-driver-core-5.1.4.jar
+26/11/19 19:59:27 INFO Executor: Adding file:/tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/org.mongodb_mongodb-driver-core-5.1.4.jar to class loader default
+26/11/19 19:59:27 INFO Executor: Fetching spark://10.255.255.254:39531/jars/org.mongodb_mongodb-driver-sync-5.1.4.jar with timestamp 1795118366370
+26/11/19 19:59:27 INFO Utils: Fetching spark://10.255.255.254:39531/jars/org.mongodb_mongodb-driver-sync-5.1.4.jar to /tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/fetchFileTemp14561900272742149039.tmp
+26/11/19 19:59:27 INFO Utils: /tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/fetchFileTemp14561900272742149039.tmp has been previously copied to /tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/org.mongodb_mongodb-driver-sync-5.1.4.jar
+26/11/19 19:59:27 INFO Executor: Adding file:/tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/org.mongodb_mongodb-driver-sync-5.1.4.jar to class loader default
+26/11/19 19:59:27 INFO Executor: Fetching spark://10.255.255.254:39531/jars/io.delta_delta-spark_2.12-3.2.1.jar with timestamp 1795118366370
+26/11/19 19:59:27 INFO Utils: Fetching spark://10.255.255.254:39531/jars/io.delta_delta-spark_2.12-3.2.1.jar to /tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/fetchFileTemp1656838462580935010.tmp
+26/11/19 19:59:27 INFO Utils: /tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/fetchFileTemp1656838462580935010.tmp has been previously copied to /tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/io.delta_delta-spark_2.12-3.2.1.jar
+26/11/19 19:59:27 INFO Executor: Adding file:/tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/io.delta_delta-spark_2.12-3.2.1.jar to class loader default
+26/11/19 19:59:27 INFO Executor: Fetching spark://10.255.255.254:39531/jars/io.delta_delta-storage-3.2.1.jar with timestamp 1795118366370
+26/11/19 19:59:27 INFO Utils: Fetching spark://10.255.255.254:39531/jars/io.delta_delta-storage-3.2.1.jar to /tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/fetchFileTemp4615890455470773380.tmp
+26/11/19 19:59:27 INFO Utils: /tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/fetchFileTemp4615890455470773380.tmp has been previously copied to /tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/io.delta_delta-storage-3.2.1.jar
+26/11/19 19:59:27 INFO Executor: Adding file:/tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/io.delta_delta-storage-3.2.1.jar to class loader default
+26/11/19 19:59:27 INFO Executor: Fetching spark://10.255.255.254:39531/jars/org.mongodb.spark_mongo-spark-connector_2.12-10.4.0.jar with timestamp 1795118366370
+26/11/19 19:59:27 INFO Utils: Fetching spark://10.255.255.254:39531/jars/org.mongodb.spark_mongo-spark-connector_2.12-10.4.0.jar to /tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/fetchFileTemp1617501728014933579.tmp
+26/11/19 19:59:27 INFO Utils: /tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/fetchFileTemp1617501728014933579.tmp has been previously copied to /tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/org.mongodb.spark_mongo-spark-connector_2.12-10.4.0.jar
+26/11/19 19:59:27 INFO Executor: Adding file:/tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/org.mongodb.spark_mongo-spark-connector_2.12-10.4.0.jar to class loader default
+26/11/19 19:59:27 INFO Executor: Fetching spark://10.255.255.254:39531/jars/org.antlr_antlr4-runtime-4.9.3.jar with timestamp 1795118366370
+26/11/19 19:59:27 INFO Utils: Fetching spark://10.255.255.254:39531/jars/org.antlr_antlr4-runtime-4.9.3.jar to /tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/fetchFileTemp1009716024064256699.tmp
+26/11/19 19:59:27 INFO Utils: /tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/fetchFileTemp1009716024064256699.tmp has been previously copied to /tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/org.antlr_antlr4-runtime-4.9.3.jar
+26/11/19 19:59:27 INFO Executor: Adding file:/tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/org.antlr_antlr4-runtime-4.9.3.jar to class loader default
+26/11/19 19:59:27 INFO Executor: Fetching spark://10.255.255.254:39531/jars/org.mongodb_bson-record-codec-5.1.4.jar with timestamp 1795118366370
+26/11/19 19:59:27 INFO Utils: Fetching spark://10.255.255.254:39531/jars/org.mongodb_bson-record-codec-5.1.4.jar to /tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/fetchFileTemp11326258924471417452.tmp
+26/11/19 19:59:27 INFO Utils: /tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/fetchFileTemp11326258924471417452.tmp has been previously copied to /tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/org.mongodb_bson-record-codec-5.1.4.jar
+26/11/19 19:59:27 INFO Executor: Adding file:/tmp/spark-4cde0bf6-9c24-4066-90a4-316fcad953dc/userFiles-5484fd18-196d-4ac8-9f7b-fe9ef96f0dd5/org.mongodb_bson-record-codec-5.1.4.jar to class loader default
+26/11/19 19:59:27 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 42849.
+26/11/19 19:59:27 INFO NettyBlockTransferService: Server created on 10.255.255.254:42849
+26/11/19 19:59:27 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+26/11/19 19:59:27 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, 10.255.255.254, 42849, None)
+26/11/19 19:59:27 INFO BlockManagerMasterEndpoint: Registering block manager 10.255.255.254:42849 with 434.4 MiB RAM, BlockManagerId(driver, 10.255.255.254, 42849, None)
+26/11/19 19:59:27 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, 10.255.255.254, 42849, None)
+26/11/19 19:59:27 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, 10.255.255.254, 42849, None)
+26/11/19 19:59:41 WARN Utils: Your hostname, LAPTOP-21KJQDU4 resolves to a loopback address: 127.0.1.1; using 10.255.255.254 instead (on interface lo)
+26/11/19 19:59:41 WARN Utils: Set SPARK_LOCAL_IP if you need to bind to another address
+Ivy Default Cache set to: /home/tdat1/.ivy2/cache
+The jars for the packages stored in: /home/tdat1/.ivy2/jars
+io.delta#delta-spark_2.12 added as a dependency
+org.mongodb.spark#mongo-spark-connector_2.12 added as a dependency
+:: resolving dependencies :: org.apache.spark#spark-submit-parent-120573a8-4d66-4a01-9092-53d6daecd414;1.0
+	confs: [default]
+	found io.delta#delta-spark_2.12;3.2.1 in central
+	found io.delta#delta-storage;3.2.1 in central
+	found org.antlr#antlr4-runtime;4.9.3 in central
+	found org.mongodb.spark#mongo-spark-connector_2.12;10.4.0 in central
+	found org.mongodb#mongodb-driver-sync;5.1.4 in central
+	[5.1.4] org.mongodb#mongodb-driver-sync;[5.1.1,5.1.99)
+	found org.mongodb#bson;5.1.4 in central
+	found org.mongodb#mongodb-driver-core;5.1.4 in central
+	found org.mongodb#bson-record-codec;5.1.4 in central
+:: resolution report :: resolve 1106ms :: artifacts dl 15ms
+	:: modules in use:
+	io.delta#delta-spark_2.12;3.2.1 from central in [default]
+	io.delta#delta-storage;3.2.1 from central in [default]
+	org.antlr#antlr4-runtime;4.9.3 from central in [default]
+	org.mongodb#bson;5.1.4 from central in [default]
+	org.mongodb#bson-record-codec;5.1.4 from central in [default]
+	org.mongodb#mongodb-driver-core;5.1.4 from central in [default]
+	org.mongodb#mongodb-driver-sync;5.1.4 from central in [default]
+	org.mongodb.spark#mongo-spark-connector_2.12;10.4.0 from central in [default]
+	---------------------------------------------------------------------
+	|                  |            modules            ||   artifacts   |
+	|       conf       | number| search|dwnlded|evicted|| number|dwnlded|
+	---------------------------------------------------------------------
+	|      default     |   8   |   1   |   0   |   0   ||   8   |   0   |
+	---------------------------------------------------------------------
+:: retrieving :: org.apache.spark#spark-submit-parent-120573a8-4d66-4a01-9092-53d6daecd414
+	confs: [default]
+	0 artifacts copied, 8 already retrieved (0kB/11ms)
+26/11/19 19:59:53 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+26/11/19 19:59:54 INFO SparkContext: Running Spark version 3.5.9
+26/11/19 19:59:54 INFO SparkContext: OS info Linux, 6.18.58.1-microsoft-standard-WSL2, amd64
+26/11/19 19:59:54 INFO SparkContext: Java version 17.0.21.1
+26/11/19 19:59:54 INFO ResourceUtils: ==============================================================
+26/11/19 19:59:54 INFO ResourceUtils: No custom resources configured for spark.driver.
+26/11/19 19:59:54 INFO ResourceUtils: ==============================================================
+26/11/19 19:59:54 INFO SparkContext: Submitted application: lab04-delta-merge
+26/11/19 19:59:54 INFO ResourceProfile: Default ResourceProfile created, executor resources: Map(cores -> name: cores, amount: 1, script: , vendor: , memory -> name: memory, amount: 1024, script: , vendor: , offHeap -> name: offHeap, amount: 0, script: , vendor: ), task resources: Map(cpus -> name: cpus, amount: 1.0)
+26/11/19 19:59:54 INFO ResourceProfile: Limiting resource is cpu
+26/11/19 19:59:54 INFO ResourceProfileManager: Added ResourceProfile id: 0
+26/11/19 19:59:54 INFO SecurityManager: Changing view acls to: tdat1
+26/11/19 19:59:54 INFO SecurityManager: Changing modify acls to: tdat1
+26/11/19 19:59:54 INFO SecurityManager: Changing view acls groups to: 
+26/11/19 19:59:54 INFO SecurityManager: Changing modify acls groups to: 
+26/11/19 19:59:54 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: tdat1; groups with view permissions: EMPTY; users with modify permissions: tdat1; groups with modify permissions: EMPTY
+26/11/19 19:59:54 INFO Utils: Successfully started service 'sparkDriver' on port 40217.
+26/11/19 19:59:54 INFO SparkEnv: Registering MapOutputTracker
+26/11/19 19:59:54 INFO SparkEnv: Registering BlockManagerMaster
+26/11/19 19:59:54 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+26/11/19 19:59:54 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+26/11/19 19:59:54 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
+26/11/19 19:59:54 INFO DiskBlockManager: Created local directory at /tmp/blockmgr-b631d372-31c2-40c6-8f96-7c8ffcd87827
+26/11/19 19:59:54 INFO MemoryStore: MemoryStore started with capacity 434.4 MiB
+26/11/19 19:59:54 INFO SparkEnv: Registering OutputCommitCoordinator
+26/11/19 19:59:54 INFO JettyUtils: Start Jetty 0.0.0.0:4040 for SparkUI
+26/11/19 19:59:55 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+26/11/19 19:59:55 INFO SparkContext: Added JAR file:///home/tdat1/.ivy2/jars/io.delta_delta-spark_2.12-3.2.1.jar at spark://10.255.255.254:40217/jars/io.delta_delta-spark_2.12-3.2.1.jar with timestamp 1795118394456
+26/11/19 19:59:55 INFO SparkContext: Added JAR file:///home/tdat1/.ivy2/jars/org.mongodb.spark_mongo-spark-connector_2.12-10.4.0.jar at spark://10.255.255.254:40217/jars/org.mongodb.spark_mongo-spark-connector_2.12-10.4.0.jar with timestamp 1795118394456
+26/11/19 19:59:55 INFO SparkContext: Added JAR file:///home/tdat1/.ivy2/jars/io.delta_delta-storage-3.2.1.jar at spark://10.255.255.254:40217/jars/io.delta_delta-storage-3.2.1.jar with timestamp 1795118394456
+26/11/19 19:59:55 INFO SparkContext: Added JAR file:///home/tdat1/.ivy2/jars/org.antlr_antlr4-runtime-4.9.3.jar at spark://10.255.255.254:40217/jars/org.antlr_antlr4-runtime-4.9.3.jar with timestamp 1795118394456
+26/11/19 19:59:55 INFO SparkContext: Added JAR file:///home/tdat1/.ivy2/jars/org.mongodb_mongodb-driver-sync-5.1.4.jar at spark://10.255.255.254:40217/jars/org.mongodb_mongodb-driver-sync-5.1.4.jar with timestamp 1795118394456
+26/11/19 19:59:55 INFO SparkContext: Added JAR file:///home/tdat1/.ivy2/jars/org.mongodb_bson-5.1.4.jar at spark://10.255.255.254:40217/jars/org.mongodb_bson-5.1.4.jar with timestamp 1795118394456
+26/11/19 19:59:55 INFO SparkContext: Added JAR file:///home/tdat1/.ivy2/jars/org.mongodb_mongodb-driver-core-5.1.4.jar at spark://10.255.255.254:40217/jars/org.mongodb_mongodb-driver-core-5.1.4.jar with timestamp 1795118394456
+26/11/19 19:59:55 INFO SparkContext: Added JAR file:///home/tdat1/.ivy2/jars/org.mongodb_bson-record-codec-5.1.4.jar at spark://10.255.255.254:40217/jars/org.mongodb_bson-record-codec-5.1.4.jar with timestamp 1795118394456
+26/11/19 19:59:55 INFO SparkContext: Added file file:///home/tdat1/Big_Data/lab04/src/l0_common.py at file:///home/tdat1/Big_Data/lab04/src/l0_common.py with timestamp 1795118394456
+26/11/19 19:59:55 INFO Utils: Copying /home/tdat1/Big_Data/lab04/src/l0_common.py to /tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/l0_common.py
+26/11/19 19:59:55 INFO SparkContext: Added file file:///home/tdat1/.ivy2/jars/io.delta_delta-spark_2.12-3.2.1.jar at file:///home/tdat1/.ivy2/jars/io.delta_delta-spark_2.12-3.2.1.jar with timestamp 1795118394456
+26/11/19 19:59:55 INFO Utils: Copying /home/tdat1/.ivy2/jars/io.delta_delta-spark_2.12-3.2.1.jar to /tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/io.delta_delta-spark_2.12-3.2.1.jar
+26/11/19 19:59:55 INFO SparkContext: Added file file:///home/tdat1/.ivy2/jars/org.mongodb.spark_mongo-spark-connector_2.12-10.4.0.jar at file:///home/tdat1/.ivy2/jars/org.mongodb.spark_mongo-spark-connector_2.12-10.4.0.jar with timestamp 1795118394456
+26/11/19 19:59:55 INFO Utils: Copying /home/tdat1/.ivy2/jars/org.mongodb.spark_mongo-spark-connector_2.12-10.4.0.jar to /tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/org.mongodb.spark_mongo-spark-connector_2.12-10.4.0.jar
+26/11/19 19:59:55 INFO SparkContext: Added file file:///home/tdat1/.ivy2/jars/io.delta_delta-storage-3.2.1.jar at file:///home/tdat1/.ivy2/jars/io.delta_delta-storage-3.2.1.jar with timestamp 1795118394456
+26/11/19 19:59:55 INFO Utils: Copying /home/tdat1/.ivy2/jars/io.delta_delta-storage-3.2.1.jar to /tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/io.delta_delta-storage-3.2.1.jar
+26/11/19 19:59:55 INFO SparkContext: Added file file:///home/tdat1/.ivy2/jars/org.antlr_antlr4-runtime-4.9.3.jar at file:///home/tdat1/.ivy2/jars/org.antlr_antlr4-runtime-4.9.3.jar with timestamp 1795118394456
+26/11/19 19:59:55 INFO Utils: Copying /home/tdat1/.ivy2/jars/org.antlr_antlr4-runtime-4.9.3.jar to /tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/org.antlr_antlr4-runtime-4.9.3.jar
+26/11/19 19:59:55 INFO SparkContext: Added file file:///home/tdat1/.ivy2/jars/org.mongodb_mongodb-driver-sync-5.1.4.jar at file:///home/tdat1/.ivy2/jars/org.mongodb_mongodb-driver-sync-5.1.4.jar with timestamp 1795118394456
+26/11/19 19:59:55 INFO Utils: Copying /home/tdat1/.ivy2/jars/org.mongodb_mongodb-driver-sync-5.1.4.jar to /tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/org.mongodb_mongodb-driver-sync-5.1.4.jar
+26/11/19 19:59:55 INFO SparkContext: Added file file:///home/tdat1/.ivy2/jars/org.mongodb_bson-5.1.4.jar at file:///home/tdat1/.ivy2/jars/org.mongodb_bson-5.1.4.jar with timestamp 1795118394456
+26/11/19 19:59:55 INFO Utils: Copying /home/tdat1/.ivy2/jars/org.mongodb_bson-5.1.4.jar to /tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/org.mongodb_bson-5.1.4.jar
+26/11/19 19:59:55 INFO SparkContext: Added file file:///home/tdat1/.ivy2/jars/org.mongodb_mongodb-driver-core-5.1.4.jar at file:///home/tdat1/.ivy2/jars/org.mongodb_mongodb-driver-core-5.1.4.jar with timestamp 1795118394456
+26/11/19 19:59:55 INFO Utils: Copying /home/tdat1/.ivy2/jars/org.mongodb_mongodb-driver-core-5.1.4.jar to /tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/org.mongodb_mongodb-driver-core-5.1.4.jar
+26/11/19 19:59:55 INFO SparkContext: Added file file:///home/tdat1/.ivy2/jars/org.mongodb_bson-record-codec-5.1.4.jar at file:///home/tdat1/.ivy2/jars/org.mongodb_bson-record-codec-5.1.4.jar with timestamp 1795118394456
+26/11/19 19:59:55 INFO Utils: Copying /home/tdat1/.ivy2/jars/org.mongodb_bson-record-codec-5.1.4.jar to /tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/org.mongodb_bson-record-codec-5.1.4.jar
+26/11/19 19:59:55 INFO Executor: Starting executor ID driver on host 10.255.255.254
+26/11/19 19:59:55 INFO Executor: OS info Linux, 6.18.58.1-microsoft-standard-WSL2, amd64
+26/11/19 19:59:55 INFO Executor: Java version 17.0.21.1
+26/11/19 19:59:55 INFO Executor: Starting executor with user classpath (userClassPathFirst = false): ''
+26/11/19 19:59:55 INFO Executor: Created or updated repl class loader org.apache.spark.util.MutableURLClassLoader@6487b16c for default.
+26/11/19 19:59:55 INFO Executor: Fetching file:///home/tdat1/.ivy2/jars/io.delta_delta-spark_2.12-3.2.1.jar with timestamp 1795118394456
+26/11/19 19:59:55 INFO Utils: /home/tdat1/.ivy2/jars/io.delta_delta-spark_2.12-3.2.1.jar has been previously copied to /tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/io.delta_delta-spark_2.12-3.2.1.jar
+26/11/19 19:59:55 INFO Executor: Fetching file:///home/tdat1/.ivy2/jars/org.mongodb_bson-record-codec-5.1.4.jar with timestamp 1795118394456
+26/11/19 19:59:55 INFO Utils: /home/tdat1/.ivy2/jars/org.mongodb_bson-record-codec-5.1.4.jar has been previously copied to /tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/org.mongodb_bson-record-codec-5.1.4.jar
+26/11/19 19:59:55 INFO Executor: Fetching file:///home/tdat1/.ivy2/jars/org.mongodb.spark_mongo-spark-connector_2.12-10.4.0.jar with timestamp 1795118394456
+26/11/19 19:59:55 INFO Utils: /home/tdat1/.ivy2/jars/org.mongodb.spark_mongo-spark-connector_2.12-10.4.0.jar has been previously copied to /tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/org.mongodb.spark_mongo-spark-connector_2.12-10.4.0.jar
+26/11/19 19:59:55 INFO Executor: Fetching file:///home/tdat1/Big_Data/lab04/src/l0_common.py with timestamp 1795118394456
+26/11/19 19:59:55 INFO Utils: /home/tdat1/Big_Data/lab04/src/l0_common.py has been previously copied to /tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/l0_common.py
+26/11/19 19:59:55 INFO Executor: Fetching file:///home/tdat1/.ivy2/jars/org.mongodb_mongodb-driver-core-5.1.4.jar with timestamp 1795118394456
+26/11/19 19:59:55 INFO Utils: /home/tdat1/.ivy2/jars/org.mongodb_mongodb-driver-core-5.1.4.jar has been previously copied to /tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/org.mongodb_mongodb-driver-core-5.1.4.jar
+26/11/19 19:59:55 INFO Executor: Fetching file:///home/tdat1/.ivy2/jars/org.mongodb_bson-5.1.4.jar with timestamp 1795118394456
+26/11/19 19:59:55 INFO Utils: /home/tdat1/.ivy2/jars/org.mongodb_bson-5.1.4.jar has been previously copied to /tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/org.mongodb_bson-5.1.4.jar
+26/11/19 19:59:55 INFO Executor: Fetching file:///home/tdat1/.ivy2/jars/io.delta_delta-storage-3.2.1.jar with timestamp 1795118394456
+26/11/19 19:59:55 INFO Utils: /home/tdat1/.ivy2/jars/io.delta_delta-storage-3.2.1.jar has been previously copied to /tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/io.delta_delta-storage-3.2.1.jar
+26/11/19 19:59:55 INFO Executor: Fetching file:///home/tdat1/.ivy2/jars/org.antlr_antlr4-runtime-4.9.3.jar with timestamp 1795118394456
+26/11/19 19:59:55 INFO Utils: /home/tdat1/.ivy2/jars/org.antlr_antlr4-runtime-4.9.3.jar has been previously copied to /tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/org.antlr_antlr4-runtime-4.9.3.jar
+26/11/19 19:59:55 INFO Executor: Fetching file:///home/tdat1/.ivy2/jars/org.mongodb_mongodb-driver-sync-5.1.4.jar with timestamp 1795118394456
+26/11/19 19:59:55 INFO Utils: /home/tdat1/.ivy2/jars/org.mongodb_mongodb-driver-sync-5.1.4.jar has been previously copied to /tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/org.mongodb_mongodb-driver-sync-5.1.4.jar
+26/11/19 19:59:55 INFO Executor: Fetching spark://10.255.255.254:40217/jars/org.mongodb_mongodb-driver-core-5.1.4.jar with timestamp 1795118394456
+26/11/19 19:59:55 INFO TransportClientFactory: Successfully created connection to /10.255.255.254:40217 after 27 ms (0 ms spent in bootstraps)
+26/11/19 19:59:55 INFO Utils: Fetching spark://10.255.255.254:40217/jars/org.mongodb_mongodb-driver-core-5.1.4.jar to /tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/fetchFileTemp14114055932884178427.tmp
+26/11/19 19:59:55 INFO Utils: /tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/fetchFileTemp14114055932884178427.tmp has been previously copied to /tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/org.mongodb_mongodb-driver-core-5.1.4.jar
+26/11/19 19:59:55 INFO Executor: Adding file:/tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/org.mongodb_mongodb-driver-core-5.1.4.jar to class loader default
+26/11/19 19:59:55 INFO Executor: Fetching spark://10.255.255.254:40217/jars/org.antlr_antlr4-runtime-4.9.3.jar with timestamp 1795118394456
+26/11/19 19:59:55 INFO Utils: Fetching spark://10.255.255.254:40217/jars/org.antlr_antlr4-runtime-4.9.3.jar to /tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/fetchFileTemp14640919888041872619.tmp
+26/11/19 19:59:55 INFO Utils: /tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/fetchFileTemp14640919888041872619.tmp has been previously copied to /tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/org.antlr_antlr4-runtime-4.9.3.jar
+26/11/19 19:59:55 INFO Executor: Adding file:/tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/org.antlr_antlr4-runtime-4.9.3.jar to class loader default
+26/11/19 19:59:55 INFO Executor: Fetching spark://10.255.255.254:40217/jars/org.mongodb_mongodb-driver-sync-5.1.4.jar with timestamp 1795118394456
+26/11/19 19:59:55 INFO Utils: Fetching spark://10.255.255.254:40217/jars/org.mongodb_mongodb-driver-sync-5.1.4.jar to /tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/fetchFileTemp9799513825310906897.tmp
+26/11/19 19:59:55 INFO Utils: /tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/fetchFileTemp9799513825310906897.tmp has been previously copied to /tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/org.mongodb_mongodb-driver-sync-5.1.4.jar
+26/11/19 19:59:55 INFO Executor: Adding file:/tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/org.mongodb_mongodb-driver-sync-5.1.4.jar to class loader default
+26/11/19 19:59:55 INFO Executor: Fetching spark://10.255.255.254:40217/jars/org.mongodb_bson-5.1.4.jar with timestamp 1795118394456
+26/11/19 19:59:55 INFO Utils: Fetching spark://10.255.255.254:40217/jars/org.mongodb_bson-5.1.4.jar to /tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/fetchFileTemp17118838932907134568.tmp
+26/11/19 19:59:55 INFO Utils: /tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/fetchFileTemp17118838932907134568.tmp has been previously copied to /tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/org.mongodb_bson-5.1.4.jar
+26/11/19 19:59:55 INFO Executor: Adding file:/tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/org.mongodb_bson-5.1.4.jar to class loader default
+26/11/19 19:59:55 INFO Executor: Fetching spark://10.255.255.254:40217/jars/org.mongodb.spark_mongo-spark-connector_2.12-10.4.0.jar with timestamp 1795118394456
+26/11/19 19:59:55 INFO Utils: Fetching spark://10.255.255.254:40217/jars/org.mongodb.spark_mongo-spark-connector_2.12-10.4.0.jar to /tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/fetchFileTemp2921094176076613028.tmp
+26/11/19 19:59:55 INFO Utils: /tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/fetchFileTemp2921094176076613028.tmp has been previously copied to /tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/org.mongodb.spark_mongo-spark-connector_2.12-10.4.0.jar
+26/11/19 19:59:55 INFO Executor: Adding file:/tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/org.mongodb.spark_mongo-spark-connector_2.12-10.4.0.jar to class loader default
+26/11/19 19:59:55 INFO Executor: Fetching spark://10.255.255.254:40217/jars/io.delta_delta-spark_2.12-3.2.1.jar with timestamp 1795118394456
+26/11/19 19:59:55 INFO Utils: Fetching spark://10.255.255.254:40217/jars/io.delta_delta-spark_2.12-3.2.1.jar to /tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/fetchFileTemp15417542403886558248.tmp
+26/11/19 19:59:55 INFO Utils: /tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/fetchFileTemp15417542403886558248.tmp has been previously copied to /tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/io.delta_delta-spark_2.12-3.2.1.jar
+26/11/19 19:59:55 INFO Executor: Adding file:/tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/io.delta_delta-spark_2.12-3.2.1.jar to class loader default
+26/11/19 19:59:55 INFO Executor: Fetching spark://10.255.255.254:40217/jars/io.delta_delta-storage-3.2.1.jar with timestamp 1795118394456
+26/11/19 19:59:55 INFO Utils: Fetching spark://10.255.255.254:40217/jars/io.delta_delta-storage-3.2.1.jar to /tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/fetchFileTemp7164265067238045864.tmp
+26/11/19 19:59:55 INFO Utils: /tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/fetchFileTemp7164265067238045864.tmp has been previously copied to /tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/io.delta_delta-storage-3.2.1.jar
+26/11/19 19:59:55 INFO Executor: Adding file:/tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/io.delta_delta-storage-3.2.1.jar to class loader default
+26/11/19 19:59:55 INFO Executor: Fetching spark://10.255.255.254:40217/jars/org.mongodb_bson-record-codec-5.1.4.jar with timestamp 1795118394456
+26/11/19 19:59:55 INFO Utils: Fetching spark://10.255.255.254:40217/jars/org.mongodb_bson-record-codec-5.1.4.jar to /tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/fetchFileTemp10378566939070700781.tmp
+26/11/19 19:59:55 INFO Utils: /tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/fetchFileTemp10378566939070700781.tmp has been previously copied to /tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/org.mongodb_bson-record-codec-5.1.4.jar
+26/11/19 19:59:55 INFO Executor: Adding file:/tmp/spark-6b82b65f-ae59-4e81-b663-a09bc6722bf2/userFiles-71844ace-a032-4eea-aef2-414abc81d53f/org.mongodb_bson-record-codec-5.1.4.jar to class loader default
+26/11/19 19:59:55 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 45993.
+26/11/19 19:59:55 INFO NettyBlockTransferService: Server created on 10.255.255.254:45993
+26/11/19 19:59:55 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+26/11/19 19:59:55 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, 10.255.255.254, 45993, None)
+26/11/19 19:59:55 INFO BlockManagerMasterEndpoint: Registering block manager 10.255.255.254:45993 with 434.4 MiB RAM, BlockManagerId(driver, 10.255.255.254, 45993, None)
+26/11/19 19:59:55 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, 10.255.255.254, 45993, None)
+26/11/19 19:59:55 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, 10.255.255.254, 45993, None)
