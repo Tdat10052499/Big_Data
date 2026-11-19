@@ -63,5 +63,42 @@ Evidence: `runs/ex02_footer.log`. Store: one Parquet file on HDFS, `agg/zone_hou
 
 These statistics would not let a reader skip this file when it looks for zone 132, because 132 lies between the file's minimum `PULocationID` (1) and maximum (265), and the file holds a single row group, so there is no smaller range that could rule part of it out.
 
-## Exercises 3-10
+## Exercise 3: A Delta table of my own (7 points)
+
+Evidence: `src/e3_zone_hour.py` (copied from `d1_create.py`, changed to build `lake/zone_hour` from `agg/zone_hour` and then delete hour 3), `runs/ex03_zone_hour.log`.
+Store: Delta Lake on HDFS, `/user/tdat1/nyc/lake/zone_hour`. Dataset: Lab 2 `agg/zone_hour` (5,422 rows).
+
+History (newest first):
+
+| Version | Operation | Parameters |
+|---|---|---|
+| 1 | DELETE | `predicate -> ["(pickup_hour#556 = 3)"]` |
+| 0 | WRITE | `mode -> ErrorIfExists, partitionBy -> []` |
+
+Row count at each version:
+
+| Version | Rows | Rows with pickup hour 3 |
+|---|---|---|
+| 0 | 5,422 | 189 |
+| 1 | 5,233 | 0 |
+
+operationMetrics of the DELETE (version 1), selected: `numDeletedRows` 189, `numCopiedRows` 5233, `numRemovedFiles` 1, `numAddedFiles` 1, `numRemovedBytes` 47886, `numAddedBytes` 46505, `numDeletionVectorsAdded` 0, `executionTimeMs` 2523 (all 13 metrics are in the log).
+
+Why 5,233 rows were copied. The table at version 0 is one Parquet file of 5,422 rows (47,886 bytes, the same file size as `agg/zone_hour`, `runs/sec2_inputs.log`). Delta does not edit a Parquet file in place, and no deletion vectors were used (`numDeletionVectorsAdded` 0). To remove the 189 hour-3 rows it read that one file, wrote a new file (46,505 bytes) holding the other 5,422 - 189 = 5,233 rows unchanged, and commit 1 records a `remove` of the old file and an `add` of the new one (`runs/ex03_zone_hour.log`, actions in commit 1). So the cost is set by the size of the file the rows live in: deleting 189 rows meant rewriting all 5,233 others. Both files are still on HDFS (the listing shows two Parquet files), because version 0 still needs the old one until a VACUUM.
+
+## Exercise 4: A rule that refuses someone (7 points)
+
+Evidence: `runs/ex04_acl.log`, in this order. Store: HDFS. Path: `/user/tdat1/nyc/lake/zone_hour` (from Exercise 3). Reader name: `2374802010097`.
+
+1. Before: `drwxr-xr-x tdat1 supergroup`, `getfacl` shows only `user::rwx group::r-x other::r-x`.
+2. Lock: `hdfs dfs -chmod 750` (exit=0).
+3. Refusal: `ls: Permission denied: user=2374802010097, access=READ_EXECUTE, inode="/user/tdat1/nyc/lake/zone_hour":tdat1:supergroup:drwxr-x---` (exit=1).
+4. Grant: `hdfs dfs -setfacl -m user:2374802010097:r-x` (exit=0); `getfacl` shows `user:2374802010097:r-x`, `mask::r-x`, `other::---`.
+5. Successful listing as the same reader: `_delta_log` and the two Parquet files (exit=0).
+6. Delete refused: `rm: Permission denied: user=2374802010097, access=WRITE, inode="/user/tdat1/nyc/lake/zone_hour":tdat1:supergroup:drwxr-x---` (exit=1). Deleting `_delta_log` needs WRITE on its parent directory, and the ACL entry grants only r-x.
+7. Undo: `setfacl -b` (exit=0) and `chmod 755` (exit=0); afterwards `drwxr-xr-x` and `getfacl` shows no named user, the same as step 1.
+
+What the rule does not protect against: `hadoop.security.authentication` is `simple` (`runs/sec10_acl.log`), so HDFS believes whatever name the client sends. I became `2374802010097` just by setting `HADOOP_USER_NAME`; anyone on this machine can equally claim `tdat1`, which owns the NameNode and is therefore the HDFS superuser, to whom no permission check applies. The rule stops mistakes, not attackers; proving identity would need Kerberos, which this course does not set up.
+
+## Exercises 5-10
 Not yet done.
