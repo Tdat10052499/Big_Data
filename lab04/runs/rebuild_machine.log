@@ -1,0 +1,18 @@
+Thu Nov 19 18:23:42 UTC 2026
+host: LAPTOP-21KJQDU4  user: tdat1
+PRETTY_NAME="Ubuntu 24.04.5 LTS"
+16
+               total        used        free      shared  buff/cache   available
+Mem:            15Gi       1.4Gi        13Gi       4.2Mi       424Mi        13Gi
+openjdk version "17.0.21.1" 2026-11-17
+Hadoop 3.4.3
+   /___/ .__/\_,_/_/ /_/\_\   version 3.5.9
+Python 3.12.3
+  HDFS NameNode                [32mUP[0m
+  HDFS DataNode                [32mUP[0m
+  YARN ResourceManager         [31mDOWN[0m
+  YARN NodeManager             [31mDOWN[0m
+  MongoDB                      [32mUP[0m
+
+  Live datanodes (1):
+  Safe mode is OFF

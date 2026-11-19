@@ -1,0 +1,19 @@
+Thu Nov 19 18:25:48 UTC 2026
+
+  zone_summary       258 rows   1 file(s)
+  zone_hour        5,422 rows   1 file(s)
+
+  dates in the data                     91
+  partitionBy on its own          22.2 s   96 files
+  repartition first               20.3 s   91 files
+
+  sum over all 91 days, split by date        0.50 s
+  sum over one day, split by date               0.12 s
+  sum over one day, NOT split by date           0.14 s
+
+/user/tdat1/nyc/agg/q1_by_date
+/user/tdat1/nyc/agg/q1_by_date_repart
+/user/tdat1/nyc/agg/zone_hour
+/user/tdat1/nyc/agg/zone_summary
+           1            2               7529 /user/tdat1/nyc/agg/zone_summary
+           1            2              47886 /user/tdat1/nyc/agg/zone_hour
