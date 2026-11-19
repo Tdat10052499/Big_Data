@@ -1,0 +1,14 @@
+Thu Nov 19 18:42:44 UTC 2026
+--- commitInfo keys of commit 0
+engineInfo
+isBlindAppend
+isolationLevel
+operation
+operationMetrics
+operationParameters
+timestamp
+txnId
+--- fs.trash.interval
+0
+--- logRetentionDuration set on the table?
+{}

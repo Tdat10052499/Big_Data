@@ -1,0 +1,7 @@
+Thu Nov 19 18:51:04 UTC 2026
+--- Lab 3 streaming checkpoint
+ls: `/user/tdat1/nyc/stream/ck/restart': No such file or directory
+--- Delta log of lake/zone_summary
+/user/tdat1/nyc/lake/zone_summary/_delta_log/00000000000000000000.json
+/user/tdat1/nyc/lake/zone_summary/_delta_log/00000000000000000001.json
+/user/tdat1/nyc/lake/zone_summary/_delta_log/_commits

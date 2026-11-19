@@ -1,0 +1,33 @@
+Thu Nov 19 18:51:11 UTC 2026
+:: loading settings :: url = jar:file:/opt/spark/jars/ivy-2.5.3.jar!/org/apache/ivy/core/settings/ivysettings.xml
+
+  zone_summary   written  258   read back  258
+  columns before  zone_id, trips, avg_fare, avg_distance
+  columns after   _id, avg_distance, avg_fare, trips, zone_id
+
+  the three busiest zones, read back from MongoDB
++-------+------+--------+------------+
+|zone_id| trips|avg_fare|avg_distance|
++-------+------+--------+------------+
+|    161|418402|   15.82|        2.36|
+|    237|410610|   12.59|        1.75|
+|    132|404725|   63.53|       16.03|
++-------+------+--------+------------+
+
+  zone_profile   written  258   read back  258
+
+--- findOne zone 132, first 3 hours
+{
+  _id: ObjectId('6aff45391120ea321182b5a6'),
+  zone_id: 132,
+  zone: 'JFK Airport',
+  borough: 'Queens',
+  trips: Long('404725'),
+  avg_fare: 63.53,
+  avg_distance: 16.03,
+  hours: [
+    { hour: 0, avg_fare: 61.26 },
+    { hour: 1, avg_fare: 61.12 },
+    { hour: 2, avg_fare: 56.9 }
+  ]
+}

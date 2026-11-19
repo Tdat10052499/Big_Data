@@ -1,0 +1,42 @@
+Thu Nov 19 18:40:57 UTC 2026
+:: loading settings :: url = jar:file:/opt/spark/jars/ivy-2.5.3.jar!/org/apache/ivy/core/settings/ivysettings.xml
+
+  table      hdfs://localhost:9000/user/tdat1/nyc/lake/zone_hour
+  version 0  5,422 rows, 189 of them for pickup hour 3
+
+  the history, newest first
++-------+-----------------------+---------+------------------------------------------+
+|version|timestamp              |operation|operationParameters                       |
++-------+-----------------------+---------+------------------------------------------+
+|1      |2026-11-19 18:41:34.243|DELETE   |{predicate -> ["(pickup_hour#556 = 3)"]}  |
+|0      |2026-11-19 18:41:23.143|WRITE    |{mode -> ErrorIfExists, partitionBy -> []}|
++-------+-----------------------+---------+------------------------------------------+
+
+  row count at each version
+    version 0    5,422 rows   hour 3 rows  189
+    version 1    5,233 rows   hour 3 rows    0
+
+  operationMetrics of version 1 (DELETE)
+    executionTimeMs                           2523
+    numAddedBytes                            46505
+    numAddedChangeFiles                          0
+    numAddedFiles                                1
+    numCopiedRows                             5233
+    numDeletedRows                             189
+    numDeletionVectorsAdded                      0
+    numDeletionVectorsRemoved                    0
+    numDeletionVectorsUpdated                    0
+    numRemovedBytes                          47886
+    numRemovedFiles                              1
+    rewriteTimeMs                              691
+    scanTimeMs                                1831
+
+--- files in the table
+Found 3 items
+drwxr-xr-x   - tdat1 supergroup          0 2026-11-19 18:41 /user/tdat1/nyc/lake/zone_hour/_delta_log
+-rw-r--r--   1 tdat1 supergroup      47886 2026-11-19 18:41 /user/tdat1/nyc/lake/zone_hour/part-00000-d84c15d7-a46b-4be5-bf5f-95c35c970aee-c000.snappy.parquet
+-rw-r--r--   1 tdat1 supergroup      46505 2026-11-19 18:41 /user/tdat1/nyc/lake/zone_hour/part-00000-de28d8d0-b99d-451b-8f14-8552e0636de3-c000.snappy.parquet
+--- actions in commit 1
+["commitInfo"]
+["remove"]
+["add"]

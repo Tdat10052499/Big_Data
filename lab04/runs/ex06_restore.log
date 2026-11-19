@@ -1,0 +1,30 @@
+Thu Nov 19 19:59:11 UTC 2026
+:: loading settings :: url = jar:file:/opt/spark/jars/ivy-2.5.3.jar!/org/apache/ivy/core/settings/ivysettings.xml
+
+  table      hdfs://localhost:9000/user/tdat1/nyc/lake/zone_summary
+  rows       258
+  version    0, written by the operation WRITE
+
+:: loading settings :: url = jar:file:/opt/spark/jars/ivy-2.5.3.jar!/org/apache/ivy/core/settings/ivysettings.xml
+
+  the corrections
++-------+------+--------+------------+
+|zone_id| trips|avg_fare|avg_distance|
++-------+------+--------+------------+
+|    132|404850|   63.52|       16.03|
+|    161|418480|   15.82|        2.36|
+|    237|410655|   12.59|        1.75|
+|      5|     2|    48.3|        11.9|
+|     84|     1|    52.1|        13.4|
++-------+------+--------+------------+
+
+  version 1, operation MERGE
+    numSourceRows                  5
+    numTargetRowsUpdated           3
+    numTargetRowsInserted          2
+    numTargetRowsCopied          255
+    numTargetFilesRemoved          1
+    numTargetFilesAdded            1
+
+  rows in the table now  260
+

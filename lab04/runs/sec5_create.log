@@ -1,0 +1,27 @@
+Thu Nov 19 18:38:04 UTC 2026
+:: loading settings :: url = jar:file:/opt/spark/jars/ivy-2.5.3.jar!/org/apache/ivy/core/settings/ivysettings.xml
+
+  table      hdfs://localhost:9000/user/tdat1/nyc/lake/zone_summary
+  rows       258
+  version    0, written by the operation WRITE
+
+--- ls
+/user/tdat1/nyc/lake/zone_summary/_delta_log
+/user/tdat1/nyc/lake/zone_summary/part-00000-bca7233e-fb37-4476-b43b-93f1346046d8-c000.snappy.parquet
+/user/tdat1/nyc/lake/zone_summary/_delta_log/00000000000000000000.json
+/user/tdat1/nyc/lake/zone_summary/_delta_log/_commits
+--- keys of commit 0
+["commitInfo"]
+["metaData"]
+["protocol"]
+["add"]
+--- add stats
+{
+  "numRecords": 258,
+  "minValues": {
+    "zone_id": 1,
+    "trips": 1,
+    "avg_fare": 10.7,
+    "avg_distance": 1.41
+  }
+}

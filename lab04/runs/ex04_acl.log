@@ -1,0 +1,65 @@
+Thu Nov 19 18:42:17 UTC 2026
+++ hdfs dfs -ls -d /user/tdat1/nyc/lake/zone_hour
+drwxr-xr-x   - tdat1 supergroup          0 2026-11-19 18:41 /user/tdat1/nyc/lake/zone_hour
+++ hdfs dfs -getfacl /user/tdat1/nyc/lake/zone_hour
+# file: /user/tdat1/nyc/lake/zone_hour
+# owner: tdat1
+# group: supergroup
+user::rwx
+group::r-x
+other::r-x
+
+++ hdfs dfs -chmod 750 /user/tdat1/nyc/lake/zone_hour
+++ echo exit=0
+exit=0
+++ HADOOP_USER_NAME=2374802010097
+++ hdfs dfs -ls /user/tdat1/nyc/lake/zone_hour
+ls: Permission denied: user=2374802010097, access=READ_EXECUTE, inode="/user/tdat1/nyc/lake/zone_hour":tdat1:supergroup:drwxr-x---
+++ echo exit=1
+exit=1
+++ hdfs dfs -setfacl -m user:2374802010097:r-x /user/tdat1/nyc/lake/zone_hour
+++ echo exit=0
+exit=0
+++ hdfs dfs -getfacl /user/tdat1/nyc/lake/zone_hour
+# file: /user/tdat1/nyc/lake/zone_hour
+# owner: tdat1
+# group: supergroup
+user::rwx
+user:2374802010097:r-x
+group::r-x
+mask::r-x
+other::---
+
+++ echo exit=0
+exit=0
+++ HADOOP_USER_NAME=2374802010097
+++ hdfs dfs -ls -C /user/tdat1/nyc/lake/zone_hour
+/user/tdat1/nyc/lake/zone_hour/_delta_log
+/user/tdat1/nyc/lake/zone_hour/part-00000-d84c15d7-a46b-4be5-bf5f-95c35c970aee-c000.snappy.parquet
+/user/tdat1/nyc/lake/zone_hour/part-00000-de28d8d0-b99d-451b-8f14-8552e0636de3-c000.snappy.parquet
+++ echo exit=0
+exit=0
+++ HADOOP_USER_NAME=2374802010097
+++ hdfs dfs -rm -r /user/tdat1/nyc/lake/zone_hour/_delta_log
+rm: Permission denied: user=2374802010097, access=WRITE, inode="/user/tdat1/nyc/lake/zone_hour":tdat1:supergroup:drwxr-x---
+++ echo exit=1
+exit=1
+++ echo '--- undo both changes'
+--- undo both changes
+++ hdfs dfs -setfacl -b /user/tdat1/nyc/lake/zone_hour
+++ echo exit=0
+exit=0
+++ hdfs dfs -chmod 755 /user/tdat1/nyc/lake/zone_hour
+++ echo exit=0
+exit=0
+++ hdfs dfs -ls -d /user/tdat1/nyc/lake/zone_hour
+drwxr-xr-x   - tdat1 supergroup          0 2026-11-19 18:41 /user/tdat1/nyc/lake/zone_hour
+++ hdfs dfs -getfacl /user/tdat1/nyc/lake/zone_hour
+# file: /user/tdat1/nyc/lake/zone_hour
+# owner: tdat1
+# group: supergroup
+user::rwx
+group::r-x
+other::r-x
+
+++ set +x

@@ -1,0 +1,18 @@
+Thu Nov 19 20:26:15 UTC 2026
+:: loading settings :: url = jar:file:/opt/spark/jars/ivy-2.5.3.jar!/org/apache/ivy/core/settings/ivysettings.xml
+
+  format                          delta
+  files per append                as Spark writes it
+  short trips appended            6 times in 15 s
+  the whole sizes                 2,724,143 + k x 1,596,003 rows, k = 0..6
+      k = 0      2,724,143 rows   seen    1 times
+      k = 1      4,320,146 rows   seen    2 times
+      k = 2      5,916,149 rows   seen    3 times
+      k = 3      7,512,152 rows   seen    3 times
+      k = 4      9,108,155 rows   seen    2 times
+      k = 5     10,704,158 rows   seen    3 times
+      k = 6     12,300,161 rows   seen    1 times
+  reads made while it ran         15
+  reads that saw a whole table    15
+  reads that saw anything else    0
+

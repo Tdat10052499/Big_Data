@@ -1,0 +1,16 @@
+Exercise 05 prediction, written by the student before measuring.
+Recorded: Thu Nov 19 19:48:47 UTC 2026
+---
+Example (Section 4 query, already measured; not Exercise 5).
+
+Query: sum of fare_amount, January, Parquet
+- Columns needed: only fare_amount.
+- Footer (largest file, 1,010,014 of 2,724,143 rows): fare_amount stored = 1,285 KB.
+- Scaling to three files: the other two files hold the remaining rows, so I scale
+  by rows: 1,285 KB x 2,724,143 / 1,010,014 = about 3,466 KB = about 3.4 MB.
+  (Scaling by file size instead, 1,285 KB x 60,289,030 / 22,563,953, gives about 3.35 MB.)
+- Prediction: Parquet reads about 3.4 MB.
+- CSV: about 356.5 MB, because a row format must read every line to find one field,
+  so the whole CSV copy is read whatever the query asks for.
+- What could make me wrong: footers and page headers add a little; the other two files
+  may compress the column differently from the largest one.

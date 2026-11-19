@@ -1,0 +1,26 @@
+Thu Nov 19 18:39:43 UTC 2026
+:: loading settings :: url = jar:file:/opt/spark/jars/ivy-2.5.3.jar!/org/apache/ivy/core/settings/ivysettings.xml
+
+  1. the history, newest first
++-------+-----------------------+---------+--------+
+|version|timestamp              |operation|userName|
++-------+-----------------------+---------+--------+
+|1      |2026-11-19 18:39:29.86 |MERGE    |NULL    |
+|0      |2026-11-19 18:38:33.025|WRITE    |NULL    |
++-------+-----------------------+---------+--------+
+
+  2. the same path read at two versions
+     version 0    258 rows   zone 132 has 404,725 trips
+     latest       260 rows   zone 132 has 404,850 trips
+
+  3. an append that brings a column the table does not have
+     refused: [_LEGACY_ERROR_TEMP_DELTA_0007] A schema mismatch detected
+              when writing to the Delta table (Table ID:
+              8736958e-1eb9-4aae-aa42-ac90bad10b0b).
+
+  4. removing old files that no version needs any more
+     keep 7 days of history: 0 file(s) would be deleted
+     keep no history:
+     refused: requirement failed: Are you sure you would like to vacuum
+              files with such a low retention period?
+

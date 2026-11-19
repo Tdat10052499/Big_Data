@@ -1,0 +1,26 @@
+Thu Nov 19 19:48:55 UTC 2026
+:: loading settings :: url = jar:file:/opt/spark/jars/ivy-2.5.3.jar!/org/apache/ivy/core/settings/ivysettings.xml
+
+  2024-01, 2,724,143 rows, 22 columns, the same rows in both formats
+
+                                 CSV     Parquet    ratio
+  stored on HDFS            356.5 MB     57.5 MB     6.2x
+
+                               bytes read           time, best of 3   
+  query                          CSV     Parquet        CSV    Parquet
+    [timing] count the rows / CSV               warm-up 0.579 s | runs 0.492 / 0.469 / 0.422 s | best 0.422 s
+    [timing] count the rows / Parquet           warm-up 0.142 s | runs 0.151 / 0.151 / 0.152 s | best 0.151 s
+  count the rows            356.5 MB       25 KB     0.42 s     0.15 s
+    [timing] sum one column / CSV               warm-up 0.973 s | runs 0.946 / 0.945 / 0.956 s | best 0.945 s
+    [timing] sum one column / Parquet           warm-up 0.129 s | runs 0.129 / 0.146 / 0.138 s | best 0.129 s
+  sum one column            356.5 MB      3.3 MB     0.95 s     0.13 s
+    [timing] count every column / CSV           warm-up 2.701 s | runs 2.737 / 2.736 / 2.765 s | best 2.736 s
+    [timing] count every column / Parquet       warm-up 0.716 s | runs 0.495 / 0.695 / 0.483 s | best 0.483 s
+  count every column        356.5 MB     57.4 MB     2.74 s     0.48 s
+    [timing] sum tip_amount / CSV               warm-up 1.151 s | runs 1.040 / 1.038 / 1.064 s | best 1.038 s
+    [timing] sum tip_amount / Parquet           warm-up 0.096 s | runs 0.107 / 0.098 / 0.105 s | best 0.098 s
+  sum tip_amount            356.5 MB      3.9 MB     1.04 s     0.10 s
+    [timing] avg fare by payment / CSV          warm-up 1.154 s | runs 1.106 / 1.062 / 1.056 s | best 1.056 s
+    [timing] avg fare by payment / Parquet      warm-up 0.142 s | runs 0.140 / 0.145 / 0.183 s | best 0.140 s
+  avg fare by payment       356.5 MB      3.9 MB     1.06 s     0.14 s
+

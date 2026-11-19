@@ -1,0 +1,25 @@
+Thu Nov 19 18:29:25 UTC 2026
+:: loading settings :: url = jar:file:/opt/spark/jars/ivy-2.5.3.jar!/org/apache/ivy/core/settings/ivysettings.xml
+
+  2024-01, 2,724,143 rows, 22 columns, the same rows in both formats
+
+                                 CSV     Parquet    ratio
+  stored on HDFS            356.5 MB     57.5 MB     6.2x
+
+                               bytes read           time, best of 3   
+  query                          CSV     Parquet        CSV    Parquet
+    [timing] count the rows / CSV               warm-up 0.572 s | runs 0.499 / 0.427 / 0.433 s | best 0.427 s
+    [timing] count the rows / Parquet           warm-up 0.142 s | runs 0.148 / 0.157 / 0.141 s | best 0.141 s
+  count the rows            356.5 MB       25 KB     0.43 s     0.14 s
+    [timing] sum one column / CSV               warm-up 1.063 s | runs 1.059 / 1.015 / 1.083 s | best 1.015 s
+    [timing] sum one column / Parquet           warm-up 0.129 s | runs 0.135 / 0.140 / 0.139 s | best 0.135 s
+  sum one column            356.5 MB      3.3 MB     1.01 s     0.13 s
+    [timing] count every column / CSV           warm-up 3.048 s | runs 2.870 / 2.919 / 3.065 s | best 2.870 s
+    [timing] count every column / Parquet       warm-up 0.670 s | runs 0.593 / 0.401 / 0.421 s | best 0.401 s
+  count every column        356.5 MB     57.4 MB     2.87 s     0.40 s
+
+  CSV scan for 'sum one column':
+    +- FileScan csv ... ReadSchema: struct<fare_amount:double>
+  Parquet scan for 'sum one column':
+    +- FileScan parquet ... ReadSchema: struct<fare_amount:double>
+

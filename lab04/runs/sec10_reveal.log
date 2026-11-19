@@ -1,0 +1,25 @@
+Thu Nov 19 18:53:35 UTC 2026
+--- startup warnings
+Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+For customers running the current memory allocator, we suggest changing the contents of the following sysfsFile
+For customers running the current memory allocator, we suggest changing the contents of the following sysfsFile
+We suggest setting the contents of sysfsFile to 0.
+Your system has glibc support for rseq built in, which is not yet supported by tcmalloc-google and has critical performance implications. Please set the environment variable GLIBC_TUNABLES=glibc.pthread.rseq=0
+We suggest setting swappiness to 0 or 1, as swapping can cause performance problems.
+--- server and shell versions
+Using MongoDB: 8.0.38
+2.14.3
+--- zones with fewer than 10 trips
+19
+--- zones with exactly 1 trip
+[
+  { zone_id: 44, avg_fare: 264.1, avg_distance: 57.2 },
+  { zone_id: 99, avg_fare: 10.7, avg_distance: 2.25 },
+  { zone_id: 105, avg_fare: 11.4, avg_distance: 1.41 },
+  { zone_id: 115, avg_fare: 138.8, avg_distance: 38.4 },
+  { zone_id: 156, avg_fare: 55.5, avg_distance: 12.92 },
+  { zone_id: 176, avg_fare: 26.8, avg_distance: 6.22 }
+]
+--- total zones
+258

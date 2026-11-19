@@ -1,0 +1,57 @@
+Thu Nov 19 18:41:50 UTC 2026
+++ hdfs dfs -chmod 750 /user/tdat1/nyc/lake/zone_summary
+++ echo exit=0
+exit=0
+++ HADOOP_USER_NAME=reader
+++ hdfs dfs -ls /user/tdat1/nyc/lake/zone_summary
+ls: Permission denied: user=reader, access=READ_EXECUTE, inode="/user/tdat1/nyc/lake/zone_summary":tdat1:supergroup:drwxr-x---
+++ echo exit=1
+exit=1
+++ hdfs dfs -setfacl -m user:reader:r-x /user/tdat1/nyc/lake/zone_summary
+++ echo exit=0
+exit=0
+++ hdfs dfs -getfacl /user/tdat1/nyc/lake/zone_summary
+# file: /user/tdat1/nyc/lake/zone_summary
+# owner: tdat1
+# group: supergroup
+user::rwx
+user:reader:r-x
+group::r-x
+mask::r-x
+other::---
+
+++ echo exit=0
+exit=0
+++ HADOOP_USER_NAME=reader
+++ hdfs dfs -ls -C /user/tdat1/nyc/lake/zone_summary
+/user/tdat1/nyc/lake/zone_summary/_delta_log
+/user/tdat1/nyc/lake/zone_summary/part-00000-1b577012-4882-45a5-9c25-4607fa30d182-c000.snappy.parquet
+/user/tdat1/nyc/lake/zone_summary/part-00000-bca7233e-fb37-4476-b43b-93f1346046d8-c000.snappy.parquet
+++ echo exit=0
+exit=0
+++ HADOOP_USER_NAME=reader
+++ hdfs dfs -rm -r /user/tdat1/nyc/lake/zone_summary/_delta_log
+rm: Permission denied: user=reader, access=WRITE, inode="/user/tdat1/nyc/lake/zone_summary":tdat1:supergroup:drwxr-x---
+++ echo exit=1
+exit=1
+++ echo '--- undo'
+--- undo
+++ hdfs dfs -setfacl -b /user/tdat1/nyc/lake/zone_summary
+++ echo exit=0
+exit=0
+++ hdfs dfs -chmod 755 /user/tdat1/nyc/lake/zone_summary
+++ echo exit=0
+exit=0
+++ hdfs dfs -getfacl /user/tdat1/nyc/lake/zone_summary
+# file: /user/tdat1/nyc/lake/zone_summary
+# owner: tdat1
+# group: supergroup
+user::rwx
+group::r-x
+other::r-x
+
+++ echo '--- authentication'
+--- authentication
+++ hdfs getconf -confKey hadoop.security.authentication
+simple
+++ set +x

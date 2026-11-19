@@ -1,0 +1,17 @@
+Thu Nov 19 18:32:20 UTC 2026
+Found 2 items
+-rw-r--r--   1 tdat1 supergroup          0 2026-11-19 18:26 /user/tdat1/nyc/agg/zone_hour/_SUCCESS
+-rw-r--r--   1 tdat1 supergroup      47886 2026-11-19 18:26 /user/tdat1/nyc/agg/zone_hour/part-00000-fe8f4bef-362a-4d0f-92df-de86f4e8ac98-c000.snappy.parquet
+
+  file          out/zone_hour.parquet
+  rows          5,422
+  row groups    1
+  columns       3
+  written by    parquet-mr version 1.13.1
+
+  row group 0: 5,422 rows, 0.1 MB before compression
+    column                     codec     stored                    min                    max
+    PULocationID              SNAPPY       7 KB                      1                    265
+    pickup_hour               SNAPPY       3 KB                      0                     23
+    zone_hour_avg             SNAPPY      35 KB                    0.0                  494.0
+

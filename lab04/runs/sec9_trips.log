@@ -1,0 +1,12 @@
+Thu Nov 19 18:51:54 UTC 2026
+:: loading settings :: url = jar:file:/opt/spark/jars/ivy-2.5.3.jar!/org/apache/ivy/core/settings/ivysettings.xml
+
+  documents written          2,724,143
+  load time                  17.8 s
+
+  the same rows, stored as           bytes   against Parquet
+  Parquet on HDFS                  57.5 MB              1.0x
+  MongoDB, documents on disk      216.5 MB              3.8x
+  MongoDB, documents unpacked   1,319.8 MB             23.0x
+  MongoDB, indexes on disk         26.5 MB
+

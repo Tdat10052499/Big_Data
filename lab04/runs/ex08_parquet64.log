@@ -1,0 +1,24 @@
+Thu Nov 19 20:27:19 UTC 2026
+:: loading settings :: url = jar:file:/opt/spark/jars/ivy-2.5.3.jar!/org/apache/ivy/core/settings/ivysettings.xml
+
+  format                          parquet
+  files per append                64
+  short trips appended            6 times in 54 s
+  the whole sizes                 2,724,143 + k x 1,596,003 rows, k = 0..6
+      k = 0      2,724,143 rows   seen   10 times
+      k = 1      4,320,146 rows   seen    5 times
+      k = 2      5,916,149 rows   seen    4 times
+      k = 3      7,512,152 rows   seen    4 times
+      k = 4      9,108,155 rows   seen    2 times
+      k = 5     10,704,158 rows   seen    2 times
+      k = 6     12,300,161 rows   seen    0 times
+  reads made while it ran         33
+  reads that saw a whole table    27
+  reads that saw anything else    6
+      3,347,588 rows                 1 time
+      5,217,909 rows                 1 time
+      7,013,410 rows                 1 time
+      8,659,287 rows                 1 time
+      10,205,416 rows                1 time
+      11,801,419 rows                1 time
+

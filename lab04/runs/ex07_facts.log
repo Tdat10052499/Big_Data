@@ -1,0 +1,18 @@
+Thu Nov 19 20:00:22 UTC 2026
+documents 2724143
+[
+  {
+    _id: 1
+  }
+]
+{
+  _id: ObjectId('6aff45615412ed76bf60348d'),
+  PULocationID: 186,
+  pickup_date: ISODate('2024-01-01T00:00:00.000Z')
+}
+--- the three queries
+const queries = [
+  ["Q-a zone 132",              {PULocationID: 132}],
+  ["Q-b zone 132 on 15 Jan",    {PULocationID: 132, pickup_date: D}],
+  ["Q-c all trips on 15 Jan",   {pickup_date: D}],
+];

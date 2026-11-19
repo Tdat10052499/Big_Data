@@ -1,0 +1,7 @@
+Thu Nov 19 18:24:31 UTC 2026
+Found 3 items
+-rw-r--r--   1 tdat1 supergroup   49961641 2026-11-19 18:24 /user/tdat1/nyc/raw/yellow_tripdata_2024-01.parquet
+-rw-r--r--   1 tdat1 supergroup   50349284 2026-11-19 18:24 /user/tdat1/nyc/raw/yellow_tripdata_2024-02.parquet
+-rw-r--r--   1 tdat1 supergroup   60078280 2026-11-19 18:24 /user/tdat1/nyc/raw/yellow_tripdata_2024-03.parquet
+Found 1 items
+-rw-r--r--   1 tdat1 supergroup      12331 2026-11-19 18:24 /user/tdat1/nyc/ref/taxi_zone_lookup.csv

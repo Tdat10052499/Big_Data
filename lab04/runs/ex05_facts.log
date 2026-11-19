@@ -1,0 +1,26 @@
+Thu Nov 19 18:58:33 UTC 2026
+--- the three January Parquet files
+Found 4 items
+-rw-r--r--   1 tdat1 supergroup          0 2026-11-19 18:29 /user/tdat1/nyc/fmt/2024-01/parquet/_SUCCESS
+-rw-r--r--   1 tdat1 supergroup   22563953 2026-11-19 18:29 /user/tdat1/nyc/fmt/2024-01/parquet/part-00000-576dc54c-f44a-4bef-90a8-a68d923f745f-c000.snappy.parquet
+-rw-r--r--   1 tdat1 supergroup   22362651 2026-11-19 18:29 /user/tdat1/nyc/fmt/2024-01/parquet/part-00001-576dc54c-f44a-4bef-90a8-a68d923f745f-c000.snappy.parquet
+-rw-r--r--   1 tdat1 supergroup   15362426 2026-11-19 18:29 /user/tdat1/nyc/fmt/2024-01/parquet/part-00002-576dc54c-f44a-4bef-90a8-a68d923f745f-c000.snappy.parquet
+--- the three January CSV files
+Found 4 items
+-rw-r--r--   1 tdat1 supergroup          0 2026-11-19 18:29 /user/tdat1/nyc/fmt/2024-01/csv/_SUCCESS
+-rw-r--r--   1 tdat1 supergroup  138575481 2026-11-19 18:29 /user/tdat1/nyc/fmt/2024-01/csv/part-00000-3142cc1c-9606-494c-9709-cf2779317e5a-c000.csv
+-rw-r--r--   1 tdat1 supergroup  138847538 2026-11-19 18:29 /user/tdat1/nyc/fmt/2024-01/csv/part-00001-3142cc1c-9606-494c-9709-cf2779317e5a-c000.csv
+-rw-r--r--   1 tdat1 supergroup   96362048 2026-11-19 18:29 /user/tdat1/nyc/fmt/2024-01/csv/part-00002-3142cc1c-9606-494c-9709-cf2779317e5a-c000.csv
+
+  file          out/sample.parquet
+  rows          1,010,014
+  row groups    1
+  columns       22
+  written by    parquet-mr version 1.13.1
+
+  row group 0: 1,010,014 rows, 27.0 MB before compression
+    column                     codec     stored                    min                    max
+    payment_type              SNAPPY     222 KB                      1                      4
+    fare_amount               SNAPPY   1,285 KB                    0.0                 1616.5
+    tip_amount                SNAPPY   1,438 KB                    0.0                  422.7
+

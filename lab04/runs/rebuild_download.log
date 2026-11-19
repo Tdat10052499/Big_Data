@@ -1,0 +1,10 @@
+Thu Nov 19 18:24:19 UTC 2026
+total 156652
+-rw-rw-r-- 1 tdat1 tdat1    12331 Feb 22  2024 taxi_zone_lookup.csv
+-rw-rw-r-- 1 tdat1 tdat1 49961641 Mar 21  2024 yellow_tripdata_2024-01.parquet
+-rw-rw-r-- 1 tdat1 tdat1 50349284 Apr 19  2024 yellow_tripdata_2024-02.parquet
+-rw-rw-r-- 1 tdat1 tdat1 60078280 May 22  2024 yellow_tripdata_2024-03.parquet
+yellow_tripdata_2024-01.parquet: OK
+yellow_tripdata_2024-02.parquet: OK
+yellow_tripdata_2024-03.parquet: OK
+taxi_zone_lookup.csv: OK
