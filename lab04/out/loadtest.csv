@@ -1,0 +1,6 @@
+store,threads,requests,seconds,requests_per_s,median_ms,p95_ms
+"MongoDB, indexed",1,34126,10.0,3412.3,0.264,0.472
+"MongoDB, indexed",4,25416,10.0,2540.8,1.496,2.646
+"MongoDB, indexed",16,21388,10.02,2133.7,7.302,11.219
+Spark on Parquet,1,248,10.03,24.7,37.392,64.745
+Spark on Parquet,4,1107,10.02,110.5,35.684,47.916

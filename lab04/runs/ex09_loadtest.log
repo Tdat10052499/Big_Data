@@ -1,0 +1,28 @@
+Thu Nov 19 20:34:23 UTC 2026
+--- machine
+16
+Model name:                              AMD Ryzen AI 7 350 w/ Radeon 860M
+               total        used        free      shared  buff/cache   available
+Mem:            15Gi       1.6Gi        13Gi       4.1Mi       716Mi        13Gi
+ 20:34:23 up  4:13,  1 user,  load average: 0.24, 0.65, 0.56
+:: loading settings :: url = jar:file:/opt/spark/jars/ivy-2.5.3.jar!/org/apache/ivy/core/settings/ivysettings.xml
+
+  Q1 load test: 258 zones, 10 s per level after a 2 s warm-up, cores 16, Spark local[4]
+  store                threads  requests  seconds     req/s  median ms   p95 ms
+  MongoDB, indexed           1    34,126    10.00   3,412.3      0.264    0.472
+  MongoDB, indexed           4    25,416    10.00   2,540.8      1.496    2.646
+  MongoDB, indexed          16    21,388    10.02   2,133.7      7.302   11.219
+  Spark on Parquet           1       248    10.03      24.7     37.392   64.745
+  Spark on Parquet           4     1,107    10.02     110.5     35.684   47.916
+
+  MongoDB, indexed: highest measured rate with p95 < 10 ms = 3,412.3 req/s (1 threads, p95 0.472 ms)
+  Spark on Parquet: p95 never stayed under 10 ms at the levels measured
+  wrote out/loadtest.csv
+
+--- out/loadtest.csv
+store,threads,requests,seconds,requests_per_s,median_ms,p95_ms
+"MongoDB, indexed",1,34126,10.0,3412.3,0.264,0.472
+"MongoDB, indexed",4,25416,10.0,2540.8,1.496,2.646
+"MongoDB, indexed",16,21388,10.02,2133.7,7.302,11.219
+Spark on Parquet,1,248,10.03,24.7,37.392,64.745
+Spark on Parquet,4,1107,10.02,110.5,35.684,47.916
