@@ -1,0 +1,4 @@
+Exercise 06 prediction, written by the student before measuring.
+Recorded: Thu Nov 19 19:58:13 UTC 2026
+---
+v1, No prediction written. rows, source No prediction written., updated No prediction written., inserted No prediction written., copied No prediction written., removed No prediction written., added No prediction written.

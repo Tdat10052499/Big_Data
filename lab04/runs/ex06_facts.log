@@ -1,0 +1,28 @@
+Thu Nov 19 19:50:16 UTC 2026
+:: loading settings :: url = jar:file:/opt/spark/jars/ivy-2.5.3.jar!/org/apache/ivy/core/settings/ivysettings.xml
+
+  table      hdfs://localhost:9000/user/tdat1/nyc/lake/zone_summary
+  rows       258
+  version    0, written by the operation WRITE
+
+--- files in the table
+Found 2 items
+drwxr-xr-x   - tdat1 supergroup          0 2026-11-19 19:50 /user/tdat1/nyc/lake/zone_summary/_delta_log
+-rw-r--r--   1 tdat1 supergroup       7543 2026-11-19 19:50 /user/tdat1/nyc/lake/zone_summary/part-00000-228e4936-fbd3-4cb5-ae79-58466433705a-c000.snappy.parquet
+--- which correction zones the table already has (bda.zone_summary holds the same 258 rows)
+[
+  { zone_id: 132 },
+  { zone_id: 161 },
+  { zone_id: 236 },
+  { zone_id: 237 }
+]
+--- the corrections in src/e6_merge.py
+corrections = spark.createDataFrame([
+    (132, 404_900, 63.50, 16.02),     # exists
+    (161, 418_500, 15.82, 2.36),      # exists
+    (237, 410_700, 12.59, 1.75),      # exists
+    (236, 400_000, 13.00, 1.90),      # exists
+    (103, 1,       20.00, 3.00),      # no pickups in Lab 2
+    (104, 1,       20.00, 3.00),      # no pickups in Lab 2
+    (109, 1,       20.00, 3.00),      # no pickups in Lab 2
+], schema)
