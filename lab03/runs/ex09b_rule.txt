@@ -1,0 +1,11 @@
+Recorded: Wed Nov 25 17:57:55 UTC 2026
+Exercise 9 supplement rule, fixed before measuring. Trigger 3 s, 8 non-empty batches per run.
+Part A (live, topic taxi-live): k producers run in parallel, each requested 5,000 events/s.
+  R = 5,000 k requested; P = sum of the k producers' achieved rates; I, O, lag, (b) as in runs/ex09_rule.txt.
+  (a') producer/machine-limited if P < 0.95 R.
+Part B (backlog, topic taxi-live-backlog): the topic is filled first; then, with no producer running,
+  the query reads it from earliest with maxOffsetsPerTrigger = 3 x R, so each 3 s batch receives the
+  rows that R events/s would deliver. Lag is meaningless here (events are old) and is not used.
+  (c) query behind at R if the mean triggerExecution of batches 2-8 exceeds 3000 ms.
+The query's own limit is the lowest R at which (c) holds in Part B. Part A reports whether, with live
+producers on this machine, (b) is reached before (a').
