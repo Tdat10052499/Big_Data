@@ -1,0 +1,26 @@
+Wed Nov 25 17:35:04 UTC 2026
+reading /home/tdat1/bda/data/raw/yellow_tripdata_2024-01.parquet
+  2,964,624 rows read
+  209,729 rows dropped as not event shaped, 2,754,895 remain
+  limited to the first 2,000 rows
+
+producing to localhost:9092 topic taxi-late-demo
+  rate           4000.0 events per second
+  late fraction  100% of events, pushed back 1800 s
+  seed           42
+  press Ctrl+C to stop
+
+  sent     2,000  late   2,000   3612.6 events/s  elapsed    0.6 s
+
+flushing
+
+  ---- run summary, copy this into your run record ----
+  topic              taxi-late-demo
+  events sent        2,000
+  of which late      2,000  (100.00% of the 2,000 sent)
+  wall clock         0.6 s
+  achieved rate      3597.8 events per second
+  requested rate     4000.0 events per second
+  late offset        1800 s
+  seed               42
+  source             /home/tdat1/bda/data/raw/yellow_tripdata_2024-01.parquet
