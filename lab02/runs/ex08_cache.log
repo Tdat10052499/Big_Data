@@ -1,0 +1,41 @@
+Wed Nov 25 16:31:58 UTC 2026
+
+  prediction file: ex08_prediction.txt (218 bytes), present before measuring
+  settings: master local[4], spark.sql.adaptive.enabled=true, spark.sql.shuffle.partitions=200
+  f = curated_q1.filter(fare_amount > 10): 5,521,025 rows = 65.1% of the 8,480,687 curated_q1 rows
+  cache empty at start (spark.catalog.isCached('ex08_f')): True
+    P1: count(*)
+    P2: avg fare_amount by PULocationID
+    P3: sum tip_amount by payment_type
+    P4: max trip_distance by pickup_hour
+
+  k=1 done
+  k=2 done
+  k=3 done
+  k=4 done
+
+  round order for every k: uncached,cached | cached,uncached | uncached,cached
+   k  mode      warm-up s   run 1 s   run 2 s   run 3 s    best s  spread s
+   1  uncached      0.307     0.175     0.123     0.177     0.123     0.054
+   1  cached        4.601     3.682     3.504     3.528     3.504     0.179
+   2  uncached      0.578     0.292     0.290     0.236     0.236     0.055
+   2  cached        4.080     3.798     3.691     3.781     3.691     0.107
+   3  uncached      0.502     0.398     0.399     0.396     0.396     0.004
+   3  cached        4.091     3.879     3.958     3.931     3.879     0.079
+   4  uncached      0.578     0.505     0.482     0.475     0.475     0.030
+   4  cached        4.232     4.169     3.845     4.057     3.845     0.324
+
+   k   best(uncached)/best(cached)   |difference| s   larger spread s  difference > larger spread
+   1                          0.03            3.381             0.179  yes
+   2                          0.06            3.455             0.107  yes
+   3                          0.10            3.483             0.079  yes
+   4                          0.12            3.369             0.324  yes
+
+  crossing point (smallest k where best(cached) < best(uncached)): none for k = 1..4
+
+  pass results in every run: P1 count 5,521,025; P2 rows [258]; P3 rows [4]; P4 rows [24]
+  same result in every run: PASS  (P1 count equals f.count(): PASS)
+  cache empty at end: True
+
+  timings written to out/parts/ex08.csv
+
