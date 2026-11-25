@@ -16,6 +16,7 @@ Winner (mechanical): the variant with the lowest best whose final plan differs f
 B's fastest run by more than B's spread.
 Run: spark-submit ~/bda/lab02/src/ex10_faster.py
 """
+import argparse
 import csv
 import re
 import time
@@ -25,6 +26,9 @@ from pyspark.sql import SparkSession, functions as F
 from common import CURATED_Q1, REF_ZONES
 
 HERE = Path(__file__).resolve().parent.parent
+ap = argparse.ArgumentParser()
+ap.add_argument("--suffix", default="", help="replication suffix for every output file, e.g. _rep2")
+SUFFIX = ap.parse_args().suffix
 
 spark = (SparkSession.builder.appName("lab02-ex10-faster").master("local[4]").getOrCreate())
 spark.sparkContext.setLogLevel("ERROR")
@@ -35,6 +39,7 @@ zones = (spark.read.option("header", True).csv(REF_ZONES)
 
 SP = "spark.sql.shuffle.partitions"
 print()
+print(f"  replication suffix: {SUFFIX or 'none'}")
 print(f"  default configuration (baseline B):")
 print(f"    spark.sql.adaptive.enabled = {spark.conf.get('spark.sql.adaptive.enabled')}")
 print(f"    {SP} = {spark.conf.get(SP)}")
@@ -176,8 +181,8 @@ def marked(plan, other):
 
 
 stamp = datetime.now(timezone.utc).strftime("%a %b %d %H:%M:%S UTC %Y")
-for fname, v, other, title in [("ex10_plan_before.log", "B", chosen, "BEFORE: baseline B"),
-                               ("ex10_plan_after.log", chosen, "B", f"AFTER: {chosen}")]:
+for fname, v, other, title in [(f"ex10_plan_before{SUFFIX}.log", "B", chosen, "BEFORE: baseline B"),
+                               (f"ex10_plan_after{SUFFIX}.log", chosen, "B", f"AFTER: {chosen}")]:
     m, n = marked(plans[v], plans[other])
     (HERE / "runs" / fname).write_text(
         f"{stamp}\n"
@@ -189,7 +194,7 @@ for fname, v, other, title in [("ex10_plan_before.log", "B", chosen, "BEFORE: ba
     print(f"  wrote runs/{fname}: plan of {v}, {n} lines marked <== changed (compared with {other})")
 print()
 
-out = HERE / "out" / "parts" / "ex10.csv"
+out = HERE / "out" / "parts" / f"ex10{SUFFIX}.csv"
 out.parent.mkdir(parents=True, exist_ok=True)
 with out.open("w", newline="") as f:
     w = csv.writer(f)
@@ -197,8 +202,8 @@ with out.open("w", newline="") as f:
     for v in NAMES:
         t = times[v]
         w.writerow(["ex10", "join+filter+groupBy(Borough,pickup_hour) avg fare", f"{v}: {VARIANTS[v][0]}",
-                    f"{warm[v]:.3f}", f"{t[0]:.3f}", f"{t[1]:.3f}", f"{t[2]:.3f}", f"{best[v]:.3f}", "runs/ex10_faster.log"])
-print("  timings written to out/parts/ex10.csv")
+                    f"{warm[v]:.3f}", f"{t[0]:.3f}", f"{t[1]:.3f}", f"{t[2]:.3f}", f"{best[v]:.3f}", f"runs/ex10_faster{SUFFIX}.log"])
+print(f"  timings written to out/parts/ex10{SUFFIX}.csv")
 print()
 
 spark.stop()

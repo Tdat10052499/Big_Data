@@ -1,0 +1,11 @@
+Exercise 10 replication rule, fixed before replications 2 and 3 were run.
+Recorded: Wed Nov 25 16:52:39 UTC 2026
+---
+Replication 1 = runs/ex10_faster.log (already measured). Replications 2 and 3 = runs/ex10_faster_rep2.log, runs/ex10_faster_rep3.log, same script and settings.
+For each variant V in V1, V2, V3, pooling the 9 scored runs of V and the 9 scored runs of B over the three replications:
+  (1) count the replications in which best(V) < best(B);
+  (2) median of V's 9 runs and median of B's 9 runs;
+  (3) the share of the 81 (V run, B run) pairs in which the V run is faster.
+V counts as faster than B only if: (1) = 3 of 3, AND median(V) < median(B), AND (3) >= 75% of the 81 pairs, AND V's plan differs from B's plan.
+V3 has the same plan as B and serves as a noise control: if V3 also meets the three timing conditions, the timing difference of any variant cannot be attributed to its plan change, and no variant is declared faster.
+The first replication's own rule and result stay as reported; nothing is removed or re-run selectively.
