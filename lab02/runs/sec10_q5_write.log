@@ -1,0 +1,13 @@
+Wed Nov 25 16:43:44 UTC 2026
+
+  zone_summary       258 rows   1 file(s)
+  zone_hour        5,422 rows   1 file(s)
+
+  dates in the data                     91
+  partitionBy on its own          17.7 s   96 files
+  repartition first               16.3 s   91 files
+
+  sum over all 91 days, split by date        0.30 s
+  sum over one day, split by date               0.07 s
+  sum over one day, NOT split by date           0.10 s
+

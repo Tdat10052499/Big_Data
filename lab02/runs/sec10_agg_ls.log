@@ -1,0 +1,8 @@
+Wed Nov 25 16:44:40 UTC 2026
+Found 4 items
+drwxr-xr-x   - tdat1 supergroup          0 2026-11-25 16:44 /user/tdat1/nyc/agg/q1_by_date
+drwxr-xr-x   - tdat1 supergroup          0 2026-11-25 16:44 /user/tdat1/nyc/agg/q1_by_date_repart
+drwxr-xr-x   - tdat1 supergroup          0 2026-11-25 16:43 /user/tdat1/nyc/agg/zone_hour
+drwxr-xr-x   - tdat1 supergroup          0 2026-11-25 16:43 /user/tdat1/nyc/agg/zone_summary
+           1            2               7529 /user/tdat1/nyc/agg/zone_summary
+           1            2              47886 /user/tdat1/nyc/agg/zone_hour
