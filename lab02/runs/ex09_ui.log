@@ -1,0 +1,36 @@
+Wed Nov 25 16:42:07 UTC 2026
+
+  UI http://localhost:4040   application local-1795624920115
+  jobs in group ex09: [1]
+
+  stage attempt  tasks  duration s   input rec  shuf read rec  shuf write rec  name
+      1       0      4       0.575   8,480,687              0           1,003  collect at /home/tdat1/Big_Data/lab02/src/ex09_ske
+      2       0      8       0.105           0          1,003               0  collect at /home/tdat1/Big_Data/lab02/src/ex09_ske
+
+  ---- stage 1 (scan), 4 tasks ----
+   index partition  duration ms   input rec  shuf read rec  shuf write rec
+       0         0          555   2,724,146              0             254
+       1         1          552   2,719,991              0             252
+       2         2          551   2,018,623              0             252
+       3         3          552   1,017,927              0             245
+  slowest task: index 0, partition 0, 555 ms
+  task duration quantiles from the UI (taskSummary, ms): min 551, 25th 552, median 552, 75th 555, max 555
+
+  ---- stage 2 (post-shuffle), 8 tasks ----
+   index partition  duration ms   input rec  shuf read rec  shuf write rec
+       0         0           82           0            112               0
+       1         1           81           0            125               0
+       2         2           79           0            103               0
+       3         3           77           0            170               0
+       4         4           19           0             96               0
+       5         5           18           0            153               0
+       6         6           18           0            134               0
+       7         7           16           0            110               0
+  slowest task: index 0, partition 0, 82 ms
+  task duration quantiles from the UI (taskSummary, ms): min 16, 25th 18, median 77, 75th 81, max 82
+
+  post-shuffle stage has 8 tasks: PASS  (8 tasks)
+
+  screenshot: figures/lab02_ex09_task_summary.png (stage 2, post-shuffle)
+  screenshot: figures/lab02_ex09_task_summary_scan.png (stage 1, scan)
+

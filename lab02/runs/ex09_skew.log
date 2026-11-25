@@ -1,0 +1,25 @@
+Wed Nov 25 16:41:57 UTC 2026
+
+  settings: master local[4], spark.sql.adaptive.enabled=false, spark.sql.shuffle.partitions=8
+  application id local-1795624920115, UI http://10.255.255.254:4040
+
+  number of groups (distinct PULocationID): 258
+  largest group: PULocationID 161 with 418,402 trips
+  median group size: 649.0 (even number of groups: mean of the two middle values 635 and 663, positions 129 and 130 of 258 sorted ascending)
+  largest / median = 644.7
+  largest group = 4.9% of the 8,480,687 curated_q1 rows
+
+  PULocationID column type: int; partition = pmod(hash(PULocationID), 8)
+  partition   keys        trips  contains largest group (PULocationID 161)
+          0     28    1,386,337  yes
+          1     32    1,296,386  no
+          2     28      280,394  no
+          3     43    1,005,060  no
+          4     25      576,537  no
+          5     40    1,649,263  no
+          6     34    1,096,481  no
+          7     28    1,190,229  no
+        sum    258    8,480,687
+  sum of trips over the 8 partitions equals the curated_q1 row count (8,480,687): PASS
+
+  UI is up; waiting for ex09_ui.stop (max 20 min)
