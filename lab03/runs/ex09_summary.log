@@ -1,0 +1,10 @@
+Wed Nov 25 17:52:12 UTC 2026
+  sweep stopped after R = 6000: (a) or (b) held at two consecutive rates (3000, 6000); R = 12000, 24000, 48000 not run
+  Exercise 9, topic taxi-live, trigger 3 s; rule: runs/ex09_rule.txt
+  batches 2-8 = positions 2..8 of the first 8 non-empty batches of each run
+       R        P    P/R        I         O  trig ms  lag b2  lag b8 ups/6  (a)  (b)
+    1500   1470.4  0.980   1471.2   16110.0    318.6   4.106   4.081     3   no   no   topic taxi-live
+    3000   2760.7  0.920   2761.4   30424.3    308.7   4.116   4.089     3  yes   no   topic taxi-live
+    6000   4982.0  0.830   4978.4   41732.6    395.1   3.466   4.061     3  yes   no   topic taxi-live
+  producer/machine limit: (a) holds at R = 3000, 6000
+  falling-behind rate, topic taxi-live: not reached up to R = 6000
