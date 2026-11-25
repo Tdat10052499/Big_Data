@@ -1,0 +1,23 @@
+Wed Nov 25 17:26:44 UTC 2026
+:: loading settings :: url = jar:file:/opt/spark/jars/ivy-2.5.3.jar!/org/apache/ivy/core/settings/ivysettings.xml
+
+  window size 1 minute, topic taxi-trips, no watermark, availableNow, complete mode
+  number of 1 minute windows with trips from topic taxi-trips: 3
+  start                 end                    trips
+  2026-11-25 17:13:00   2026-11-25 17:14:00      933   topic taxi-trips
+  2026-11-25 17:14:00   2026-11-25 17:15:00    2,074   topic taxi-trips
+  2026-11-25 17:24:00   2026-11-25 17:25:00   16,993   topic taxi-trips
+  sum of trips over all 1 minute windows, topic taxi-trips: 20,000   check equals 20,000: PASS
+  min event_time seen in topic taxi-trips: 2026-11-25 17:13:36.937098
+  max event_time seen in topic taxi-trips: 2026-11-25 17:24:47.079750
+
+  window size 5 minutes, topic taxi-trips, no watermark, availableNow, complete mode
+  number of 5 minutes windows with trips from topic taxi-trips: 2
+  start                 end                    trips
+  2026-11-25 17:10:00   2026-11-25 17:15:00    3,007   topic taxi-trips
+  2026-11-25 17:20:00   2026-11-25 17:25:00   16,993   topic taxi-trips
+  sum of trips over all 5 minutes windows, topic taxi-trips: 20,000   check equals 20,000: PASS
+  min event_time seen in topic taxi-trips: 2026-11-25 17:13:36.937098
+  max event_time seen in topic taxi-trips: 2026-11-25 17:24:47.079750
+
+spark-submit exit 0

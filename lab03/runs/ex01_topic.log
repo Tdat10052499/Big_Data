@@ -1,0 +1,35 @@
+Wed Nov 25 17:25:52 UTC 2026
+$ kafka-topics.sh --bootstrap-server localhost:9092 --create --topic taxi-ex1 --partitions 4 --replication-factor 1
+Created topic taxi-ex1.
+$ kafka-topics.sh --bootstrap-server localhost:9092 --describe --topic taxi-ex1
+Topic: taxi-ex1	TopicId: E-pDlIyKSLenUxyj8-yvaw	PartitionCount: 4	ReplicationFactor: 1	Configs: segment.bytes=1073741824
+	Topic: taxi-ex1	Partition: 0	Leader: 1	Replicas: 1	Isr: 1	Elr: 	LastKnownElr: 
+	Topic: taxi-ex1	Partition: 1	Leader: 1	Replicas: 1	Isr: 1	Elr: 	LastKnownElr: 
+	Topic: taxi-ex1	Partition: 2	Leader: 1	Replicas: 1	Isr: 1	Elr: 	LastKnownElr: 
+	Topic: taxi-ex1	Partition: 3	Leader: 1	Replicas: 1	Isr: 1	Elr: 	LastKnownElr: 
+
+Wed Nov 25 17:26:08 UTC 2026
+# end offsets of taxi-ex1
+$ /opt/kafka/bin/kafka-run-class.sh kafka.tools.GetOffsetShell --bootstrap-server localhost:9092 --topic taxi-ex1
+Error: Could not find or load main class kafka.tools.GetOffsetShell
+Caused by: java.lang.ClassNotFoundException: kafka.tools.GetOffsetShell
+exit 1
+$ /opt/kafka/bin/kafka-run-class.sh org.apache.kafka.tools.GetOffsetShell --bootstrap-server localhost:9092 --topic taxi-ex1
+taxi-ex1:0:1192
+taxi-ex1:1:1717
+taxi-ex1:2:1089
+taxi-ex1:3:1002
+exit 0
+$ /opt/kafka/bin/kafka-get-offsets.sh --bootstrap-server localhost:9092 --topic taxi-ex1
+taxi-ex1:0:1192
+taxi-ex1:1:1717
+taxi-ex1:2:1089
+taxi-ex1:3:1002
+exit 0
+end offsets of topic taxi-ex1, per partition (from the first variant that worked):
+  topic taxi-ex1 partition 0 end offset 1192
+  topic taxi-ex1 partition 1 end offset 1717
+  topic taxi-ex1 partition 2 end offset 1089
+  topic taxi-ex1 partition 3 end offset 1002
+  sum of end offsets of topic taxi-ex1: 5000
+  check: sum 5000 equals 5000 events sent to topic taxi-ex1: PASS

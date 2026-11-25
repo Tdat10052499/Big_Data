@@ -1,0 +1,83 @@
+Wed Nov 25 17:27:48 UTC 2026
+$ hdfs dfs -ls -R hdfs://localhost:9000/user/tdat1/nyc/stream/ck/late_demo
+drwxr-xr-x   - tdat1 supergroup          0 2026-11-25 17:27 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/late_demo/commits
+-rw-r--r--   1 tdat1 supergroup         41 2026-11-25 17:27 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/late_demo/commits/0
+-rw-r--r--   1 tdat1 supergroup         41 2026-11-25 17:27 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/late_demo/commits/1
+-rw-r--r--   1 tdat1 supergroup         41 2026-11-25 17:27 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/late_demo/commits/2
+-rw-r--r--   1 tdat1 supergroup         45 2026-11-25 17:27 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/late_demo/metadata
+drwxr-xr-x   - tdat1 supergroup          0 2026-11-25 17:27 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/late_demo/offsets
+-rw-r--r--   1 tdat1 supergroup        753 2026-11-25 17:27 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/late_demo/offsets/0
+-rw-r--r--   1 tdat1 supergroup        765 2026-11-25 17:27 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/late_demo/offsets/1
+-rw-r--r--   1 tdat1 supergroup        765 2026-11-25 17:27 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/late_demo/offsets/2
+drwxr-xr-x   - tdat1 supergroup          0 2026-11-25 17:27 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/late_demo/sources
+drwxr-xr-x   - tdat1 supergroup          0 2026-11-25 17:27 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/late_demo/sources/0
+-rw-r--r--   1 tdat1 supergroup         42 2026-11-25 17:27 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/late_demo/sources/0/0
+drwxr-xr-x   - tdat1 supergroup          0 2026-11-25 17:27 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/late_demo/state
+drwxr-xr-x   - tdat1 supergroup          0 2026-11-25 17:27 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/late_demo/state/0
+drwxr-xr-x   - tdat1 supergroup          0 2026-11-25 17:27 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/late_demo/state/0/0
+-rw-r--r--   1 tdat1 supergroup         46 2026-11-25 17:27 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/late_demo/state/0/0/1.delta
+-rw-r--r--   1 tdat1 supergroup         46 2026-11-25 17:27 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/late_demo/state/0/0/2.delta
+-rw-r--r--   1 tdat1 supergroup         46 2026-11-25 17:27 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/late_demo/state/0/0/3.delta
+drwxr-xr-x   - tdat1 supergroup          0 2026-11-25 17:27 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/late_demo/state/0/0/_metadata
+-rw-r--r--   1 tdat1 supergroup        404 2026-11-25 17:27 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/late_demo/state/0/0/_metadata/schema
+drwxr-xr-x   - tdat1 supergroup          0 2026-11-25 17:27 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/late_demo/state/0/1
+-rw-r--r--   1 tdat1 supergroup         46 2026-11-25 17:27 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/late_demo/state/0/1/1.delta
+-rw-r--r--   1 tdat1 supergroup         46 2026-11-25 17:27 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/late_demo/state/0/1/2.delta
+-rw-r--r--   1 tdat1 supergroup         46 2026-11-25 17:27 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/late_demo/state/0/1/3.delta
+drwxr-xr-x   - tdat1 supergroup          0 2026-11-25 17:27 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/late_demo/state/0/2
+-rw-r--r--   1 tdat1 supergroup         91 2026-11-25 17:27 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/late_demo/state/0/2/1.delta
+-rw-r--r--   1 tdat1 supergroup         46 2026-11-25 17:27 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/late_demo/state/0/2/2.delta
+-rw-r--r--   1 tdat1 supergroup         46 2026-11-25 17:27 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/late_demo/state/0/2/3.delta
+drwxr-xr-x   - tdat1 supergroup          0 2026-11-25 17:27 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/late_demo/state/0/3
+-rw-r--r--   1 tdat1 supergroup         46 2026-11-25 17:27 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/late_demo/state/0/3/1.delta
+-rw-r--r--   1 tdat1 supergroup         46 2026-11-25 17:27 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/late_demo/state/0/3/2.delta
+-rw-r--r--   1 tdat1 supergroup         46 2026-11-25 17:27 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/late_demo/state/0/3/3.delta
+
+# latest offsets file (highest batch number): hdfs://localhost:9000/user/tdat1/nyc/stream/ck/late_demo/offsets/2
+$ hdfs dfs -cat hdfs://localhost:9000/user/tdat1/nyc/stream/ck/late_demo/offsets/2
+v1
+{"batchWatermarkMs":1795627510426,"batchTimestampMs":1795627654608,"conf":{"spark.sql.streaming.stateStore.providerClass":"org.apache.spark.sql.execution.streaming.state.HDFSBackedStateStoreProvider","spark.sql.streaming.join.stateFormatVersion":"2","spark.sql.streaming.stateStore.compression.codec":"lz4","spark.sql.optimizer.pruneFiltersCanPruneStreamingSubplan":"false","spark.sql.streaming.stateStore.rocksdb.formatVersion":"5","spark.sql.streaming.statefulOperator.useStrictDistribution":"true","spark.sql.streaming.flatMapGroupsWithState.stateFormatVersion":"2","spark.sql.streaming.multipleWatermarkPolicy":"min","spark.sql.streaming.aggregation.stateFormatVersion":"2","spark.sql.shuffle.partitions":"4"}}
+{"taxi-late-demo":{"2":5039,"1":3354,"0":3607}}
+# other offsets file: hdfs://localhost:9000/user/tdat1/nyc/stream/ck/late_demo/offsets/0
+$ hdfs dfs -cat hdfs://localhost:9000/user/tdat1/nyc/stream/ck/late_demo/offsets/0
+v1
+{"batchWatermarkMs":0,"batchTimestampMs":1795627637709,"conf":{"spark.sql.streaming.stateStore.providerClass":"org.apache.spark.sql.execution.streaming.state.HDFSBackedStateStoreProvider","spark.sql.streaming.join.stateFormatVersion":"2","spark.sql.streaming.stateStore.compression.codec":"lz4","spark.sql.optimizer.pruneFiltersCanPruneStreamingSubplan":"false","spark.sql.streaming.stateStore.rocksdb.formatVersion":"5","spark.sql.streaming.statefulOperator.useStrictDistribution":"true","spark.sql.streaming.flatMapGroupsWithState.stateFormatVersion":"2","spark.sql.streaming.multipleWatermarkPolicy":"min","spark.sql.streaming.aggregation.stateFormatVersion":"2","spark.sql.shuffle.partitions":"4"}}
+{"taxi-late-demo":{"2":4153,"1":2818,"0":3029}}
+# other offsets file: hdfs://localhost:9000/user/tdat1/nyc/stream/ck/late_demo/offsets/1
+$ hdfs dfs -cat hdfs://localhost:9000/user/tdat1/nyc/stream/ck/late_demo/offsets/1
+v1
+{"batchWatermarkMs":1795627510426,"batchTimestampMs":1795627641397,"conf":{"spark.sql.streaming.stateStore.providerClass":"org.apache.spark.sql.execution.streaming.state.HDFSBackedStateStoreProvider","spark.sql.streaming.join.stateFormatVersion":"2","spark.sql.streaming.stateStore.compression.codec":"lz4","spark.sql.optimizer.pruneFiltersCanPruneStreamingSubplan":"false","spark.sql.streaming.stateStore.rocksdb.formatVersion":"5","spark.sql.streaming.statefulOperator.useStrictDistribution":"true","spark.sql.streaming.flatMapGroupsWithState.stateFormatVersion":"2","spark.sql.streaming.multipleWatermarkPolicy":"min","spark.sql.streaming.aggregation.stateFormatVersion":"2","spark.sql.shuffle.partitions":"4"}}
+{"taxi-late-demo":{"2":4153,"1":2818,"0":3029}}
+# commits: 3 files, names: 0 1 2
+# latest commits file: hdfs://localhost:9000/user/tdat1/nyc/stream/ck/late_demo/commits/2
+$ hdfs dfs -cat hdfs://localhost:9000/user/tdat1/nyc/stream/ck/late_demo/commits/2
+v1
+{"nextBatchWatermarkMs":1795627510426}
+# metadata
+$ hdfs dfs -cat hdfs://localhost:9000/user/tdat1/nyc/stream/ck/late_demo/metadata
+{"id":"64aea93b-a9f7-418f-838d-4036c403dd66"}
+
+latest offsets batch = 2
+latest commits batch = 2
+last batch finished: yes
+
+# end offsets of topic taxi-late-demo (to compare with offsets/2)
+$ /opt/kafka/bin/kafka-run-class.sh kafka.tools.GetOffsetShell --bootstrap-server localhost:9092 --topic taxi-late-demo
+Error: Could not find or load main class kafka.tools.GetOffsetShell
+Caused by: java.lang.ClassNotFoundException: kafka.tools.GetOffsetShell
+exit 1
+$ /opt/kafka/bin/kafka-run-class.sh org.apache.kafka.tools.GetOffsetShell --bootstrap-server localhost:9092 --topic taxi-late-demo
+taxi-late-demo:0:3607
+taxi-late-demo:1:3354
+taxi-late-demo:2:5039
+exit 0
+$ /opt/kafka/bin/kafka-get-offsets.sh --bootstrap-server localhost:9092 --topic taxi-late-demo
+taxi-late-demo:0:3607
+taxi-late-demo:1:3354
+taxi-late-demo:2:5039
+exit 0
+end offsets of topic taxi-late-demo, per partition (from the first variant that worked):
+  topic taxi-late-demo partition 0 end offset 3607
+  topic taxi-late-demo partition 1 end offset 3354
+  topic taxi-late-demo partition 2 end offset 5039
+  sum of end offsets of topic taxi-late-demo: 12000
