@@ -1,0 +1,35 @@
+Wed Nov 25 17:24:36 UTC 2026
+reading /home/tdat1/bda/data/raw/yellow_tripdata_2024-01.parquet
+  2,964,624 rows read
+  209,729 rows dropped as not event shaped, 2,754,895 remain
+  limited to the first 20,000 rows
+
+producing to localhost:9092 topic taxi-trips
+  rate           2000.0 events per second
+  late fraction  15% of events, pushed back 600 s
+  seed           42
+  press Ctrl+C to stop
+
+  sent     2,000  late     292   1907.6 events/s  elapsed    1.0 s
+  sent     4,000  late     586   1916.1 events/s  elapsed    2.1 s
+  sent     6,000  late     877   1917.7 events/s  elapsed    3.1 s
+  sent     8,000  late   1,179   1921.1 events/s  elapsed    4.2 s
+  sent    10,000  late   1,516   1924.4 events/s  elapsed    5.2 s
+  sent    12,000  late   1,833   1918.1 events/s  elapsed    6.3 s
+  sent    14,000  late   2,143   1920.0 events/s  elapsed    7.3 s
+  sent    16,000  late   2,424   1921.9 events/s  elapsed    8.3 s
+  sent    18,000  late   2,722   1923.3 events/s  elapsed    9.4 s
+  sent    20,000  late   3,007   1923.8 events/s  elapsed   10.4 s
+
+flushing
+
+  ---- run summary, copy this into your run record ----
+  topic              taxi-trips
+  events sent        20,000
+  of which late      3,007  (15.04% of the 20,000 sent)
+  wall clock         10.4 s
+  achieved rate      1923.2 events per second
+  requested rate     2000.0 events per second
+  late offset        600 s
+  seed               42
+  source             /home/tdat1/bda/data/raw/yellow_tripdata_2024-01.parquet

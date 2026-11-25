@@ -1,0 +1,25 @@
+Wed Nov 25 17:53:32 UTC 2026
+# checkpoint after the restart
+$ hdfs dfs -ls hdfs://localhost:9000/user/tdat1/nyc/stream/ck/ex10_repeat/offsets
+Found 6 items
+-rw-r--r--   1 tdat1 supergroup        748 2026-11-25 17:53 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/ex10_repeat/offsets/0
+-rw-r--r--   1 tdat1 supergroup        751 2026-11-25 17:53 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/ex10_repeat/offsets/1
+-rw-r--r--   1 tdat1 supergroup        751 2026-11-25 17:53 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/ex10_repeat/offsets/2
+-rw-r--r--   1 tdat1 supergroup        751 2026-11-25 17:53 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/ex10_repeat/offsets/3
+-rw-r--r--   1 tdat1 supergroup        751 2026-11-25 17:53 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/ex10_repeat/offsets/4
+-rw-r--r--   1 tdat1 supergroup        751 2026-11-25 17:53 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/ex10_repeat/offsets/5
+$ hdfs dfs -ls hdfs://localhost:9000/user/tdat1/nyc/stream/ck/ex10_repeat/commits
+Found 5 items
+-rw-r--r--   1 tdat1 supergroup         29 2026-11-25 17:53 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/ex10_repeat/commits/0
+-rw-r--r--   1 tdat1 supergroup         29 2026-11-25 17:53 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/ex10_repeat/commits/1
+-rw-r--r--   1 tdat1 supergroup         29 2026-11-25 17:53 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/ex10_repeat/commits/2
+-rw-r--r--   1 tdat1 supergroup         29 2026-11-25 17:53 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/ex10_repeat/commits/3
+-rw-r--r--   1 tdat1 supergroup         29 2026-11-25 17:53 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/ex10_repeat/commits/4
+$ hdfs dfs -cat hdfs://localhost:9000/user/tdat1/nyc/stream/ck/ex10_repeat/offsets/5
+v1
+{"batchWatermarkMs":0,"batchTimestampMs":1795629210696,"conf":{"spark.sql.streaming.stateStore.providerClass":"org.apache.spark.sql.execution.streaming.state.HDFSBackedStateStoreProvider","spark.sql.streaming.join.stateFormatVersion":"2","spark.sql.streaming.stateStore.compression.codec":"lz4","spark.sql.optimizer.pruneFiltersCanPruneStreamingSubplan":"false","spark.sql.streaming.stateStore.rocksdb.formatVersion":"5","spark.sql.streaming.statefulOperator.useStrictDistribution":"true","spark.sql.streaming.flatMapGroupsWithState.stateFormatVersion":"2","spark.sql.streaming.multipleWatermarkPolicy":"min","spark.sql.streaming.aggregation.stateFormatVersion":"2","spark.sql.shuffle.partitions":"4"}}
+{"taxi-restart":{"2":4860,"1":3150,"0":3978}}
+latest offsets batch N = 5
+latest commits batch M = 4
+interrupted batch present: yes
+side-effect lines in runs/ex10_side_effects.txt: 7

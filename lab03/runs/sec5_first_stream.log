@@ -1,0 +1,24 @@
+Wed Nov 25 17:24:53 UTC 2026
+topic read by s1_first_stream.py (s0_common.TOPIC): taxi-trips
+:: loading settings :: url = jar:file:/opt/spark/jars/ivy-2.5.3.jar!/org/apache/ivy/core/settings/ivysettings.xml
+
+  is this a streaming DataFrame? True
+
+  events read from the topic: 20,000
+  distinct pickup zones:      136
+
++-----------+-----+--------+
+|pickup_zone|trips|avg_fare|
++-----------+-----+--------+
+|79         |1449 |15.95   |
+|107        |846  |15.05   |
+|148        |736  |18.72   |
+|263        |706  |14.13   |
+|48         |702  |21.53   |
+|170        |700  |16.56   |
+|249        |660  |18.78   |
+|161        |651  |19.76   |
++-----------+-----+--------+
+only showing top 8 rows
+
+spark-submit exit 0

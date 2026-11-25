@@ -1,0 +1,47 @@
+Wed Nov 25 17:13:25 UTC 2026
+$ bda-start.sh
+
+$ bda-status.sh
+  HDFS NameNode                [32mUP[0m
+  HDFS DataNode                [32mUP[0m
+  YARN ResourceManager         [31mDOWN[0m
+  YARN NodeManager             [31mDOWN[0m
+  MongoDB                      [32mUP[0m
+
+  Live datanodes (1):
+  Safe mode is OFF
+
+$ spark-submit --version
+26/11/25 17:13:32 WARN Utils: Your hostname, LAPTOP-21KJQDU4 resolves to a loopback address: 127.0.1.1; using 10.255.255.254 instead (on interface lo)
+26/11/25 17:13:32 WARN Utils: Set SPARK_LOCAL_IP if you need to bind to another address
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /___/ .__/\_,_/_/ /_/\_\   version 3.5.9
+      /_/
+                        
+Using Scala version 2.12.18, OpenJDK 64-Bit Server VM, 17.0.21.1
+Branch HEAD
+Compiled by user holden on 2026-07-12T18:40:50Z
+Revision 7c14a3c28b141cc97a330c4d0f5d2a6da7267f85
+Url https://github.com/apache/spark
+Type --help for more information.
+$ python3 --version
+Python 3.12.3
+$ /opt/kafka/bin/kafka-topics.sh --version
+/bin/bash: line 1: /opt/kafka/bin/kafka-topics.sh: No such file or directory
+$ hdfs dfs -count /user/tdat1/nyc/curated_q1
+           1            5          187967005 /user/tdat1/nyc/curated_q1
+$ ls -l ~/bda/data/raw/
+total 156660
+-rw-rw-r-- 1 tdat1 tdat1    12331 Feb 22  2024 taxi_zone_lookup.csv
+-rw-rw-r-- 1 tdat1 tdat1 49961641 Mar 21  2024 yellow_tripdata_2024-01.parquet
+-rw-rw-r-- 1 tdat1 tdat1 50349284 Apr 19  2024 yellow_tripdata_2024-02.parquet
+-rw-rw-r-- 1 tdat1 tdat1 60078280 May 22  2024 yellow_tripdata_2024-03.parquet
+$ ~/bda/venv/bin/python -c 'import pandas, kafka; ...'
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+ModuleNotFoundError: No module named 'kafka'
+$ /opt/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --list
+/bin/bash: line 1: /opt/kafka/bin/kafka-topics.sh: No such file or directory

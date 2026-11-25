@@ -1,0 +1,123 @@
+Wed Nov 25 17:44:16 UTC 2026
+# checkpoint inspection after the restart
+$ hdfs dfs -ls hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/offsets
+Found 21 items
+-rw-r--r--   1 tdat1 supergroup        748 2026-11-25 17:42 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/offsets/0
+-rw-r--r--   1 tdat1 supergroup        751 2026-11-25 17:42 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/offsets/1
+-rw-r--r--   1 tdat1 supergroup        751 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/offsets/10
+-rw-r--r--   1 tdat1 supergroup        751 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/offsets/11
+-rw-r--r--   1 tdat1 supergroup        752 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/offsets/12
+-rw-r--r--   1 tdat1 supergroup        752 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/offsets/13
+-rw-r--r--   1 tdat1 supergroup        752 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/offsets/14
+-rw-r--r--   1 tdat1 supergroup        753 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/offsets/15
+-rw-r--r--   1 tdat1 supergroup        753 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/offsets/16
+-rw-r--r--   1 tdat1 supergroup        753 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/offsets/17
+-rw-r--r--   1 tdat1 supergroup        753 2026-11-25 17:44 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/offsets/18
+-rw-r--r--   1 tdat1 supergroup        754 2026-11-25 17:44 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/offsets/19
+-rw-r--r--   1 tdat1 supergroup        751 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/offsets/2
+-rw-r--r--   1 tdat1 supergroup        754 2026-11-25 17:44 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/offsets/20
+-rw-r--r--   1 tdat1 supergroup        751 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/offsets/3
+-rw-r--r--   1 tdat1 supergroup        751 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/offsets/4
+-rw-r--r--   1 tdat1 supergroup        751 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/offsets/5
+-rw-r--r--   1 tdat1 supergroup        751 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/offsets/6
+-rw-r--r--   1 tdat1 supergroup        751 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/offsets/7
+-rw-r--r--   1 tdat1 supergroup        751 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/offsets/8
+-rw-r--r--   1 tdat1 supergroup        751 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/offsets/9
+$ hdfs dfs -ls hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/commits
+Found 21 items
+-rw-r--r--   1 tdat1 supergroup         29 2026-11-25 17:42 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/commits/0
+-rw-r--r--   1 tdat1 supergroup         29 2026-11-25 17:42 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/commits/1
+-rw-r--r--   1 tdat1 supergroup         29 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/commits/10
+-rw-r--r--   1 tdat1 supergroup         29 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/commits/11
+-rw-r--r--   1 tdat1 supergroup         29 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/commits/12
+-rw-r--r--   1 tdat1 supergroup         29 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/commits/13
+-rw-r--r--   1 tdat1 supergroup         29 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/commits/14
+-rw-r--r--   1 tdat1 supergroup         29 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/commits/15
+-rw-r--r--   1 tdat1 supergroup         29 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/commits/16
+-rw-r--r--   1 tdat1 supergroup         29 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/commits/17
+-rw-r--r--   1 tdat1 supergroup         29 2026-11-25 17:44 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/commits/18
+-rw-r--r--   1 tdat1 supergroup         29 2026-11-25 17:44 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/commits/19
+-rw-r--r--   1 tdat1 supergroup         29 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/commits/2
+-rw-r--r--   1 tdat1 supergroup         29 2026-11-25 17:44 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/commits/20
+-rw-r--r--   1 tdat1 supergroup         29 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/commits/3
+-rw-r--r--   1 tdat1 supergroup         29 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/commits/4
+-rw-r--r--   1 tdat1 supergroup         29 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/commits/5
+-rw-r--r--   1 tdat1 supergroup         29 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/commits/6
+-rw-r--r--   1 tdat1 supergroup         29 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/commits/7
+-rw-r--r--   1 tdat1 supergroup         29 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/commits/8
+-rw-r--r--   1 tdat1 supergroup         29 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/commits/9
+$ hdfs dfs -ls hdfs://localhost:9000/user/tdat1/nyc/stream/restart/_spark_metadata
+Found 21 items
+-rw-r--r--   1 tdat1 supergroup        749 2026-11-25 17:42 hdfs://localhost:9000/user/tdat1/nyc/stream/restart/_spark_metadata/0
+-rw-r--r--   1 tdat1 supergroup        749 2026-11-25 17:42 hdfs://localhost:9000/user/tdat1/nyc/stream/restart/_spark_metadata/1
+-rw-r--r--   1 tdat1 supergroup        749 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/restart/_spark_metadata/10
+-rw-r--r--   1 tdat1 supergroup        749 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/restart/_spark_metadata/11
+-rw-r--r--   1 tdat1 supergroup        749 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/restart/_spark_metadata/12
+-rw-r--r--   1 tdat1 supergroup        749 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/restart/_spark_metadata/13
+-rw-r--r--   1 tdat1 supergroup        749 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/restart/_spark_metadata/14
+-rw-r--r--   1 tdat1 supergroup        749 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/restart/_spark_metadata/15
+-rw-r--r--   1 tdat1 supergroup        749 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/restart/_spark_metadata/16
+-rw-r--r--   1 tdat1 supergroup        749 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/restart/_spark_metadata/17
+-rw-r--r--   1 tdat1 supergroup        749 2026-11-25 17:44 hdfs://localhost:9000/user/tdat1/nyc/stream/restart/_spark_metadata/18
+-rw-r--r--   1 tdat1 supergroup      14942 2026-11-25 17:44 hdfs://localhost:9000/user/tdat1/nyc/stream/restart/_spark_metadata/19.compact
+-rw-r--r--   1 tdat1 supergroup        749 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/restart/_spark_metadata/2
+-rw-r--r--   1 tdat1 supergroup        746 2026-11-25 17:44 hdfs://localhost:9000/user/tdat1/nyc/stream/restart/_spark_metadata/20
+-rw-r--r--   1 tdat1 supergroup        749 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/restart/_spark_metadata/3
+-rw-r--r--   1 tdat1 supergroup        749 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/restart/_spark_metadata/4
+-rw-r--r--   1 tdat1 supergroup        749 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/restart/_spark_metadata/5
+-rw-r--r--   1 tdat1 supergroup        749 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/restart/_spark_metadata/6
+-rw-r--r--   1 tdat1 supergroup        749 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/restart/_spark_metadata/7
+-rw-r--r--   1 tdat1 supergroup        749 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/restart/_spark_metadata/8
+-rw-r--r--   1 tdat1 supergroup       7472 2026-11-25 17:43 hdfs://localhost:9000/user/tdat1/nyc/stream/restart/_spark_metadata/9.compact
+# latest offsets file: hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/offsets/20
+$ hdfs dfs -cat hdfs://localhost:9000/user/tdat1/nyc/stream/ck/restart/offsets/20
+v1
+{"batchWatermarkMs":0,"batchTimestampMs":1795628644005,"conf":{"spark.sql.streaming.stateStore.providerClass":"org.apache.spark.sql.execution.streaming.state.HDFSBackedStateStoreProvider","spark.sql.streaming.join.stateFormatVersion":"2","spark.sql.streaming.stateStore.compression.codec":"lz4","spark.sql.optimizer.pruneFiltersCanPruneStreamingSubplan":"false","spark.sql.streaming.stateStore.rocksdb.formatVersion":"5","spark.sql.streaming.statefulOperator.useStrictDistribution":"true","spark.sql.streaming.flatMapGroupsWithState.stateFormatVersion":"2","spark.sql.streaming.multipleWatermarkPolicy":"min","spark.sql.streaming.aggregation.stateFormatVersion":"2","spark.sql.shuffle.partitions":"4"}}
+{"taxi-restart":{"2":16214,"1":10515,"0":13271}}
+latest offsets batch N = 20
+latest commits batch M = 20
+interrupted batch present: no
+part-*.parquet files in hdfs://localhost:9000/user/tdat1/nyc/stream/restart (output of topic taxi-restart): 63
+  _spark_metadata file 0: 3 "path" entries
+  _spark_metadata file 1: 3 "path" entries
+  _spark_metadata file 10: 3 "path" entries
+  _spark_metadata file 11: 3 "path" entries
+  _spark_metadata file 12: 3 "path" entries
+  _spark_metadata file 13: 3 "path" entries
+  _spark_metadata file 14: 3 "path" entries
+  _spark_metadata file 15: 3 "path" entries
+  _spark_metadata file 16: 3 "path" entries
+  _spark_metadata file 17: 3 "path" entries
+  _spark_metadata file 18: 3 "path" entries
+  _spark_metadata file 19.compact: 60 "path" entries
+  _spark_metadata file 2: 3 "path" entries
+  _spark_metadata file 20: 3 "path" entries
+  _spark_metadata file 3: 3 "path" entries
+  _spark_metadata file 4: 3 "path" entries
+  _spark_metadata file 5: 3 "path" entries
+  _spark_metadata file 6: 3 "path" entries
+  _spark_metadata file 7: 3 "path" entries
+  _spark_metadata file 8: 3 "path" entries
+  _spark_metadata file 9.compact: 30 "path" entries
+files listed in all _spark_metadata log files ("path" entries, summed over the files above): 147
+# end offsets of topic taxi-restart
+$ /opt/kafka/bin/kafka-run-class.sh kafka.tools.GetOffsetShell --bootstrap-server localhost:9092 --topic taxi-restart
+Error: Could not find or load main class kafka.tools.GetOffsetShell
+Caused by: java.lang.ClassNotFoundException: kafka.tools.GetOffsetShell
+exit 1
+$ /opt/kafka/bin/kafka-run-class.sh org.apache.kafka.tools.GetOffsetShell --bootstrap-server localhost:9092 --topic taxi-restart
+taxi-restart:0:13271
+taxi-restart:1:10515
+taxi-restart:2:16214
+exit 0
+$ /opt/kafka/bin/kafka-get-offsets.sh --bootstrap-server localhost:9092 --topic taxi-restart
+taxi-restart:0:13271
+taxi-restart:1:10515
+taxi-restart:2:16214
+exit 0
+end offsets of topic taxi-restart, per partition (from the first variant that worked):
+  topic taxi-restart partition 0 end offset 13271
+  topic taxi-restart partition 1 end offset 10515
+  topic taxi-restart partition 2 end offset 16214
+  sum of end offsets of topic taxi-restart: 40000
+batch ids committed after the restart: 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 

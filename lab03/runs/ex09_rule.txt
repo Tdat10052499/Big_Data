@@ -1,0 +1,6 @@
+Recorded: Wed Nov 25 17:49:51 UTC 2026
+Exercise 9 rule, fixed before measuring. Trigger 3 s, 8 non-empty batches per rate, topic taxi-live.
+For each requested rate R: P = producer achieved rate (its summary); I = mean inputRowsPerSecond of batches 2-8; O = mean processedRowsPerSecond of batches 2-8; lag = avg_lag_s_precise per batch.
+(a) producer-limited at R if P < 0.95 R.
+(b) query behind at R if, over batches 2-8, the precise average lag rises in at least 5 of the 6 steps AND batch 8's lag exceeds batch 2's by more than 3 s, OR the mean triggerExecution of batches 2-8 exceeds 3000 ms.
+The falling-behind rate is the lowest R at which (b) holds. If (a) holds at a rate below that, the machine/producer limit is reported first.

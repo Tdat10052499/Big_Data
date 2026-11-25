@@ -1,0 +1,8 @@
+Wed Nov 25 17:27:00 UTC 2026
+:: loading settings :: url = jar:file:/opt/spark/jars/ivy-2.5.3.jar!/org/apache/ivy/core/settings/ivysettings.xml
+  topic taxi-late-demo
+  watermark 2 minutes
+  checkpoint hdfs://localhost:9000/user/tdat1/nyc/stream/ck/late_demo
+  output hdfs://localhost:9000/user/tdat1/nyc/stream/late_demo
+  topic taxi-late-demo recreated, checkpoint and output cleared
+spark-submit exit 0

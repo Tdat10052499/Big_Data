@@ -1,0 +1,45 @@
+Wed Nov 25 17:42:42 UTC 2026
+reading /home/tdat1/bda/data/raw/yellow_tripdata_2024-01.parquet
+  2,964,624 rows read
+  209,729 rows dropped as not event shaped, 2,754,895 remain
+  limited to the first 40,000 rows
+
+producing to localhost:9092 topic taxi-restart
+  rate           6000.0 events per second
+  late fraction  0% of events, pushed back 300 s
+  seed           42
+  press Ctrl+C to stop
+
+  sent     2,000  late       0   5071.8 events/s  elapsed    0.4 s
+  sent     4,000  late       0   5078.3 events/s  elapsed    0.8 s
+  sent     6,000  late       0   5082.0 events/s  elapsed    1.2 s
+  sent     8,000  late       0   5084.4 events/s  elapsed    1.6 s
+  sent    10,000  late       0   5092.9 events/s  elapsed    2.0 s
+  sent    12,000  late       0   5047.0 events/s  elapsed    2.4 s
+  sent    14,000  late       0   5041.8 events/s  elapsed    2.8 s
+  sent    16,000  late       0   5046.0 events/s  elapsed    3.2 s
+  sent    18,000  late       0   5050.0 events/s  elapsed    3.6 s
+  sent    20,000  late       0   5050.2 events/s  elapsed    4.0 s
+  sent    22,000  late       0   5050.5 events/s  elapsed    4.4 s
+  sent    24,000  late       0   5056.3 events/s  elapsed    4.7 s
+  sent    26,000  late       0   5057.7 events/s  elapsed    5.1 s
+  sent    28,000  late       0   5057.2 events/s  elapsed    5.5 s
+  sent    30,000  late       0   5042.6 events/s  elapsed    5.9 s
+  sent    32,000  late       0   5044.6 events/s  elapsed    6.3 s
+  sent    34,000  late       0   5047.9 events/s  elapsed    6.7 s
+  sent    36,000  late       0   5048.3 events/s  elapsed    7.1 s
+  sent    38,000  late       0   5048.2 events/s  elapsed    7.5 s
+  sent    40,000  late       0   5051.9 events/s  elapsed    7.9 s
+
+flushing
+
+  ---- run summary, copy this into your run record ----
+  topic              taxi-restart
+  events sent        40,000
+  of which late      0  (0.00% of the 40,000 sent)
+  wall clock         7.9 s
+  achieved rate      5050.4 events per second
+  requested rate     6000.0 events per second
+  late offset        300 s
+  seed               42
+  source             /home/tdat1/bda/data/raw/yellow_tripdata_2024-01.parquet

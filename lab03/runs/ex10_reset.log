@@ -1,0 +1,9 @@
+Wed Nov 25 17:52:51 UTC 2026
+:: loading settings :: url = jar:file:/opt/spark/jars/ivy-2.5.3.jar!/org/apache/ivy/core/settings/ivysettings.xml
+  topic taxi-restart
+  checkpoint hdfs://localhost:9000/user/tdat1/nyc/stream/ck/ex10_repeat
+  side-effects file /home/tdat1/Big_Data/lab03/runs/ex10_side_effects.txt
+  each batch: append one line to the side-effects file (flush + fsync), then time.sleep(3);
+  the sleep is a deliberate widening of the window so that the kill lands inside a batch
+  checkpoint cleared, side-effects file emptied
+spark-submit exit 0

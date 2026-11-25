@@ -1,0 +1,21 @@
+Wed Nov 25 17:53:12 UTC 2026
+# checkpoint after the kill
+$ hdfs dfs -ls hdfs://localhost:9000/user/tdat1/nyc/stream/ck/ex10_repeat/offsets
+Found 4 items
+-rw-r--r--   1 tdat1 supergroup        748 2026-11-25 17:53 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/ex10_repeat/offsets/0
+-rw-r--r--   1 tdat1 supergroup        751 2026-11-25 17:53 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/ex10_repeat/offsets/1
+-rw-r--r--   1 tdat1 supergroup        751 2026-11-25 17:53 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/ex10_repeat/offsets/2
+-rw-r--r--   1 tdat1 supergroup        751 2026-11-25 17:53 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/ex10_repeat/offsets/3
+$ hdfs dfs -ls hdfs://localhost:9000/user/tdat1/nyc/stream/ck/ex10_repeat/commits
+Found 3 items
+-rw-r--r--   1 tdat1 supergroup         29 2026-11-25 17:53 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/ex10_repeat/commits/0
+-rw-r--r--   1 tdat1 supergroup         29 2026-11-25 17:53 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/ex10_repeat/commits/1
+-rw-r--r--   1 tdat1 supergroup         29 2026-11-25 17:53 hdfs://localhost:9000/user/tdat1/nyc/stream/ck/ex10_repeat/commits/2
+$ hdfs dfs -cat hdfs://localhost:9000/user/tdat1/nyc/stream/ck/ex10_repeat/offsets/3
+v1
+{"batchWatermarkMs":0,"batchTimestampMs":1795629191219,"conf":{"spark.sql.streaming.stateStore.providerClass":"org.apache.spark.sql.execution.streaming.state.HDFSBackedStateStoreProvider","spark.sql.streaming.join.stateFormatVersion":"2","spark.sql.streaming.stateStore.compression.codec":"lz4","spark.sql.optimizer.pruneFiltersCanPruneStreamingSubplan":"false","spark.sql.streaming.stateStore.rocksdb.formatVersion":"5","spark.sql.streaming.statefulOperator.useStrictDistribution":"true","spark.sql.streaming.flatMapGroupsWithState.stateFormatVersion":"2","spark.sql.streaming.multipleWatermarkPolicy":"min","spark.sql.streaming.aggregation.stateFormatVersion":"2","spark.sql.shuffle.partitions":"4"}}
+{"taxi-restart":{"2":3240,"1":2100,"0":2652}}
+latest offsets batch N = 3
+latest commits batch M = 2
+interrupted batch present: yes
+side-effect lines in runs/ex10_side_effects.txt: 4

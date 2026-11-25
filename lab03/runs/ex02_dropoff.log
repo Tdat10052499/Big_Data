@@ -1,0 +1,29 @@
+Wed Nov 25 17:26:24 UTC 2026
+:: loading settings :: url = jar:file:/opt/spark/jars/ivy-2.5.3.jar!/org/apache/ivy/core/settings/ivysettings.xml
+
+  is this a streaming DataFrame? True
+
+  top five dropoff zones:
+    dropoff_zone   79  trips from topic taxi-trips: 859  avg_fare 13.15
+    dropoff_zone  263  trips from topic taxi-trips: 802  avg_fare 16.95
+    dropoff_zone  170  trips from topic taxi-trips: 765  avg_fare 13.69
+    dropoff_zone  141  trips from topic taxi-trips: 715  avg_fare 13.89
+    dropoff_zone  236  trips from topic taxi-trips: 602  avg_fare 15.64
+  distinct dropoff zones in topic taxi-trips: 225
+  events read from topic taxi-trips: 20,000
+
++------------+-----+--------+
+|dropoff_zone|trips|avg_fare|
++------------+-----+--------+
+|79          |859  |13.15   |
+|263         |802  |16.95   |
+|170         |765  |13.69   |
+|141         |715  |13.89   |
+|236         |602  |15.64   |
+|107         |587  |12.28   |
+|229         |552  |13.05   |
+|48          |526  |17.76   |
++------------+-----+--------+
+only showing top 8 rows
+
+spark-submit exit 0

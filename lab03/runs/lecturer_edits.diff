@@ -1,0 +1,233 @@
+diff --git a/lab03/src/s2_watermark.py b/lab03/src/s2_watermark.py
+index afa4ad0..0086ad8 100644
+--- a/lab03/src/s2_watermark.py
++++ b/lab03/src/s2_watermark.py
+@@ -30,13 +30,28 @@ from pyspark.sql import functions as F
+ from s0_common import spark_session, SCHEMA, BOOTSTRAP
+ 
+ TOPIC = "taxi-late-demo"
+-STREAM = "hdfs://localhost:9000/user/thaianh/nyc/stream"
++STREAM = "hdfs://localhost:9000/user/tdat1/nyc/stream"
++
++
++def _opt(name, default):
++    """--name value, read from the command line (tdat1 edit)."""
++    if name in sys.argv:
++        return sys.argv[sys.argv.index(name) + 1]
++    return default
++
++
++WATERMARK = _opt("--watermark", "2 minutes")
++TAG = _opt("--tag", "")
+ # Spell the checkpoint out in full. A bare path would land in HDFS anyway,
+ # because fs.defaultFS is HDFS, and then a local delete would not touch it.
+-CKPT = f"{STREAM}/ck/late_demo"
+-OUT = f"{STREAM}/late_demo"
++CKPT = f"{STREAM}/ck/late_demo{TAG}"
++OUT = f"{STREAM}/late_demo{TAG}"
+ KT = "/opt/kafka/bin/kafka-topics.sh"
+ 
++print(f"  topic {TOPIC}")
++print(f"  watermark {WATERMARK}")
++print(f"  checkpoint {CKPT}")
++print(f"  output {OUT}", flush=True)
+ 
+ def topic_exists():
+     r = subprocess.run([KT, "--bootstrap-server", BOOTSTRAP, "--list"],
+@@ -89,7 +104,7 @@ trips = (raw.select(F.from_json(F.col("value").cast("string"), SCHEMA).alias("t"
+             .withColumn("event_time", F.to_timestamp("event_time")))
+ 
+ counted = (trips
+-           .withWatermark("event_time", "2 minutes")
++           .withWatermark("event_time", WATERMARK)
+            .groupBy(F.window("event_time", "1 minute"))
+            .agg(F.count("*").alias("trips")))
+ 
+@@ -117,12 +132,12 @@ except Exception:
+     this_run = all_runs = 0
+ 
+ print()
+-print(f"  rows read from Kafka this run     {read_rows:>8,}")
+-print(f"  trips counted into windows        {this_run:>8,}")
++print(f"  rows read from topic {TOPIC} this run     {read_rows:>8,}")
++print(f"  trips from topic {TOPIC} counted into windows        {this_run:>8,}")
+ if read_rows:
+-    print(f"  read but never counted            {read_rows - this_run:>8,}"
+-          f"   {(read_rows - this_run)/read_rows:.0%} of the {read_rows:,} read")
+-print(f"  trips counted across all runs     {all_runs:>8,}")
++    print(f"  rows from topic {TOPIC} read but never counted            {read_rows - this_run:>8,}"
++          f"   {(read_rows - this_run)/read_rows:.0%} of the {read_rows:,} read from topic {TOPIC} this run")
++print(f"  trips from topic {TOPIC} counted across all runs     {all_runs:>8,}")
+ print()
+ 
+ spark.stop()
+diff --git a/lab03/src/s3_restart.py b/lab03/src/s3_restart.py
+index 80244d5..30a37a0 100644
+--- a/lab03/src/s3_restart.py
++++ b/lab03/src/s3_restart.py
+@@ -22,7 +22,7 @@ from pyspark.sql import functions as F
+ from s0_common import spark_session, SCHEMA, BOOTSTRAP
+ 
+ TOPIC = "taxi-restart"
+-STREAM = "hdfs://localhost:9000/user/thaianh/nyc/stream"
++STREAM = "hdfs://localhost:9000/user/tdat1/nyc/stream"
+ CKPT = f"{STREAM}/ck/restart"
+ OUT = f"{STREAM}/restart"
+ KT = "/opt/kafka/bin/kafka-topics.sh"
+@@ -60,9 +60,9 @@ if "--check" in sys.argv:
+     except Exception:
+         rows = distinct = 0
+     print()
+-    print(f"  rows written to HDFS      {rows:>8,}")
+-    print(f"  distinct trip_id          {distinct:>8,}")
+-    print(f"  duplicates                {rows - distinct:>8,}")
++    print(f"  rows written to HDFS from topic {TOPIC}      {rows:>8,}")
++    print(f"  distinct trip_id from topic {TOPIC}          {distinct:>8,}")
++    print(f"  duplicates from topic {TOPIC}                {rows - distinct:>8,}")
+     print()
+     spark.stop()
+     sys.exit(0)
+@@ -85,6 +85,8 @@ q = (trips.writeStream
+      .option("checkpointLocation", CKPT)
+      .trigger(processingTime="2 seconds")
+      .start())
++from datetime import datetime, timezone  # tdat1 edit
++print(f"  query started at {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]} UTC", flush=True)
+ 
+ print("  query running. Batches of 2,000 events every 2 seconds.")
+ print("  Kill this program with Ctrl+C, or from another terminal, then run it again.")
+diff --git a/lab03/src/s4_latency.py b/lab03/src/s4_latency.py
+index dafe65e..911d00e 100644
+--- a/lab03/src/s4_latency.py
++++ b/lab03/src/s4_latency.py
+@@ -16,17 +16,35 @@ Then:
+     spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.9 \
+         --py-files src/s0_common.py src/s4_latency.py
+ """
++import csv
+ import subprocess
+ import sys
+ import time
++from pathlib import Path
+ 
+ from pyspark.sql import functions as F
+ from s0_common import spark_session, SCHEMA, BOOTSTRAP
+ 
+-TOPIC = "taxi-live"
+-STREAM = "hdfs://localhost:9000/user/thaianh/nyc/stream"
+-CKPT = f"{STREAM}/ck/latency"
+-BATCHES = 8
++
++
++def _opt(name, default):
++    """--name value, read from the command line (tdat1 edit)."""
++    if name in sys.argv:
++        return sys.argv[sys.argv.index(name) + 1]
++    return default
++
++
++TOPIC = _opt("--topic", "taxi-live")
++TRIGGER = int(_opt("--trigger", "3"))
++TAG = _opt("--tag", "sec11")
++STREAM = "hdfs://localhost:9000/user/tdat1/nyc/stream"
++CKPT = f"{STREAM}/ck/latency_{TAG}"
++BATCHES = int(_opt("--batches", "8"))
++PARTS = Path(__file__).resolve().parent.parent / "out" / "latency_parts"
++
++print(f"  topic {TOPIC}")
++print(f"  trigger {TRIGGER} seconds")
++print(f"  checkpoint {CKPT}", flush=True)
+ 
+ subprocess.run(["/opt/hadoop/bin/hdfs", "dfs", "-rm", "-r", "-f", CKPT], capture_output=True)
+ 
+@@ -50,23 +68,28 @@ def measure(df, batch_id):
+     the time the event waited in Kafka as well as the time Spark took."""
+     row = (df.withColumn("lag_s", F.unix_timestamp(F.current_timestamp())
+                          - F.unix_timestamp("event_time"))
++             .withColumn("lag_ms_prec", F.current_timestamp().cast("double")
++                         - F.col("event_time").cast("double"))
+              .agg(F.count("*").alias("n"),
+                   F.round(F.avg("lag_s"), 1).alias("avg_lag"),
+-                  F.round(F.max("lag_s"), 1).alias("max_lag"))
++                  F.round(F.max("lag_s"), 1).alias("max_lag"),
++                  F.avg("lag_ms_prec").alias("avg_lag_p"),
++                  F.max("lag_ms_prec").alias("max_lag_p"))
+              .collect()[0])
+     if row["n"]:
+-        lags[batch_id] = (row["n"], row["avg_lag"], row["max_lag"])
++        lags[batch_id] = (row["n"], row["avg_lag"], row["max_lag"],
++                          row["avg_lag_p"], row["max_lag_p"])
+ 
+ 
+ q = (trips.writeStream
+      .outputMode("append")
+      .foreachBatch(measure)
+      .option("checkpointLocation", CKPT)
+-     .trigger(processingTime="3 seconds")
++     .trigger(processingTime=f"{TRIGGER} seconds")
+      .start())
+ 
+ print()
+-print(f"  watching {BATCHES} batches at a 3 second trigger")
++print(f"  watching {BATCHES} batches at a {TRIGGER} second trigger, topic {TOPIC}", flush=True)
+ while len([p for p in q.recentProgress if p.get("numInputRows", 0) > 0]) < BATCHES:
+     if not q.isActive:
+         break
+@@ -75,17 +98,38 @@ q.stop()
+ 
+ print()
+ print(f"  {'batch':>6} {'rows':>7} {'rows/s in':>10} {'rows/s out':>11} "
+-      f"{'trigger ms':>11} {'avg lag s':>10} {'max lag s':>10}")
++      f"{'trigger ms':>11} {'avg lag s':>10} {'max lag s':>10} "
++      f"{'avg lag s (ms prec)':>20} {'max lag s (ms prec)':>20}   topic {TOPIC}")
++csv_rows = []
+ for p in q.recentProgress:
+     n = p.get("numInputRows", 0)
+     if not n:
+         continue
+     bid = p.get("batchId")
+-    lag = lags.get(bid, (n, None, None))
+-    print(f"  {bid:>6} {n:>7,} {p.get('inputRowsPerSecond') or 0:>10.0f} "
+-          f"{p.get('processedRowsPerSecond') or 0:>11.0f} "
+-          f"{p.get('durationMs', {}).get('triggerExecution', 0):>11,} "
+-          f"{lag[1] if lag[1] is not None else 0:>10} {lag[2] if lag[2] is not None else 0:>10}")
++    lag = lags.get(bid, (n, None, None, None, None))
++    rin = p.get('inputRowsPerSecond') or 0
++    rout = p.get('processedRowsPerSecond') or 0
++    tms = p.get('durationMs', {}).get('triggerExecution', 0)
++    avg_l = lag[1] if lag[1] is not None else 0
++    max_l = lag[2] if lag[2] is not None else 0
++    avg_p = lag[3] if lag[3] is not None else 0
++    max_p = lag[4] if lag[4] is not None else 0
++    print(f"  {bid:>6} {n:>7,} {rin:>10.0f} "
++          f"{rout:>11.0f} "
++          f"{tms:>11,} "
++          f"{avg_l:>10} {max_l:>10} "
++          f"{avg_p:>20.3f} {max_p:>20.3f}   topic {TOPIC}")
++    csv_rows.append([TAG, TOPIC, TRIGGER, bid, n, rin, rout, tms, avg_l, max_l, avg_p, max_p])
++print()
++
++PARTS.mkdir(parents=True, exist_ok=True)
++with open(PARTS / f"{TAG}.csv", "w", newline="") as fh:
++    w = csv.writer(fh)
++    w.writerow(["run", "topic", "trigger_s", "batch", "rows", "input_rows_per_s",
++                "processed_rows_per_s", "trigger_ms", "avg_lag_s", "max_lag_s",
++                "avg_lag_s_precise", "max_lag_s_precise"])
++    w.writerows(csv_rows)
++print(f"  wrote {PARTS / (TAG + '.csv')}")
+ print()
+ 
+ spark.stop()
+diff --git a/lab03/src/trip_producer.py b/lab03/src/trip_producer.py
+index a98c158..5d6a347 100644
+--- a/lab03/src/trip_producer.py
++++ b/lab03/src/trip_producer.py
+@@ -52,7 +52,7 @@ except ImportError:
+     sys.exit("kafka-python is missing. Install it with: pip install kafka-python-ng")
+ 
+ 
+-DEFAULT_SOURCE = "/home/thaianh/bda/data/raw/yellow_tripdata_2024-01.parquet"
++DEFAULT_SOURCE = "/home/tdat1/bda/data/raw/yellow_tripdata_2024-01.parquet"
+ 
+ COLUMNS = [
+     "tpep_pickup_datetime",
