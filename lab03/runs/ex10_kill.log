@@ -1,0 +1,9 @@
+Wed Nov 25 17:53:11 UTC 2026
+2026-11-25 17:53:11.354 UTC 4th side-effect line seen; sleep 1
+$ pkill -9 -e -f ex10_repeat.py   at 2026-11-25 17:53:12.357 UTC
+java killed (pid 64308)
+python killed (pid 64402)
+2026-11-25 17:53:31.234 UTC 3 more side-effect lines seen (7 in total)
+$ pkill -INT -e -f ex10_repeat.py   at 2026-11-25 17:53:31.238 UTC
+java killed (pid 65196)
+python killed (pid 65290)

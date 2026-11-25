@@ -1,0 +1,14 @@
+Wed Nov 25 17:53:37 UTC 2026
+  --- ex10_side_effects.txt (verbatim; topic taxi-restart) ---
+2026-11-25 17:53:01.816 batch_id=0 rows=1998 pid=64402
+2026-11-25 17:53:05.038 batch_id=1 rows=1998 pid=64402
+2026-11-25 17:53:08.193 batch_id=2 rows=1998 pid=64402
+2026-11-25 17:53:11.330 batch_id=3 rows=1998 pid=64402
+2026-11-25 17:53:24.402 batch_id=3 rows=1998 pid=65290
+2026-11-25 17:53:27.675 batch_id=4 rows=1998 pid=65290
+2026-11-25 17:53:31.228 batch_id=5 rows=1998 pid=65290
+  --- end of file ---
+  side-effect lines: 7; distinct batch_ids: 6; topic taxi-restart
+  batch_id=3 appears 2 times (topic taxi-restart):
+    2026-11-25 17:53:11.330 UTC  pid=64402  rows=1998
+    2026-11-25 17:53:24.402 UTC  pid=65290  rows=1998
