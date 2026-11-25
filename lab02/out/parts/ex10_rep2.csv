@@ -1,0 +1,5 @@
+exercise,measurement,setting,warmup_s,run1_s,run2_s,run3_s,best_s,source_log
+ex10,"join+filter+groupBy(Borough,pickup_hour) avg fare","B: baseline: join, then filter, then groupBy (defaults)",1.578,0.326,0.241,0.216,0.216,runs/ex10_faster_rep2.log
+ex10,"join+filter+groupBy(Borough,pickup_hour) avg fare",V1: aggregate before the join,0.997,0.364,0.284,0.277,0.277,runs/ex10_faster_rep2.log
+ex10,"join+filter+groupBy(Borough,pickup_hour) avg fare",V2: spark.sql.shuffle.partitions=8 (AQE on),0.534,0.274,0.265,0.220,0.220,runs/ex10_faster_rep2.log
+ex10,"join+filter+groupBy(Borough,pickup_hour) avg fare",V3: explicit F.broadcast(zones),0.397,0.278,0.257,0.201,0.201,runs/ex10_faster_rep2.log

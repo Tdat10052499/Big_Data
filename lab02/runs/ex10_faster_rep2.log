@@ -1,0 +1,42 @@
+Wed Nov 25 16:52:45 UTC 2026
+
+  replication suffix: _rep2
+  default configuration (baseline B):
+    spark.sql.adaptive.enabled = true
+    spark.sql.shuffle.partitions = 200
+    spark.sql.autoBroadcastJoinThreshold = 10485760b
+
+  B   baseline: join, then filter, then groupBy (defaults)
+  V1  aggregate before the join
+  V2  spark.sql.shuffle.partitions=8 (AQE on)
+  V3  explicit F.broadcast(zones)
+
+  correctness against B (same keys; avg_fare equal within relative 1e-9):
+    V1: PASS  (178 result rows; B has 178)
+    V2: PASS  (178 result rows; B has 178)
+    V3: PASS  (178 result rows; B has 178)
+
+  round order: B,V1,V2,V3 | V3,V2,V1,B | B,V1,V2,V3
+  variant  warm-up s   run 1 s   run 2 s   run 3 s    best s  spread s  best(B)/best(V)
+  B            1.578     0.326     0.241     0.216     0.216     0.110             1.00
+  V1           0.997     0.364     0.284     0.277     0.277     0.087             0.78
+  V2           0.534     0.274     0.265     0.220     0.220     0.054             0.98
+  V3           0.397     0.278     0.257     0.201     0.201     0.076             1.07
+
+  final plan of B: isFinalPlan=true yes
+  final plan of V1: isFinalPlan=true yes; differs from B's plan (ids stripped): yes
+  final plan of V2: isFinalPlan=true yes; differs from B's plan (ids stripped): yes
+  final plan of V3: isFinalPlan=true yes; differs from B's plan (ids stripped): no
+
+  rule: winner = the variant with the lowest best whose plan differs from B's and whose best is lower
+        than B's fastest run (0.216 s) by more than B's spread (0.110 s), i.e. best < 0.106 s
+    V1: best 0.277 s, plan differs yes, best < 0.106: no  -> does not qualify
+    V2: best 0.220 s, plan differs yes, best < 0.106: no  -> does not qualify
+    V3: best 0.201 s, plan differs no, best < 0.106: no  -> does not qualify
+  result: no variant is reliably faster than the baseline; plan files written for the fastest variant, V3
+
+  wrote runs/ex10_plan_before_rep2.log: plan of B, 0 lines marked <== changed (compared with V3)
+  wrote runs/ex10_plan_after_rep2.log: plan of V3, 0 lines marked <== changed (compared with B)
+
+  timings written to out/parts/ex10_rep2.csv
+

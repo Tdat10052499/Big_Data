@@ -1,0 +1,70 @@
+Wed Nov 25 16:52:58 UTC 2026
+Exercise 10 AFTER: V3 (explicit F.broadcast(zones))
+Final executed plan (executedPlan().toString()) of the DataFrame of the last scored run.
+
+==== Part 1: plan as returned by Spark ====
+AdaptiveSparkPlan isFinalPlan=true
++- == Final Plan ==
+   *(3) HashAggregate(keys=[Borough#62, pickup_hour#20], functions=[avg(fare_amount#10)], output=[Borough#62, pickup_hour#20, avg_fare#1536])
+   +- AQEShuffleRead coalesced
+      +- ShuffleQueryStage 1
+         +- Exchange hashpartitioning(Borough#62, pickup_hour#20, 200), ENSURE_REQUIREMENTS, [plan_id=2486]
+            +- *(2) HashAggregate(keys=[Borough#62, pickup_hour#20], functions=[partial_avg(fare_amount#10)], output=[Borough#62, pickup_hour#20, sum#1542, count#1543L])
+               +- *(2) Project [fare_amount#10, pickup_hour#20, Borough#62]
+                  +- *(2) BroadcastHashJoin [PULocationID#7], [LocationID#69], LeftOuter, BuildRight, false
+                     :- *(2) Project [PULocationID#7, fare_amount#10, pickup_hour#20]
+                     :  +- *(2) Filter (isnotnull(trip_distance#4) AND (trip_distance#4 > 5.0))
+                     :     +- *(2) ColumnarToRow
+                     :        +- FileScan parquet [trip_distance#4,PULocationID#7,fare_amount#10,pickup_hour#20] Batched: true, DataFilters: [isnotnull(trip_distance#4), (trip_distance#4 > 5.0)], Format: Parquet, Location: InMemoryFileIndex(1 paths)[hdfs://localhost:9000/user/tdat1/nyc/curated_q1], PartitionFilters: [], PushedFilters: [IsNotNull(trip_distance), GreaterThan(trip_distance,5.0)], ReadSchema: struct<trip_distance:double,PULocationID:int,fare_amount:double,pickup_hour:int>
+                     +- BroadcastQueryStage 0
+                        +- BroadcastExchange HashedRelationBroadcastMode(List(cast(input[0, int, true] as bigint)),false), [plan_id=2429]
+                           +- *(1) Project [cast(LocationID#61 as int) AS LocationID#69, Borough#62]
+                              +- *(1) Filter isnotnull(cast(LocationID#61 as int))
+                                 +- FileScan csv [LocationID#61,Borough#62] Batched: false, DataFilters: [isnotnull(cast(LocationID#61 as int))], Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://localhost:9000/user/tdat1/nyc/ref/taxi_zone_lookup.csv], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<LocationID:string,Borough:string>
++- == Initial Plan ==
+   HashAggregate(keys=[Borough#62, pickup_hour#20], functions=[avg(fare_amount#10)], output=[Borough#62, pickup_hour#20, avg_fare#1536])
+   +- Exchange hashpartitioning(Borough#62, pickup_hour#20, 200), ENSURE_REQUIREMENTS, [plan_id=2404]
+      +- HashAggregate(keys=[Borough#62, pickup_hour#20], functions=[partial_avg(fare_amount#10)], output=[Borough#62, pickup_hour#20, sum#1542, count#1543L])
+         +- Project [fare_amount#10, pickup_hour#20, Borough#62]
+            +- BroadcastHashJoin [PULocationID#7], [LocationID#69], LeftOuter, BuildRight, false
+               :- Project [PULocationID#7, fare_amount#10, pickup_hour#20]
+               :  +- Filter (isnotnull(trip_distance#4) AND (trip_distance#4 > 5.0))
+               :     +- FileScan parquet [trip_distance#4,PULocationID#7,fare_amount#10,pickup_hour#20] Batched: true, DataFilters: [isnotnull(trip_distance#4), (trip_distance#4 > 5.0)], Format: Parquet, Location: InMemoryFileIndex(1 paths)[hdfs://localhost:9000/user/tdat1/nyc/curated_q1], PartitionFilters: [], PushedFilters: [IsNotNull(trip_distance), GreaterThan(trip_distance,5.0)], ReadSchema: struct<trip_distance:double,PULocationID:int,fare_amount:double,pickup_hour:int>
+               +- BroadcastExchange HashedRelationBroadcastMode(List(cast(input[0, int, true] as bigint)),false), [plan_id=2399]
+                  +- Project [cast(LocationID#61 as int) AS LocationID#69, Borough#62]
+                     +- Filter isnotnull(cast(LocationID#61 as int))
+                        +- FileScan csv [LocationID#61,Borough#62] Batched: false, DataFilters: [isnotnull(cast(LocationID#61 as int))], Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://localhost:9000/user/tdat1/nyc/ref/taxi_zone_lookup.csv], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<LocationID:string,Borough:string>
+
+
+==== Part 2: the same plan, lines not present in the B plan marked <== changed (compared after stripping #ids and plan_id) ====
+AdaptiveSparkPlan isFinalPlan=true
++- == Final Plan ==
+   *(3) HashAggregate(keys=[Borough#62, pickup_hour#20], functions=[avg(fare_amount#10)], output=[Borough#62, pickup_hour#20, avg_fare#1536])
+   +- AQEShuffleRead coalesced
+      +- ShuffleQueryStage 1
+         +- Exchange hashpartitioning(Borough#62, pickup_hour#20, 200), ENSURE_REQUIREMENTS, [plan_id=2486]
+            +- *(2) HashAggregate(keys=[Borough#62, pickup_hour#20], functions=[partial_avg(fare_amount#10)], output=[Borough#62, pickup_hour#20, sum#1542, count#1543L])
+               +- *(2) Project [fare_amount#10, pickup_hour#20, Borough#62]
+                  +- *(2) BroadcastHashJoin [PULocationID#7], [LocationID#69], LeftOuter, BuildRight, false
+                     :- *(2) Project [PULocationID#7, fare_amount#10, pickup_hour#20]
+                     :  +- *(2) Filter (isnotnull(trip_distance#4) AND (trip_distance#4 > 5.0))
+                     :     +- *(2) ColumnarToRow
+                     :        +- FileScan parquet [trip_distance#4,PULocationID#7,fare_amount#10,pickup_hour#20] Batched: true, DataFilters: [isnotnull(trip_distance#4), (trip_distance#4 > 5.0)], Format: Parquet, Location: InMemoryFileIndex(1 paths)[hdfs://localhost:9000/user/tdat1/nyc/curated_q1], PartitionFilters: [], PushedFilters: [IsNotNull(trip_distance), GreaterThan(trip_distance,5.0)], ReadSchema: struct<trip_distance:double,PULocationID:int,fare_amount:double,pickup_hour:int>
+                     +- BroadcastQueryStage 0
+                        +- BroadcastExchange HashedRelationBroadcastMode(List(cast(input[0, int, true] as bigint)),false), [plan_id=2429]
+                           +- *(1) Project [cast(LocationID#61 as int) AS LocationID#69, Borough#62]
+                              +- *(1) Filter isnotnull(cast(LocationID#61 as int))
+                                 +- FileScan csv [LocationID#61,Borough#62] Batched: false, DataFilters: [isnotnull(cast(LocationID#61 as int))], Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://localhost:9000/user/tdat1/nyc/ref/taxi_zone_lookup.csv], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<LocationID:string,Borough:string>
++- == Initial Plan ==
+   HashAggregate(keys=[Borough#62, pickup_hour#20], functions=[avg(fare_amount#10)], output=[Borough#62, pickup_hour#20, avg_fare#1536])
+   +- Exchange hashpartitioning(Borough#62, pickup_hour#20, 200), ENSURE_REQUIREMENTS, [plan_id=2404]
+      +- HashAggregate(keys=[Borough#62, pickup_hour#20], functions=[partial_avg(fare_amount#10)], output=[Borough#62, pickup_hour#20, sum#1542, count#1543L])
+         +- Project [fare_amount#10, pickup_hour#20, Borough#62]
+            +- BroadcastHashJoin [PULocationID#7], [LocationID#69], LeftOuter, BuildRight, false
+               :- Project [PULocationID#7, fare_amount#10, pickup_hour#20]
+               :  +- Filter (isnotnull(trip_distance#4) AND (trip_distance#4 > 5.0))
+               :     +- FileScan parquet [trip_distance#4,PULocationID#7,fare_amount#10,pickup_hour#20] Batched: true, DataFilters: [isnotnull(trip_distance#4), (trip_distance#4 > 5.0)], Format: Parquet, Location: InMemoryFileIndex(1 paths)[hdfs://localhost:9000/user/tdat1/nyc/curated_q1], PartitionFilters: [], PushedFilters: [IsNotNull(trip_distance), GreaterThan(trip_distance,5.0)], ReadSchema: struct<trip_distance:double,PULocationID:int,fare_amount:double,pickup_hour:int>
+               +- BroadcastExchange HashedRelationBroadcastMode(List(cast(input[0, int, true] as bigint)),false), [plan_id=2399]
+                  +- Project [cast(LocationID#61 as int) AS LocationID#69, Borough#62]
+                     +- Filter isnotnull(cast(LocationID#61 as int))
+                        +- FileScan csv [LocationID#61,Borough#62] Batched: false, DataFilters: [isnotnull(cast(LocationID#61 as int))], Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://localhost:9000/user/tdat1/nyc/ref/taxi_zone_lookup.csv], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<LocationID:string,Borough:string>

@@ -1,0 +1,65 @@
+Wed Nov 25 16:53:35 UTC 2026
+
+  sources: replication 1: out/parts/ex10.csv + runs/ex10_faster.log; replication 2: out/parts/ex10_rep2.csv + runs/ex10_faster_rep2.log; replication 3: out/parts/ex10_rep3.csv + runs/ex10_faster_rep3.log
+
+  variant  rep   run 1 s   run 2 s   run 3 s    best s  plan differs from B
+  B          1     0.345     0.223     0.226     0.223  -
+  B          2     0.326     0.241     0.216     0.216  -
+  B          3     0.298     0.228     0.228     0.228  -
+  V1         1     0.353     0.255     0.250     0.250  yes
+  V1         2     0.364     0.284     0.277     0.277  yes
+  V1         3     0.338     0.269     0.237     0.237  yes
+  V2         1     0.242     0.228     0.187     0.187  yes
+  V2         2     0.274     0.265     0.220     0.220  yes
+  V2         3     0.237     0.229     0.209     0.209  yes
+  V3         1     0.238     0.242     0.195     0.195  no
+  V3         2     0.278     0.257     0.201     0.201  no
+  V3         3     0.288     0.226     0.210     0.210  no
+
+  median of 9 runs = the 5th of the 9 pooled scored runs sorted ascending
+  B: 9 runs [0.216, 0.223, 0.226, 0.228, 0.228, 0.241, 0.298, 0.326, 0.345], median 0.228 s, min-max 0.216-0.345 s
+
+  ---- V1 ----
+    9 runs [0.237, 0.25, 0.255, 0.269, 0.277, 0.284, 0.338, 0.353, 0.364], min-max 0.237-0.364 s
+    (1) replications with best(V1) < best(B): 0 of 3
+    (2) median(V1) 0.277 s, median(B) 0.228 s, median(B)/median(V1) = 0.82
+    (3) V1 run faster in 20 of the 81 (V1 run, B run) pairs = 24.7% of the 81 pairs (ties: 0)
+    plan differs from B in replications 1/2/3: yes/yes/yes
+    condition (1) = 3 of 3: no
+    condition median(V1) < median(B): no
+    condition (3) >= 75% of the 81 pairs: no
+    condition plan differs from B (all three replications): yes
+    three timing conditions met: no
+    verdict: V1 does not count as faster than B
+
+  ---- V2 ----
+    9 runs [0.187, 0.209, 0.22, 0.228, 0.229, 0.237, 0.242, 0.265, 0.274], min-max 0.187-0.274 s
+    (1) replications with best(V2) < best(B): 2 of 3
+    (2) median(V2) 0.229 s, median(B) 0.228 s, median(B)/median(V2) = 1.00
+    (3) V2 run faster in 47 of the 81 (V2 run, B run) pairs = 58.0% of the 81 pairs (ties: 2)
+    plan differs from B in replications 1/2/3: yes/yes/yes
+    condition (1) = 3 of 3: no
+    condition median(V2) < median(B): no
+    condition (3) >= 75% of the 81 pairs: no
+    condition plan differs from B (all three replications): yes
+    three timing conditions met: no
+    verdict: V2 does not count as faster than B
+
+  ---- V3 ----
+    9 runs [0.195, 0.201, 0.21, 0.226, 0.238, 0.242, 0.257, 0.278, 0.288], min-max 0.195-0.288 s
+    (1) replications with best(V3) < best(B): 3 of 3
+    (2) median(V3) 0.238 s, median(B) 0.228 s, median(B)/median(V3) = 0.96
+    (3) V3 run faster in 49 of the 81 (V3 run, B run) pairs = 60.5% of the 81 pairs (ties: 1)
+    plan differs from B in replications 1/2/3: no/no/no
+    condition (1) = 3 of 3: yes
+    condition median(V3) < median(B): no
+    condition (3) >= 75% of the 81 pairs: no
+    condition plan differs from B (all three replications): no
+    three timing conditions met: no
+    verdict: V3 does not count as faster than B
+
+  overall:
+    V3 (same plan as B, noise control) meets the three timing conditions: no
+    -> no variant is reliably faster than the baseline over three replications
+  lowest median of the 9 pooled runs: B (0.228 s); medians: B 0.228, V1 0.277, V2 0.229, V3 0.238
+
