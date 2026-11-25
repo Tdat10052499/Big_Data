@@ -52,7 +52,7 @@ except ImportError:
     sys.exit("kafka-python is missing. Install it with: pip install kafka-python-ng")
 
 
-DEFAULT_SOURCE = "/home/thaianh/bda/data/raw/yellow_tripdata_2024-01.parquet"
+DEFAULT_SOURCE = "/home/tdat1/bda/data/raw/yellow_tripdata_2024-01.parquet"
 
 COLUMNS = [
     "tpep_pickup_datetime",

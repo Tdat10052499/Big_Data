@@ -22,7 +22,7 @@ from pyspark.sql import functions as F
 from s0_common import spark_session, SCHEMA, BOOTSTRAP
 
 TOPIC = "taxi-restart"
-STREAM = "hdfs://localhost:9000/user/thaianh/nyc/stream"
+STREAM = "hdfs://localhost:9000/user/tdat1/nyc/stream"
 CKPT = f"{STREAM}/ck/restart"
 OUT = f"{STREAM}/restart"
 KT = "/opt/kafka/bin/kafka-topics.sh"
@@ -60,9 +60,9 @@ if "--check" in sys.argv:
     except Exception:
         rows = distinct = 0
     print()
-    print(f"  rows written to HDFS      {rows:>8,}")
-    print(f"  distinct trip_id          {distinct:>8,}")
-    print(f"  duplicates                {rows - distinct:>8,}")
+    print(f"  rows written to HDFS from topic {TOPIC}      {rows:>8,}")
+    print(f"  distinct trip_id from topic {TOPIC}          {distinct:>8,}")
+    print(f"  duplicates from topic {TOPIC}                {rows - distinct:>8,}")
     print()
     spark.stop()
     sys.exit(0)
@@ -85,6 +85,8 @@ q = (trips.writeStream
      .option("checkpointLocation", CKPT)
      .trigger(processingTime="2 seconds")
      .start())
+from datetime import datetime, timezone  # tdat1 edit
+print(f"  query started at {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]} UTC", flush=True)
 
 print("  query running. Batches of 2,000 events every 2 seconds.")
 print("  Kill this program with Ctrl+C, or from another terminal, then run it again.")

@@ -30,13 +30,28 @@ from pyspark.sql import functions as F
 from s0_common import spark_session, SCHEMA, BOOTSTRAP
 
 TOPIC = "taxi-late-demo"
-STREAM = "hdfs://localhost:9000/user/thaianh/nyc/stream"
+STREAM = "hdfs://localhost:9000/user/tdat1/nyc/stream"
+
+
+def _opt(name, default):
+    """--name value, read from the command line (tdat1 edit)."""
+    if name in sys.argv:
+        return sys.argv[sys.argv.index(name) + 1]
+    return default
+
+
+WATERMARK = _opt("--watermark", "2 minutes")
+TAG = _opt("--tag", "")
 # Spell the checkpoint out in full. A bare path would land in HDFS anyway,
 # because fs.defaultFS is HDFS, and then a local delete would not touch it.
-CKPT = f"{STREAM}/ck/late_demo"
-OUT = f"{STREAM}/late_demo"
+CKPT = f"{STREAM}/ck/late_demo{TAG}"
+OUT = f"{STREAM}/late_demo{TAG}"
 KT = "/opt/kafka/bin/kafka-topics.sh"
 
+print(f"  topic {TOPIC}")
+print(f"  watermark {WATERMARK}")
+print(f"  checkpoint {CKPT}")
+print(f"  output {OUT}", flush=True)
 
 def topic_exists():
     r = subprocess.run([KT, "--bootstrap-server", BOOTSTRAP, "--list"],
@@ -89,7 +104,7 @@ trips = (raw.select(F.from_json(F.col("value").cast("string"), SCHEMA).alias("t"
             .withColumn("event_time", F.to_timestamp("event_time")))
 
 counted = (trips
-           .withWatermark("event_time", "2 minutes")
+           .withWatermark("event_time", WATERMARK)
            .groupBy(F.window("event_time", "1 minute"))
            .agg(F.count("*").alias("trips")))
 
@@ -117,12 +132,12 @@ except Exception:
     this_run = all_runs = 0
 
 print()
-print(f"  rows read from Kafka this run     {read_rows:>8,}")
-print(f"  trips counted into windows        {this_run:>8,}")
+print(f"  rows read from topic {TOPIC} this run     {read_rows:>8,}")
+print(f"  trips from topic {TOPIC} counted into windows        {this_run:>8,}")
 if read_rows:
-    print(f"  read but never counted            {read_rows - this_run:>8,}"
-          f"   {(read_rows - this_run)/read_rows:.0%} of the {read_rows:,} read")
-print(f"  trips counted across all runs     {all_runs:>8,}")
+    print(f"  rows from topic {TOPIC} read but never counted            {read_rows - this_run:>8,}"
+          f"   {(read_rows - this_run)/read_rows:.0%} of the {read_rows:,} read from topic {TOPIC} this run")
+print(f"  trips from topic {TOPIC} counted across all runs     {all_runs:>8,}")
 print()
 
 spark.stop()
