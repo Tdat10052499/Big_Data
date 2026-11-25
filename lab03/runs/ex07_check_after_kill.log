@@ -1,0 +1,8 @@
+Wed Nov 25 17:43:18 UTC 2026
+:: loading settings :: url = jar:file:/opt/spark/jars/ivy-2.5.3.jar!/org/apache/ivy/core/settings/ivysettings.xml
+
+  rows written to HDFS from topic taxi-restart         5,994
+  distinct trip_id from topic taxi-restart             5,994
+  duplicates from topic taxi-restart                       0
+
+spark-submit exit 0

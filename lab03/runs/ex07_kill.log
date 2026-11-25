@@ -1,0 +1,8 @@
+Wed Nov 25 17:43:01 UTC 2026
+query started at (from ex07_run1.log): 2026-11-25 17:42:55.881 UTC
+start line seen by kill_restart.sh at:    2026-11-25 17:42:56.104 UTC
+sleep 5
+$ pkill -9 -e -f s3_restart.py   at 2026-11-25 17:43:01.107 UTC
+java killed (pid 45419)
+python killed (pid 45499)
+seconds between the start line and the kill: 5.226

@@ -1,0 +1,11 @@
+Wed Nov 25 17:43:25 UTC 2026
+# polling every 5 s (max 300 s): latest commits batch == latest offsets batch AND latest offsets == end offsets of topic taxi-restart
+2026-11-25 17:43:35.895 UTC poll 1: offsets batch 3, commits batch 2, offsets {"taxi-restart":{"2":3240,"1":2100,"0":2652}}, topic taxi-restart end taxi-restart:0:13271 taxi-restart:1:10515 taxi-restart:2:16214 , offsets equal end: no
+2026-11-25 17:43:45.771 UTC poll 2: offsets batch 8, commits batch 9, offsets {"taxi-restart":{"2":7290,"1":4725,"0":5967}}, topic taxi-restart end taxi-restart:0:13271 taxi-restart:1:10515 taxi-restart:2:16214 , offsets equal end: no
+2026-11-25 17:43:55.618 UTC poll 3: offsets batch 13, commits batch 13, offsets {"taxi-restart":{"2":11340,"1":7352,"0":9282}}, topic taxi-restart end taxi-restart:0:13271 taxi-restart:1:10515 taxi-restart:2:16214 , offsets equal end: no
+2026-11-25 17:44:05.310 UTC poll 4: offsets batch 18, commits batch 18, offsets {"taxi-restart":{"2":15390,"1":9980,"0":12597}}, topic taxi-restart end taxi-restart:0:13271 taxi-restart:1:10515 taxi-restart:2:16214 , offsets equal end: no
+2026-11-25 17:44:15.034 UTC poll 5: offsets batch 20, commits batch 20, offsets {"taxi-restart":{"2":16214,"1":10515,"0":13271}}, topic taxi-restart end taxi-restart:0:13271 taxi-restart:1:10515 taxi-restart:2:16214 , offsets equal end: yes
+caught up: yes
+$ pkill -INT -e -f s3_restart.py   at 2026-11-25 17:44:15.036 UTC
+java killed (pid 48074)
+python killed (pid 48145)
