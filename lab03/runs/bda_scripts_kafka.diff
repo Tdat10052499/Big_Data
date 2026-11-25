@@ -1,0 +1,47 @@
+--- bda-start.sh.orig
++++ ~/bin/bda-start.sh
+@@ -1,9 +1,10 @@
+ #!/usr/bin/env bash
+-# Start the services Lab 4 needs: HDFS (NameNode + DataNode) and MongoDB.
++# Start the services the labs need: HDFS (NameNode + DataNode), MongoDB and the Kafka broker.
+ # Written for the new laptop; replaces the lecturer's bda-start.sh, which is not in the repo.
+ # Uses 'hdfs --daemon' (no ssh needed). MongoDB keeps its data in /data/db (manual section 2.2).
+-#   bda-start.sh          HDFS and MongoDB
++#   bda-start.sh          HDFS, MongoDB and Kafka
+ #   bda-start.sh mongo    MongoDB only
++#   bda-start.sh kafka    Kafka broker only (KRaft, /opt/kafka, localhost:9092; Lab 3 manual section 2.1)
+ set -u
+ start_hdfs() {
+   jps | grep -qw NameNode || hdfs --daemon start namenode
+@@ -15,8 +16,19 @@
+   mongod --dbpath /data/db --logpath /var/log/mongodb/mongod.log --logappend \
+          --bind_ip 127.0.0.1 --port 27017 --fork >/dev/null
+ }
++start_kafka() {
++  # Single-node KRaft broker; data in ~/bda/kafka-data; log in /opt/kafka/logs/kafkaServer.out
++  jps | grep -qw Kafka && return
++  /opt/kafka/bin/kafka-server-start.sh -daemon /opt/kafka/config/kraft/bda.properties
++  for _ in $(seq 1 30); do
++    /opt/kafka/bin/kafka-broker-api-versions.sh --bootstrap-server localhost:9092 >/dev/null 2>&1 && return
++    sleep 1
++  done
++  echo "  Kafka did not answer on localhost:9092 within 30 s; see /opt/kafka/logs/kafkaServer.out" >&2
++}
+ case "${1:-all}" in
+   mongo) start_mongo ;;
+   hdfs)  start_hdfs ;;
+-  *)     start_hdfs; start_mongo ;;
++  kafka) start_kafka ;;
++  *)     start_hdfs; start_mongo; start_kafka ;;
+ esac
+--- bda-status.sh.orig
++++ ~/bin/bda-status.sh
+@@ -10,6 +10,8 @@
+ row "YARN NodeManager"     "$(has NodeManager)"
+ m=0; mongosh --quiet --eval 'db.runCommand({ping:1}).ok' 2>/dev/null | grep -q 1 && m=1
+ row "MongoDB"              "$m"
++k=0; echo "$J" | grep -qw Kafka && /opt/kafka/bin/kafka-broker-api-versions.sh --bootstrap-server localhost:9092 >/dev/null 2>&1 && k=1
++row "Kafka broker (localhost:9092)" "$k"
+ echo
+ hdfs dfsadmin -report 2>/dev/null | grep -m1 "Live datanodes" | sed 's/^/  /'
+ hdfs dfsadmin -safemode get 2>/dev/null | sed 's/^/  /'
