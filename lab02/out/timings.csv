@@ -1,0 +1,24 @@
+exercise,measurement,setting,warmup_s,run1_s,run2_s,run3_s,best_s,source_log
+ex02,line a,filter,,0.0118,0.0122,0.0093,0.0093,runs/ex02_lines.log
+ex02,line b,select,,0.0121,0.0218,0.0143,0.0121,runs/ex02_lines.log
+ex02,line c,groupBy.count,,0.0197,0.0145,0.0173,0.0145,runs/ex02_lines.log
+ex02,line d,orderBy,,0.0161,0.0113,0.0079,0.0079,runs/ex02_lines.log
+ex02,line e,take(5),,0.6558,0.5635,0.4263,0.4263,runs/ex02_lines.log
+ex05,"wide aggregation groupBy(PULocationID,DOLocationID,pickup_hour), AQE off",spark.sql.shuffle.partitions=2,1.725,0.538,0.490,0.444,0.444,runs/ex05_partitions.log
+ex05,"wide aggregation groupBy(PULocationID,DOLocationID,pickup_hour), AQE off",spark.sql.shuffle.partitions=8,0.665,0.453,0.456,0.368,0.368,runs/ex05_partitions.log
+ex06,groupBy(payment_type).avg(tip_amount),spark.sql.adaptive.enabled=true,1.527,0.253,0.176,0.166,0.166,runs/ex06_aqe.log
+ex06,groupBy(payment_type).avg(tip_amount),spark.sql.adaptive.enabled=false,0.869,0.456,0.410,0.351,0.351,runs/ex06_aqe.log
+ex07,"join zones on DOLocationID, trips per Borough",auto (BroadcastHashJoin),0.421,0.307,0.249,0.234,0.234,runs/ex07_join.log
+ex07,"join zones on DOLocationID, trips per Borough",forced (SortMergeJoin),1.959,1.122,1.278,1.283,1.122,runs/ex07_join.log
+ex08,1 passes (P1..P1) on fare_amount>10,uncached,0.307,0.175,0.123,0.177,0.123,runs/ex08_cache.log
+ex08,1 passes (P1..P1) on fare_amount>10,cached,4.601,3.682,3.504,3.528,3.504,runs/ex08_cache.log
+ex08,2 passes (P1..P2) on fare_amount>10,uncached,0.578,0.292,0.290,0.236,0.236,runs/ex08_cache.log
+ex08,2 passes (P1..P2) on fare_amount>10,cached,4.080,3.798,3.691,3.781,3.691,runs/ex08_cache.log
+ex08,3 passes (P1..P3) on fare_amount>10,uncached,0.502,0.398,0.399,0.396,0.396,runs/ex08_cache.log
+ex08,3 passes (P1..P3) on fare_amount>10,cached,4.091,3.879,3.958,3.931,3.879,runs/ex08_cache.log
+ex08,4 passes (P1..P4) on fare_amount>10,uncached,0.578,0.505,0.482,0.475,0.475,runs/ex08_cache.log
+ex08,4 passes (P1..P4) on fare_amount>10,cached,4.232,4.169,3.845,4.057,3.845,runs/ex08_cache.log
+ex10,"join+filter+groupBy(Borough,pickup_hour) avg fare","B: baseline: join, then filter, then groupBy (defaults)",1.592,0.345,0.223,0.226,0.223,runs/ex10_faster.log
+ex10,"join+filter+groupBy(Borough,pickup_hour) avg fare",V1: aggregate before the join,0.874,0.353,0.255,0.250,0.250,runs/ex10_faster.log
+ex10,"join+filter+groupBy(Borough,pickup_hour) avg fare",V2: spark.sql.shuffle.partitions=8 (AQE on),0.489,0.242,0.228,0.187,0.187,runs/ex10_faster.log
+ex10,"join+filter+groupBy(Borough,pickup_hour) avg fare",V3: explicit F.broadcast(zones),0.381,0.238,0.242,0.195,0.195,runs/ex10_faster.log
