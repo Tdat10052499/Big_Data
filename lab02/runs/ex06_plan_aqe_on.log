@@ -1,0 +1,79 @@
+Wed Nov 25 16:29:45 UTC 2026
+Exercise 6, setting A: AQE on  (spark.sql.adaptive.enabled=true)
+Plan of the DataFrame of the last scored run, taken after .collect() with explain(mode='formatted').
+
+== Physical Plan ==
+AdaptiveSparkPlan (11)
++- == Final Plan ==
+   * HashAggregate (7)
+   +- AQEShuffleRead (6)
+      +- ShuffleQueryStage (5), Statistics(sizeInBytes=512.0 B, rowCount=16)
+         +- Exchange (4)
+            +- * HashAggregate (3)
+               +- * ColumnarToRow (2)
+                  +- Scan parquet  (1)
++- == Initial Plan ==
+   HashAggregate (10)
+   +- Exchange (9)
+      +- HashAggregate (8)
+         +- Scan parquet  (1)
+
+
+(1) Scan parquet 
+Output [2]: [payment_type#9L, tip_amount#13]
+Batched: true
+Location: InMemoryFileIndex [hdfs://localhost:9000/user/tdat1/nyc/curated_q1]
+ReadSchema: struct<payment_type:bigint,tip_amount:double>
+
+(2) ColumnarToRow [codegen id : 1]
+Input [2]: [payment_type#9L, tip_amount#13]
+
+(3) HashAggregate [codegen id : 1]
+Input [2]: [payment_type#9L, tip_amount#13]
+Keys [1]: [payment_type#9L]
+Functions [1]: [partial_avg(tip_amount#13)]
+Aggregate Attributes [2]: [sum#269, count#270L]
+Results [3]: [payment_type#9L, sum#271, count#272L]
+
+(4) Exchange
+Input [3]: [payment_type#9L, sum#271, count#272L]
+Arguments: hashpartitioning(payment_type#9L, 200), ENSURE_REQUIREMENTS, [plan_id=244]
+
+(5) ShuffleQueryStage
+Output [3]: [payment_type#9L, sum#271, count#272L]
+Arguments: 0
+
+(6) AQEShuffleRead
+Input [3]: [payment_type#9L, sum#271, count#272L]
+Arguments: coalesced
+
+(7) HashAggregate [codegen id : 2]
+Input [3]: [payment_type#9L, sum#271, count#272L]
+Keys [1]: [payment_type#9L]
+Functions [1]: [avg(tip_amount#13)]
+Aggregate Attributes [1]: [avg(tip_amount#13)#265]
+Results [2]: [payment_type#9L, avg(tip_amount#13)#265 AS avg_tip#266]
+
+(8) HashAggregate
+Input [2]: [payment_type#9L, tip_amount#13]
+Keys [1]: [payment_type#9L]
+Functions [1]: [partial_avg(tip_amount#13)]
+Aggregate Attributes [2]: [sum#269, count#270L]
+Results [3]: [payment_type#9L, sum#271, count#272L]
+
+(9) Exchange
+Input [3]: [payment_type#9L, sum#271, count#272L]
+Arguments: hashpartitioning(payment_type#9L, 200), ENSURE_REQUIREMENTS, [plan_id=230]
+
+(10) HashAggregate
+Input [3]: [payment_type#9L, sum#271, count#272L]
+Keys [1]: [payment_type#9L]
+Functions [1]: [avg(tip_amount#13)]
+Aggregate Attributes [1]: [avg(tip_amount#13)#265]
+Results [2]: [payment_type#9L, avg(tip_amount#13)#265 AS avg_tip#266]
+
+(11) AdaptiveSparkPlan
+Output [2]: [payment_type#9L, avg_tip#266]
+Arguments: isFinalPlan=true
+
+

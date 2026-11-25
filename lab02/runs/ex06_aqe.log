@@ -1,0 +1,52 @@
+Wed Nov 25 16:29:37 UTC 2026
+
+  prediction file: ex06_prediction.txt (218 bytes), present before measuring
+  settings: master local[4], spark.sql.shuffle.partitions=200 (default, not changed)
+  A = AQE on  (spark.sql.adaptive.enabled=true)
+  B = AQE off (spark.sql.adaptive.enabled=false)
+
+  round order: A,B | B,A | A,B
+
+  setting                                        warm-up s   run 1 s   run 2 s   run 3 s    best s
+  A AQE on  (spark.sql.adaptive.enabled=true)        1.527     0.253     0.176     0.166     0.166
+  B AQE off (spark.sql.adaptive.enabled=false)       0.869     0.456     0.410     0.351     0.351
+
+  best(on) / best(off) = 0.47
+
+  result rows, setting A (4 rows):
+    payment_type 1   avg_tip 4.200964757401717
+    payment_type 2   avg_tip 0.00018275541123138713
+    payment_type 3   avg_tip 0.006386538763956597
+    payment_type 4   avg_tip 0.01569367846168297
+  result rows, setting B (4 rows):
+    payment_type 1   avg_tip 4.200964757401717
+    payment_type 2   avg_tip 0.00018275541123138713
+    payment_type 3   avg_tip 0.006386538763956597
+    payment_type 4   avg_tip 0.01569367846168297
+  result rows identical between A and B (exact comparison): PASS
+
+  ---- setting A: AQE on  (spark.sql.adaptive.enabled=true)   (plan written to runs/ex06_plan_aqe_on.log) ----
+    isFinalPlan=true appears in the plan: yes
+    AQEShuffleRead appears: yes
+      +- AQEShuffleRead (6)
+      (6) AQEShuffleRead
+    plan line: +- Exchange (4)
+    plan line: +- Exchange (9)
+    plan line: (4) Exchange
+    plan line: Arguments: hashpartitioning(payment_type#9L, 200), ENSURE_REQUIREMENTS, [plan_id=244]
+    plan line: Arguments: coalesced
+    plan line: (9) Exchange
+    plan line: Arguments: hashpartitioning(payment_type#9L, 200), ENSURE_REQUIREMENTS, [plan_id=230]
+    last run (job group ex06-A-last): jobs [11, 10], stage ids [16, 17, 18]
+    post-shuffle stage 18 (attempt 0): 1 tasks, shuffle read records 16  [from http://localhost:4040/api/v1/applications/local-1795624179262/stages]
+
+  ---- setting B: AQE off (spark.sql.adaptive.enabled=false)   (plan written to runs/ex06_plan_aqe_off.log) ----
+    AQEShuffleRead appears: no
+    plan line: +- Exchange (4)
+    plan line: (4) Exchange
+    plan line: Arguments: hashpartitioning(payment_type#9L, 200), ENSURE_REQUIREMENTS, [plan_id=280]
+    last run (job group ex06-B-last): jobs [12], stage ids [19, 20]
+    post-shuffle stage 20 (attempt 0): 200 tasks, shuffle read records 16  [from http://localhost:4040/api/v1/applications/local-1795624179262/stages]
+
+  timings written to out/parts/ex06.csv
+
