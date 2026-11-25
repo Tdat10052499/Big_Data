@@ -1,0 +1,78 @@
+Wed Nov 25 17:48:09 UTC 2026
+reading /home/tdat1/bda/data/raw/yellow_tripdata_2024-01.parquet
+  2,964,624 rows read
+  209,729 rows dropped as not event shaped, 2,754,895 remain
+  limited to the first 180,000 rows
+
+producing to localhost:9092 topic taxi-live
+  rate           1500.0 events per second
+  late fraction  0% of events, pushed back 300 s
+  seed           42
+  press Ctrl+C to stop
+
+  sent     2,000  late       0   1451.4 events/s  elapsed    1.4 s
+  sent     4,000  late       0   1462.0 events/s  elapsed    2.7 s
+  sent     6,000  late       0   1466.7 events/s  elapsed    4.1 s
+  sent     8,000  late       0   1470.8 events/s  elapsed    5.4 s
+  sent    10,000  late       0   1467.7 events/s  elapsed    6.8 s
+  sent    12,000  late       0   1469.4 events/s  elapsed    8.2 s
+  sent    14,000  late       0   1471.9 events/s  elapsed    9.5 s
+  sent    16,000  late       0   1469.9 events/s  elapsed   10.9 s
+  sent    18,000  late       0   1470.4 events/s  elapsed   12.2 s
+  sent    20,000  late       0   1470.7 events/s  elapsed   13.6 s
+  sent    22,000  late       0   1471.0 events/s  elapsed   15.0 s
+  sent    24,000  late       0   1469.6 events/s  elapsed   16.3 s
+  sent    26,000  late       0   1469.9 events/s  elapsed   17.7 s
+  sent    28,000  late       0   1470.7 events/s  elapsed   19.0 s
+  sent    30,000  late       0   1470.3 events/s  elapsed   20.4 s
+  sent    32,000  late       0   1470.0 events/s  elapsed   21.8 s
+  sent    34,000  late       0   1469.9 events/s  elapsed   23.1 s
+  sent    36,000  late       0   1469.9 events/s  elapsed   24.5 s
+  sent    38,000  late       0   1469.9 events/s  elapsed   25.9 s
+  sent    40,000  late       0   1470.1 events/s  elapsed   27.2 s
+  sent    42,000  late       0   1468.5 events/s  elapsed   28.6 s
+  sent    44,000  late       0   1469.0 events/s  elapsed   30.0 s
+  sent    46,000  late       0   1469.2 events/s  elapsed   31.3 s
+  sent    48,000  late       0   1469.3 events/s  elapsed   32.7 s
+  sent    50,000  late       0   1469.6 events/s  elapsed   34.0 s
+  sent    52,000  late       0   1469.9 events/s  elapsed   35.4 s
+  sent    54,000  late       0   1470.2 events/s  elapsed   36.7 s
+  sent    56,000  late       0   1470.5 events/s  elapsed   38.1 s
+  sent    58,000  late       0   1470.9 events/s  elapsed   39.4 s
+  sent    60,000  late       0   1470.9 events/s  elapsed   40.8 s
+  sent    62,000  late       0   1470.4 events/s  elapsed   42.2 s
+  sent    64,000  late       0   1470.4 events/s  elapsed   43.5 s
+  sent    66,000  late       0   1470.5 events/s  elapsed   44.9 s
+  sent    68,000  late       0   1470.7 events/s  elapsed   46.2 s
+  sent    70,000  late       0   1470.9 events/s  elapsed   47.6 s
+  sent    72,000  late       0   1470.9 events/s  elapsed   48.9 s
+  sent    74,000  late       0   1470.7 events/s  elapsed   50.3 s
+  sent    76,000  late       0   1470.7 events/s  elapsed   51.7 s
+  sent    78,000  late       0   1470.7 events/s  elapsed   53.0 s
+  sent    80,000  late       0   1470.9 events/s  elapsed   54.4 s
+  sent    82,000  late       0   1470.4 events/s  elapsed   55.8 s
+  sent    84,000  late       0   1470.5 events/s  elapsed   57.1 s
+  sent    86,000  late       0   1470.6 events/s  elapsed   58.5 s
+  sent    88,000  late       0   1470.7 events/s  elapsed   59.8 s
+  sent    90,000  late       0   1470.8 events/s  elapsed   61.2 s
+  sent    92,000  late       0   1471.0 events/s  elapsed   62.5 s
+  sent    94,000  late       0   1471.2 events/s  elapsed   63.9 s
+  sent    96,000  late       0   1471.3 events/s  elapsed   65.2 s
+  sent    98,000  late       0   1471.6 events/s  elapsed   66.6 s
+  sent   100,000  late       0   1471.7 events/s  elapsed   67.9 s
+  sent   102,000  late       0   1471.4 events/s  elapsed   69.3 s
+  sent   104,000  late       0   1471.4 events/s  elapsed   70.7 s
+  sent   106,000  late       0   1471.4 events/s  elapsed   72.0 s
+
+flushing
+
+  ---- run summary, copy this into your run record ----
+  topic              taxi-live
+  events sent        106,602
+  of which late      0  (0.00% of the 106,602 sent)
+  wall clock         72.4 s
+  achieved rate      1471.4 events per second
+  requested rate     1500.0 events per second
+  late offset        300 s
+  seed               42
+  source             /home/tdat1/bda/data/raw/yellow_tripdata_2024-01.parquet

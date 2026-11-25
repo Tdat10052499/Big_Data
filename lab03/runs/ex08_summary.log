@@ -1,0 +1,55 @@
+Wed Nov 25 17:49:34 UTC 2026
+  Exercise 8 summary, topic taxi-live, producer requested 1,500 events per second
+  the 8 batches = the first 8 non-empty batches in each CSV, in batch order
+
+  trigger 1 s (ex08_t1), topic taxi-live: 9 non-empty batches in the CSV, 8 used
+    batch    rows  rows/s in  rows/s out trigger ms avg lag s  avg lag s precise
+        1   1,620      768.1      1968.4        823       3.1              3.221   topic taxi-live
+        2   1,190     1444.2      3051.3        390       3.2              3.038   topic taxi-live
+        3   1,104     1472.0      3887.3        284       3.4              3.011   topic taxi-live
+        4   1,457     1457.0      5222.2        279       3.5              3.079   topic taxi-live
+        5   1,482     1482.0      6645.7        222       3.5              3.105   topic taxi-live
+        6   1,441     1441.0      7505.2        192       3.5              3.095   topic taxi-live
+        7   1,492     1492.0      6431.0        232       3.5              3.062   topic taxi-live
+        8   1,395     1395.0      6940.3        201       3.5              3.084   topic taxi-live
+    mean rows per batch, topic taxi-live, trigger 1 s:   1,397.6
+    median rows per batch, topic taxi-live, trigger 1 s: 1,449.0
+    mean of avg_lag_s, topic taxi-live, trigger 1 s:          3.400
+    mean of avg_lag_s_precise, topic taxi-live, trigger 1 s:  3.087
+    precise lag first-to-last change (batch 8 minus batch 1), topic taxi-live, trigger 1 s: -0.137 s
+    producer (ex08_t1_producer.log), topic taxi-live: events sent 15,171, achieved rate 1461.1 events per second
+
+  trigger 3 s (ex08_t3), topic taxi-live: 8 non-empty batches in the CSV, 8 used
+    batch    rows  rows/s in  rows/s out trigger ms avg lag s  avg lag s precise
+        1   1,890      806.3      2423.1        780       3.6              3.304   topic taxi-live
+        2   1,312     1489.2      4125.8        318       3.4              3.059   topic taxi-live
+        3   4,430     1476.7     13263.5        334       4.5              4.095   topic taxi-live
+        4   4,363     1454.8     14840.1        294       4.5              4.100   topic taxi-live
+        5   4,441     1480.3      6780.2        655       4.5              4.512   topic taxi-live
+        6   4,409     1469.2     23205.3        190       4.5              4.069   topic taxi-live
+        7   4,392     1464.5     23115.8        190       4.5              4.085   topic taxi-live
+        8   4,395     1465.0     25404.6        173       4.5              4.072   topic taxi-live
+    mean rows per batch, topic taxi-live, trigger 3 s:   3,704.0
+    median rows per batch, topic taxi-live, trigger 3 s: 4,393.5
+    mean of avg_lag_s, topic taxi-live, trigger 3 s:          4.250
+    mean of avg_lag_s_precise, topic taxi-live, trigger 3 s:  3.912
+    precise lag first-to-last change (batch 8 minus batch 1), topic taxi-live, trigger 3 s: +0.768 s
+    producer (ex08_t3_producer.log), topic taxi-live: events sent 32,687, achieved rate 1467.9 events per second
+
+  trigger 10 s (ex08_t10), topic taxi-live: 8 non-empty batches in the CSV, 8 used
+    batch    rows  rows/s in  rows/s out trigger ms avg lag s  avg lag s precise
+        1   1,358      722.0      1603.3        847       3.4              3.161   topic taxi-live
+        2  13,102     1473.5     24173.4        542       7.4              7.057   topic taxi-live
+        3  14,693     1469.4     43214.7        340       8.0              7.614   topic taxi-live
+        4  14,669     1466.9     20289.1        723       8.0              8.036   topic taxi-live
+        5  14,746     1474.6     59459.7        248       8.0              7.578   topic taxi-live
+        6  14,731     1473.1     64327.5        229       8.0              7.598   topic taxi-live
+        7  14,690     1468.9     23466.5        626       8.0              7.985   topic taxi-live
+        8  14,770     1477.1     68064.5        217       8.0              7.588   topic taxi-live
+    mean rows per batch, topic taxi-live, trigger 10 s:   12,844.9
+    median rows per batch, topic taxi-live, trigger 10 s: 14,691.5
+    mean of avg_lag_s, topic taxi-live, trigger 10 s:          7.350
+    mean of avg_lag_s_precise, topic taxi-live, trigger 10 s:  7.077
+    precise lag first-to-last change (batch 8 minus batch 1), topic taxi-live, trigger 10 s: +4.427 s
+    producer (ex08_t10_producer.log), topic taxi-live: events sent 106,602, achieved rate 1471.4 events per second
+
