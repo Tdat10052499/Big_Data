@@ -1,0 +1,22 @@
+Wed Nov 25 18:02:50 UTC 2026
+# end offsets of taxi-live-backlog after the fill (4 producers x 750,000 events)
+$ /opt/kafka/bin/kafka-run-class.sh kafka.tools.GetOffsetShell --bootstrap-server localhost:9092 --topic taxi-live-backlog
+Error: Could not find or load main class kafka.tools.GetOffsetShell
+Caused by: java.lang.ClassNotFoundException: kafka.tools.GetOffsetShell
+exit 1
+$ /opt/kafka/bin/kafka-run-class.sh org.apache.kafka.tools.GetOffsetShell --bootstrap-server localhost:9092 --topic taxi-live-backlog
+taxi-live-backlog:0:879012
+taxi-live-backlog:1:730396
+taxi-live-backlog:2:1390592
+exit 0
+$ /opt/kafka/bin/kafka-get-offsets.sh --bootstrap-server localhost:9092 --topic taxi-live-backlog
+taxi-live-backlog:0:879012
+taxi-live-backlog:1:730396
+taxi-live-backlog:2:1390592
+exit 0
+end offsets of topic taxi-live-backlog, per partition (from the first variant that worked):
+  topic taxi-live-backlog partition 0 end offset 879012
+  topic taxi-live-backlog partition 1 end offset 730396
+  topic taxi-live-backlog partition 2 end offset 1390592
+  sum of end offsets of topic taxi-live-backlog: 3000000
+  check: sum 3000000 equals 3000000 events sent to topic taxi-live-backlog: PASS

@@ -1,0 +1,121 @@
+Wed Nov 25 17:59:24 UTC 2026
+--- 2026-11-25 17:59:24 UTC
+ 17:59:24 up  2:11,  1 user,  load average: 1.73, 0.82, 0.82
+               total        used        free      shared  buff/cache   available
+Mem:           15633        2307       12311           4        1213       13326
+Swap:           4096           0        4096
+top - 17:59:24 up  2:11,  1 user,  load average: 1.73, 0.82, 0.82
+Tasks:  40 total,   1 running,  39 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  2.4 us,  5.4 sy,  0.0 ni, 90.4 id,  0.0 wa,  0.0 hi,  1.8 si,  0.0 st 
+MiB Mem :  15633.9 total,  12292.7 free,   2326.6 used,   1213.4 buff/cache     
+MiB Swap:   4096.0 total,   4096.0 free,      0.0 used.  13307.2 avail Mem 
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+  68894 tdat1     20   0 3746080  38908  21092 S  40.0   0.2   0:00.04 java
+      1 root      20   0   21744  13224   9848 S   0.0   0.1   0:00.63 systemd
+      2 root      20   0    3824   2524   2392 S   0.0   0.0   0:00.01 init-sy+
+      3 root      20   0    3680   2220   2120 S   0.0   0.0   0:00.00 init-wa+
+      8 root      20   0    3856   2456   2316 S   0.0   0.0   0:00.17 init
+     41 root      19  -1   50456  16332  15236 S   0.0   0.1   0:00.28 systemd+
+     91 root      20   0   24684   6460   5208 S   0.0   0.0   0:00.33 systemd+
+    112 systemd+  20   0   21352  13288  11168 S   0.0   0.1   0:00.10 systemd+
+--- 2026-11-25 17:59:29 UTC
+ 17:59:29 up  2:11,  1 user,  load average: 1.75, 0.84, 0.83
+               total        used        free      shared  buff/cache   available
+Mem:           15633        2734       11828           4        1270       12899
+Swap:           4096           0        4096
+top - 17:59:30 up  2:11,  1 user,  load average: 1.75, 0.84, 0.83
+Tasks:  40 total,   2 running,  38 sleeping,   0 stopped,   0 zombie
+%Cpu(s): 23.7 us,  4.1 sy,  0.0 ni, 69.8 id,  0.0 wa,  0.0 hi,  2.4 si,  0.0 st 
+MiB Mem :  15633.9 total,  11788.0 free,   2774.8 used,   1270.6 buff/cache     
+MiB Swap:   4096.0 total,   4096.0 free,      0.0 used.  12859.1 avail Mem 
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+  68894 tdat1     20   0 8544448 417260  24776 S 127.3   2.6   0:09.56 java
+  68966 tdat1     20   0  912636  83700  13732 R  45.5   0.5   0:02.49 python
+  13092 tdat1     20   0 5799124 444456 136356 S   9.1   2.8   1:48.79 claude
+      1 root      20   0   21744  13224   9848 S   0.0   0.1   0:00.63 systemd
+      2 root      20   0    3824   2524   2392 S   0.0   0.0   0:00.01 init-sy+
+      3 root      20   0    3680   2220   2120 S   0.0   0.0   0:00.00 init-wa+
+      8 root      20   0    3856   2456   2316 S   0.0   0.0   0:00.17 init
+     41 root      19  -1   50456  16332  15236 S   0.0   0.1   0:00.28 systemd+
+--- 2026-11-25 17:59:35 UTC
+ 17:59:35 up  2:11,  1 user,  load average: 2.33, 0.98, 0.87
+               total        used        free      shared  buff/cache   available
+Mem:           15633        5091        9455           4        1285       10542
+Swap:           4096           0        4096
+top - 17:59:35 up  2:11,  1 user,  load average: 2.33, 0.98, 0.87
+Tasks:  48 total,   3 running,  45 sleeping,   0 stopped,   0 zombie
+%Cpu(s): 10.8 us,  0.6 sy,  0.0 ni, 86.1 id,  0.0 wa,  0.0 hi,  2.4 si,  0.0 st 
+MiB Mem :  15633.9 total,   9453.9 free,   5093.4 used,   1286.5 buff/cache     
+MiB Swap:   4096.0 total,   4096.0 free,      0.0 used.  10540.5 avail Mem 
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+  69205 tdat1     20   0 3811448 587860  67400 S  50.0   3.7   0:03.83 python
+  69206 tdat1     20   0 3811448 590272  67820 S  50.0   3.7   0:04.02 python
+  69207 tdat1     20   0 3737716 579732  67540 R  50.0   3.6   0:03.95 python
+  69208 tdat1     20   0 3811576 593076  67800 R  50.0   3.7   0:03.87 python
+   1807 tdat1     20   0 3753708 159536  60116 S  10.0   1.0   0:33.21 mongod
+  15671 tdat1     20   0   10.2g 629548  24508 S  10.0   3.9   0:47.87 java
+      1 root      20   0   21744  13224   9848 S   0.0   0.1   0:00.63 systemd
+      2 root      20   0    3824   2524   2392 S   0.0   0.0   0:00.01 init-sy+
+--- 2026-11-25 17:59:40 UTC
+ 17:59:40 up  2:11,  1 user,  load average: 2.31, 0.99, 0.88
+               total        used        free      shared  buff/cache   available
+Mem:           15633        5231        9291           4        1310       10402
+Swap:           4096           0        4096
+top - 17:59:40 up  2:11,  1 user,  load average: 2.31, 0.99, 0.88
+Tasks:  48 total,   4 running,  44 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  8.5 us,  2.4 sy,  0.0 ni, 86.7 id,  0.0 wa,  0.0 hi,  2.4 si,  0.0 st 
+MiB Mem :  15633.9 total,   9289.6 free,   5233.2 used,   1311.2 buff/cache     
+MiB Swap:   4096.0 total,   4096.0 free,      0.0 used.  10400.7 avail Mem 
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+  69205 tdat1     20   0 3811448 588640  67400 R  50.0   3.7   0:06.39 python
+  69206 tdat1     20   0 3811448 591072  67820 R  50.0   3.7   0:06.58 python
+  69208 tdat1     20   0 3811576 593080  67800 S  50.0   3.7   0:06.41 python
+  69207 tdat1     20   0 3737716 580540  67540 R  40.0   3.6   0:06.50 python
+  15671 tdat1     20   0   10.2g 660368  24556 S  20.0   4.1   0:48.71 java
+  13092 tdat1     20   0 5799124 445040 136356 S  10.0   2.8   1:49.22 claude
+  68894 tdat1     20   0   10.7g 720480  25108 S  10.0   4.5   0:28.63 java
+      1 root      20   0   21744  13224   9848 S   0.0   0.1   0:00.63 systemd
+--- 2026-11-25 17:59:45 UTC
+ 17:59:45 up  2:11,  1 user,  load average: 2.36, 1.03, 0.89
+               total        used        free      shared  buff/cache   available
+Mem:           15633        5334        9164           4        1335       10299
+Swap:           4096           0        4096
+top - 17:59:45 up  2:11,  1 user,  load average: 2.36, 1.03, 0.89
+Tasks:  48 total,   3 running,  45 sleeping,   0 stopped,   0 zombie
+%Cpu(s): 11.4 us,  0.6 sy,  0.0 ni, 84.4 id,  0.0 wa,  0.0 hi,  3.6 si,  0.0 st 
+MiB Mem :  15633.9 total,   9163.3 free,   5334.8 used,   1336.3 buff/cache     
+MiB Swap:   4096.0 total,   4096.0 free,      0.0 used.  10299.0 avail Mem 
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+  69205 tdat1     20   0 3811448 588700  67400 S  45.5   3.7   0:08.96 python
+  69206 tdat1     20   0 3811448 591076  67820 R  45.5   3.7   0:09.13 python
+  69207 tdat1     20   0 3737716 580544  67540 S  45.5   3.6   0:09.08 python
+  69208 tdat1     20   0 3811576 593084  67800 R  45.5   3.7   0:08.99 python
+  15671 tdat1     20   0   10.2g 684352  24608 S   9.1   4.3   0:49.40 java
+      1 root      20   0   21744  13224   9848 S   0.0   0.1   0:00.63 systemd
+      2 root      20   0    3824   2524   2392 S   0.0   0.0   0:00.01 init-sy+
+      3 root      20   0    3680   2220   2120 S   0.0   0.0   0:00.00 init-wa+
+--- 2026-11-25 17:59:50 UTC
+ 17:59:50 up  2:11,  1 user,  load average: 2.89, 1.16, 0.93
+               total        used        free      shared  buff/cache   available
+Mem:           15633        5315        9158           4        1360       10318
+Swap:           4096           0        4096
+top - 17:59:50 up  2:11,  1 user,  load average: 2.89, 1.16, 0.93
+Tasks:  48 total,   3 running,  45 sleeping,   0 stopped,   0 zombie
+%Cpu(s): 10.6 us,  1.2 sy,  0.0 ni, 87.6 id,  0.0 wa,  0.0 hi,  0.6 si,  0.0 st 
+MiB Mem :  15633.9 total,   9156.1 free,   5317.5 used,   1361.2 buff/cache     
+MiB Swap:   4096.0 total,   4096.0 free,      0.0 used.  10316.3 avail Mem 
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+  69205 tdat1     20   0 3811448 588708  67400 S  50.0   3.7   0:11.51 python
+  69207 tdat1     20   0 3737716 580544  67540 S  50.0   3.6   0:11.64 python
+  69208 tdat1     20   0 3811576 593084  67800 R  50.0   3.7   0:11.56 python
+  69206 tdat1     20   0 3811448 591076  67820 R  40.0   3.7   0:11.69 python
+  15671 tdat1     20   0   10.2g 684456  24656 S  10.0   4.3   0:50.07 java
+      1 root      20   0   21744  13224   9848 S   0.0   0.1   0:00.63 systemd
+      2 root      20   0    3824   2524   2392 S   0.0   0.0   0:00.01 init-sy+
+      3 root      20   0    3680   2220   2120 S   0.0   0.0   0:00.00 init-wa+

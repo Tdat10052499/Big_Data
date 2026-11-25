@@ -1,0 +1,19 @@
+Wed Nov 25 18:05:09 UTC 2026
+  Part A (live), topic taxi-live, trigger 3 s, k producers at 5,000 events/s each; rule: runs/ex09b_rule.txt
+  batches 2-8 = positions 2..8 of the first 8 non-empty batches of each run
+    k      R         P    P/R         I         O  trig ms  lag b2  lag b8 ups/6  (a)  (b) max load1
+    2  10000    8582.5  0.858    8537.4   62418.0    448.6   3.391   4.091     3  yes   no  1.88/16   topic taxi-live
+    4  20000   17050.9  0.853   17066.4  109637.5    511.4   4.132   4.122     2  yes   no  2.89/16   topic taxi-live
+    8  40000   32670.6  0.817   30723.2  129157.0    825.0   4.092   4.480     3  yes   no  4.57/16   topic taxi-live
+   12  60000   45917.8  0.765   45788.1  121879.1   1120.9   3.745   4.092     3  yes   no 16.73/16   topic taxi-live
+  (a) = (a') of the supplement rule: P < 0.95 R;  max load1 = highest 1-minute load average in runs/ex09b_k<k>_load.log / nproc
+
+  Part B (backlog), topic taxi-live-backlog, trigger 3 s, startingOffsets earliest, maxOffsetsPerTrigger = 3 x R
+        R maxOffsets rows/batch  trig ms max trig         O  (c)
+    15000      45000    44998.0    564.0     1119   98903.2   no   topic taxi-live-backlog
+    30000      90000    89998.0    486.3      701  190919.6   no   topic taxi-live-backlog
+    60000     180000   179998.0    765.7     1055  246545.0   no   topic taxi-live-backlog
+   120000     360000   359998.3   1160.0     1425  316938.8   no   topic taxi-live-backlog
+  query's own limit, topic taxi-live-backlog: not reached up to R = 120000
+
+  Part A, topic taxi-live: (b) reached before (a')? no: (a') first holds at k = 2 (R = 10000); (b) not reached up to k = 12

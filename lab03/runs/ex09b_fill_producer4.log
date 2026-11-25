@@ -1,0 +1,40 @@
+Wed Nov 25 18:01:16 UTC 2026
+reading /home/tdat1/bda/data/raw/yellow_tripdata_2024-01.parquet
+  2,964,624 rows read
+  209,729 rows dropped as not event shaped, 2,754,895 remain
+  limited to the first 750,000 rows
+
+producing to localhost:9092 topic taxi-live-backlog
+  rate           0.0 events per second
+  late fraction  0% of events, pushed back 300 s
+  seed           45
+  press Ctrl+C to stop
+
+  sent    50,000  late       0   8924.2 events/s  elapsed    5.6 s
+  sent   100,000  late       0   8883.4 events/s  elapsed   11.3 s
+  sent   150,000  late       0   8777.9 events/s  elapsed   17.1 s
+  sent   200,000  late       0   8847.0 events/s  elapsed   22.6 s
+  sent   250,000  late       0   8873.7 events/s  elapsed   28.2 s
+  sent   300,000  late       0   8939.7 events/s  elapsed   33.6 s
+  sent   350,000  late       0   8913.3 events/s  elapsed   39.3 s
+  sent   400,000  late       0   8922.5 events/s  elapsed   44.8 s
+  sent   450,000  late       0   8849.8 events/s  elapsed   50.8 s
+  sent   500,000  late       0   8768.2 events/s  elapsed   57.0 s
+  sent   550,000  late       0   8756.7 events/s  elapsed   62.8 s
+  sent   600,000  late       0   8748.3 events/s  elapsed   68.6 s
+  sent   650,000  late       0   8756.2 events/s  elapsed   74.2 s
+  sent   700,000  late       0   8776.6 events/s  elapsed   79.8 s
+  sent   750,000  late       0   8781.7 events/s  elapsed   85.4 s
+
+flushing
+
+  ---- run summary, copy this into your run record ----
+  topic              taxi-live-backlog
+  events sent        750,000
+  of which late      0  (0.00% of the 750,000 sent)
+  wall clock         88.9 s
+  achieved rate      8432.8 events per second
+  requested rate     0.0 events per second
+  late offset        300 s
+  seed               45
+  source             /home/tdat1/bda/data/raw/yellow_tripdata_2024-01.parquet

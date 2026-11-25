@@ -1,0 +1,73 @@
+Wed Nov 25 18:00:05 UTC 2026
+reading /home/tdat1/bda/data/raw/yellow_tripdata_2024-01.parquet
+  2,964,624 rows read
+  209,729 rows dropped as not event shaped, 2,754,895 remain
+  limited to the first 150,000 rows
+
+producing to localhost:9092 topic taxi-live
+  rate           5000.0 events per second
+  late fraction  0% of events, pushed back 300 s
+  seed           44
+  press Ctrl+C to stop
+
+  sent     2,000  late       0   3927.3 events/s  elapsed    0.5 s
+  sent     4,000  late       0   3926.7 events/s  elapsed    1.0 s
+  sent     6,000  late       0   3901.0 events/s  elapsed    1.5 s
+  sent     8,000  late       0   3890.3 events/s  elapsed    2.1 s
+  sent    10,000  late       0   3876.9 events/s  elapsed    2.6 s
+  sent    12,000  late       0   3766.0 events/s  elapsed    3.2 s
+  sent    14,000  late       0   3706.7 events/s  elapsed    3.8 s
+  sent    16,000  late       0   3762.0 events/s  elapsed    4.3 s
+  sent    18,000  late       0   3810.5 events/s  elapsed    4.7 s
+  sent    20,000  late       0   3822.9 events/s  elapsed    5.2 s
+  sent    22,000  late       0   3850.5 events/s  elapsed    5.7 s
+  sent    24,000  late       0   3885.4 events/s  elapsed    6.2 s
+  sent    26,000  late       0   3909.6 events/s  elapsed    6.7 s
+  sent    28,000  late       0   3937.0 events/s  elapsed    7.1 s
+  sent    30,000  late       0   3958.2 events/s  elapsed    7.6 s
+  sent    32,000  late       0   3948.6 events/s  elapsed    8.1 s
+  sent    34,000  late       0   3944.3 events/s  elapsed    8.6 s
+  sent    36,000  late       0   3961.1 events/s  elapsed    9.1 s
+  sent    38,000  late       0   3976.6 events/s  elapsed    9.6 s
+  sent    40,000  late       0   3986.9 events/s  elapsed   10.0 s
+  sent    42,000  late       0   3995.7 events/s  elapsed   10.5 s
+  sent    44,000  late       0   4005.6 events/s  elapsed   11.0 s
+  sent    46,000  late       0   3989.8 events/s  elapsed   11.5 s
+  sent    48,000  late       0   3995.9 events/s  elapsed   12.0 s
+  sent    50,000  late       0   3993.6 events/s  elapsed   12.5 s
+  sent    52,000  late       0   4004.6 events/s  elapsed   13.0 s
+  sent    54,000  late       0   4014.6 events/s  elapsed   13.5 s
+  sent    56,000  late       0   4021.2 events/s  elapsed   13.9 s
+  sent    58,000  late       0   4017.7 events/s  elapsed   14.4 s
+  sent    60,000  late       0   4027.2 events/s  elapsed   14.9 s
+  sent    62,000  late       0   4035.0 events/s  elapsed   15.4 s
+  sent    64,000  late       0   4037.1 events/s  elapsed   15.9 s
+  sent    66,000  late       0   4044.4 events/s  elapsed   16.3 s
+  sent    68,000  late       0   4051.1 events/s  elapsed   16.8 s
+  sent    70,000  late       0   4043.7 events/s  elapsed   17.3 s
+  sent    72,000  late       0   4047.2 events/s  elapsed   17.8 s
+  sent    74,000  late       0   4050.7 events/s  elapsed   18.3 s
+  sent    76,000  late       0   4056.3 events/s  elapsed   18.7 s
+  sent    78,000  late       0   4061.8 events/s  elapsed   19.2 s
+  sent    80,000  late       0   4067.5 events/s  elapsed   19.7 s
+  sent    82,000  late       0   4065.8 events/s  elapsed   20.2 s
+  sent    84,000  late       0   4063.3 events/s  elapsed   20.7 s
+  sent    86,000  late       0   4066.8 events/s  elapsed   21.1 s
+  sent    88,000  late       0   4071.7 events/s  elapsed   21.6 s
+  sent    90,000  late       0   4076.3 events/s  elapsed   22.1 s
+  sent    92,000  late       0   4079.0 events/s  elapsed   22.6 s
+  sent    94,000  late       0   4083.3 events/s  elapsed   23.0 s
+  sent    96,000  late       0   4088.0 events/s  elapsed   23.5 s
+
+flushing
+
+  ---- run summary, copy this into your run record ----
+  topic              taxi-live
+  events sent        96,162
+  of which late      0  (0.00% of the 96,162 sent)
+  wall clock         23.5 s
+  achieved rate      4087.1 events per second
+  requested rate     5000.0 events per second
+  late offset        300 s
+  seed               44
+  source             /home/tdat1/bda/data/raw/yellow_tripdata_2024-01.parquet

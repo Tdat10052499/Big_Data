@@ -1,0 +1,23 @@
+Wed Nov 25 17:59:24 UTC 2026
+:: loading settings :: url = jar:file:/opt/spark/jars/ivy-2.5.3.jar!/org/apache/ivy/core/settings/ivysettings.xml
+  topic taxi-live
+  trigger 3 seconds
+  checkpoint hdfs://localhost:9000/user/tdat1/nyc/stream/ck/latency_ex09b_k4
+  startingOffsets latest
+  maxOffsetsPerTrigger none
+
+  watching 8 batches at a 3 second trigger, topic taxi-live
+
+   batch    rows  rows/s in  rows/s out  trigger ms  avg lag s  max lag s  avg lag s (ms prec)  max lag s (ms prec)   topic taxi-live
+       1  21,151       8413       13178       1,605        3.6          7                3.305                6.380   topic taxi-live
+       2  49,722      16574       71749         693        4.5          8                4.132                8.128   topic taxi-live
+       3  50,677      16892      112866         449        4.5          8                4.105                8.100   topic taxi-live
+       4  51,843      17281       62840         825        4.5          8                4.095                8.099   topic taxi-live
+       5  51,756      17246      126234         410        4.5          8                4.106                8.098   topic taxi-live
+       6  51,798      17272      134540         385        4.5          8                4.078                8.049   topic taxi-live
+       7  51,179      17060      152773         335        4.5          8                4.064                8.070   topic taxi-live
+       8  51,420      17140      106460         483        4.5          8                4.122                8.097   topic taxi-live
+
+  wrote /home/tdat1/Big_Data/lab03/out/latency_parts/ex09b_k4.csv
+
+spark-submit exit 0
