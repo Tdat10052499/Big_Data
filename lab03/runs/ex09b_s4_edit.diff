@@ -1,0 +1,37 @@
+diff --git a/lab03/src/s4_latency.py b/lab03/src/s4_latency.py
+index 911d00e..684bf3e 100644
+--- a/lab03/src/s4_latency.py
++++ b/lab03/src/s4_latency.py
+@@ -41,20 +41,26 @@ STREAM = "hdfs://localhost:9000/user/tdat1/nyc/stream"
+ CKPT = f"{STREAM}/ck/latency_{TAG}"
+ BATCHES = int(_opt("--batches", "8"))
+ PARTS = Path(__file__).resolve().parent.parent / "out" / "latency_parts"
++STARTING = _opt("--starting", "latest")
++MAX_OFFSETS = _opt("--max-offsets", None)
+ 
+ print(f"  topic {TOPIC}")
+ print(f"  trigger {TRIGGER} seconds")
+-print(f"  checkpoint {CKPT}", flush=True)
++print(f"  checkpoint {CKPT}")
++print(f"  startingOffsets {STARTING}")
++print(f"  maxOffsetsPerTrigger {MAX_OFFSETS if MAX_OFFSETS is not None else 'none'}", flush=True)
+ 
+ subprocess.run(["/opt/hadoop/bin/hdfs", "dfs", "-rm", "-r", "-f", CKPT], capture_output=True)
+ 
+ spark = spark_session("lab03-latency")
+ 
+-raw = (spark.readStream.format("kafka")
+-       .option("kafka.bootstrap.servers", BOOTSTRAP)
+-       .option("subscribe", TOPIC)
+-       .option("startingOffsets", "latest")
+-       .load())
++reader = (spark.readStream.format("kafka")
++          .option("kafka.bootstrap.servers", BOOTSTRAP)
++          .option("subscribe", TOPIC)
++          .option("startingOffsets", STARTING))
++if MAX_OFFSETS is not None:
++    reader = reader.option("maxOffsetsPerTrigger", int(MAX_OFFSETS))
++raw = reader.load()
+ 
+ trips = (raw.select(F.from_json(F.col("value").cast("string"), SCHEMA).alias("t"))
+             .select("t.*")
