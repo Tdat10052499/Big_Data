@@ -1,0 +1,8 @@
+Wed Nov 25 17:24:31 UTC 2026
+$ kafka-topics.sh --bootstrap-server localhost:9092 --create --topic taxi-trips --partitions 3 --replication-factor 1
+Created topic taxi-trips.
+$ kafka-topics.sh --bootstrap-server localhost:9092 --describe --topic taxi-trips
+Topic: taxi-trips	TopicId: muYvgac0Qiyc-wVOJEILLA	PartitionCount: 3	ReplicationFactor: 1	Configs: segment.bytes=1073741824
+	Topic: taxi-trips	Partition: 0	Leader: 1	Replicas: 1	Isr: 1	Elr: 	LastKnownElr: 
+	Topic: taxi-trips	Partition: 1	Leader: 1	Replicas: 1	Isr: 1	Elr: 	LastKnownElr: 
+	Topic: taxi-trips	Partition: 2	Leader: 1	Replicas: 1	Isr: 1	Elr: 	LastKnownElr: 
