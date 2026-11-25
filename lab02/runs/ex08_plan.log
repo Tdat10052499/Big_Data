@@ -1,0 +1,88 @@
+Wed Nov 25 16:51:58 UTC 2026
+
+  settings: master local[4], spark.sql.adaptive.enabled=true, spark.sql.shuffle.partitions=200
+  spark.driver.memory = not set
+  MemoryStore capacity (REST /executors, executor driver, maxMemory): 455,501,414 bytes = 434.4 MiB
+  f = curated_q1.filter(fare_amount > 10); passes: P1 count(*); P2 avg fare_amount by PULocationID; P3 sum tip_amount by payment_type; P4 max trip_distance by pickup_hour
+  cache empty at start: True
+
+  ==== (a) P2 on the uncached f: 258 result rows; final executed plan (after .collect()) ====
+AdaptiveSparkPlan isFinalPlan=true
++- == Final Plan ==
+   *(2) HashAggregate(keys=[PULocationID#7], functions=[avg(fare_amount#10)], output=[PULocationID#7, avg(fare_amount)#90])
+   +- AQEShuffleRead coalesced
+      +- ShuffleQueryStage 0
+         +- Exchange hashpartitioning(PULocationID#7, 200), ENSURE_REQUIREMENTS, [plan_id=38]
+            +- *(1) HashAggregate(keys=[PULocationID#7], functions=[partial_avg(fare_amount#10)], output=[PULocationID#7, sum#95, count#96L])
+               +- *(1) Filter (isnotnull(fare_amount#10) AND (fare_amount#10 > 10.0))
+                  +- *(1) ColumnarToRow
+                     +- FileScan parquet [PULocationID#7,fare_amount#10] Batched: true, DataFilters: [isnotnull(fare_amount#10), (fare_amount#10 > 10.0)], Format: Parquet, Location: InMemoryFileIndex(1 paths)[hdfs://localhost:9000/user/tdat1/nyc/curated_q1], PartitionFilters: [], PushedFilters: [IsNotNull(fare_amount), GreaterThan(fare_amount,10.0)], ReadSchema: struct<PULocationID:int,fare_amount:double>
++- == Initial Plan ==
+   HashAggregate(keys=[PULocationID#7], functions=[avg(fare_amount#10)], output=[PULocationID#7, avg(fare_amount)#90])
+   +- Exchange hashpartitioning(PULocationID#7, 200), ENSURE_REQUIREMENTS, [plan_id=20]
+      +- HashAggregate(keys=[PULocationID#7], functions=[partial_avg(fare_amount#10)], output=[PULocationID#7, sum#95, count#96L])
+         +- Filter (isnotnull(fare_amount#10) AND (fare_amount#10 > 10.0))
+            +- FileScan parquet [PULocationID#7,fare_amount#10] Batched: true, DataFilters: [isnotnull(fare_amount#10), (fare_amount#10 > 10.0)], Format: Parquet, Location: InMemoryFileIndex(1 paths)[hdfs://localhost:9000/user/tdat1/nyc/curated_q1], PartitionFilters: [], PushedFilters: [IsNotNull(fare_amount), GreaterThan(fare_amount,10.0)], ReadSchema: struct<PULocationID:int,fare_amount:double>
+
+
+  FileScan parquet line(s):
+    +- FileScan parquet [PULocationID#7,fare_amount#10] Batched: true, DataFilters: [isnotnull(fare_amount#10), (fare_amount#10 > 10.0)], Format: Parquet, Location: InMemoryFileIndex(1 paths)[hdfs://localhost:9000/user/tdat1/nyc/curated_q1], PartitionFilters: [], PushedFilters: [IsNotNull(fare_amount), GreaterThan(fare_amount,10.0)], ReadSchema: struct<PULocationID:int,fare_amount:double>
+    +- FileScan parquet [PULocationID#7,fare_amount#10] Batched: true, DataFilters: [isnotnull(fare_amount#10), (fare_amount#10 > 10.0)], Format: Parquet, Location: InMemoryFileIndex(1 paths)[hdfs://localhost:9000/user/tdat1/nyc/curated_q1], PartitionFilters: [], PushedFilters: [IsNotNull(fare_amount), GreaterThan(fare_amount,10.0)], ReadSchema: struct<PULocationID:int,fare_amount:double>
+  ReadSchema: struct<PULocationID:int,fare_amount:double>
+  columns in that ReadSchema: 2 (PULocationID, fare_amount)
+  uncached plan contains FileScan parquet: yes; contains InMemoryTableScan: no
+
+  ==== (b) f.cache(); P1 filled the cache (count 5,521,025); P2 on the cached f: 258 result rows; final executed plan (after .collect()) ====
+AdaptiveSparkPlan isFinalPlan=true
++- == Final Plan ==
+   *(2) HashAggregate(keys=[PULocationID#7], functions=[avg(fare_amount#10)], output=[PULocationID#7, avg(fare_amount)#811])
+   +- AQEShuffleRead coalesced
+      +- ShuffleQueryStage 1
+         +- Exchange hashpartitioning(PULocationID#7, 200), ENSURE_REQUIREMENTS, [plan_id=152]
+            +- *(1) HashAggregate(keys=[PULocationID#7], functions=[partial_avg(fare_amount#10)], output=[PULocationID#7, sum#1146, count#1147L])
+               +- TableCacheQueryStage 0
+                  +- InMemoryTableScan [PULocationID#7, fare_amount#10]
+                        +- InMemoryRelation [VendorID#0, tpep_pickup_datetime#1, tpep_dropoff_datetime#2, passenger_count#3L, trip_distance#4, RatecodeID#5L, store_and_fwd_flag#6, PULocationID#7, DOLocationID#8, payment_type#9L, fare_amount#10, extra#11, mta_tax#12, tip_amount#13, tolls_amount#14, improvement_surcharge#15, total_amount#16, congestion_surcharge#17, Airport_fee#18, pickup_date#19, pickup_hour#20, trip_minutes#21], StorageLevel(disk, memory, deserialized, 1 replicas)
+                              +- *(1) Filter (isnotnull(fare_amount#10) AND (fare_amount#10 > 10.0))
+                                 +- *(1) ColumnarToRow
+                                    +- FileScan parquet [VendorID#0,tpep_pickup_datetime#1,tpep_dropoff_datetime#2,passenger_count#3L,trip_distance#4,RatecodeID#5L,store_and_fwd_flag#6,PULocationID#7,DOLocationID#8,payment_type#9L,fare_amount#10,extra#11,mta_tax#12,tip_amount#13,tolls_amount#14,improvement_surcharge#15,total_amount#16,congestion_surcharge#17,Airport_fee#18,pickup_date#19,pickup_hour#20,trip_minutes#21] Batched: true, DataFilters: [isnotnull(fare_amount#10), (fare_amount#10 > 10.0)], Format: Parquet, Location: InMemoryFileIndex(1 paths)[hdfs://localhost:9000/user/tdat1/nyc/curated_q1], PartitionFilters: [], PushedFilters: [IsNotNull(fare_amount), GreaterThan(fare_amount,10.0)], ReadSchema: struct<VendorID:int,tpep_pickup_datetime:timestamp_ntz,tpep_dropoff_datetime:timestamp_ntz,passen...
++- == Initial Plan ==
+   HashAggregate(keys=[PULocationID#7], functions=[avg(fare_amount#10)], output=[PULocationID#7, avg(fare_amount)#811])
+   +- Exchange hashpartitioning(PULocationID#7, 200), ENSURE_REQUIREMENTS, [plan_id=126]
+      +- HashAggregate(keys=[PULocationID#7], functions=[partial_avg(fare_amount#10)], output=[PULocationID#7, sum#1146, count#1147L])
+         +- InMemoryTableScan [PULocationID#7, fare_amount#10]
+               +- InMemoryRelation [VendorID#0, tpep_pickup_datetime#1, tpep_dropoff_datetime#2, passenger_count#3L, trip_distance#4, RatecodeID#5L, store_and_fwd_flag#6, PULocationID#7, DOLocationID#8, payment_type#9L, fare_amount#10, extra#11, mta_tax#12, tip_amount#13, tolls_amount#14, improvement_surcharge#15, total_amount#16, congestion_surcharge#17, Airport_fee#18, pickup_date#19, pickup_hour#20, trip_minutes#21], StorageLevel(disk, memory, deserialized, 1 replicas)
+                     +- *(1) Filter (isnotnull(fare_amount#10) AND (fare_amount#10 > 10.0))
+                        +- *(1) ColumnarToRow
+                           +- FileScan parquet [VendorID#0,tpep_pickup_datetime#1,tpep_dropoff_datetime#2,passenger_count#3L,trip_distance#4,RatecodeID#5L,store_and_fwd_flag#6,PULocationID#7,DOLocationID#8,payment_type#9L,fare_amount#10,extra#11,mta_tax#12,tip_amount#13,tolls_amount#14,improvement_surcharge#15,total_amount#16,congestion_surcharge#17,Airport_fee#18,pickup_date#19,pickup_hour#20,trip_minutes#21] Batched: true, DataFilters: [isnotnull(fare_amount#10), (fare_amount#10 > 10.0)], Format: Parquet, Location: InMemoryFileIndex(1 paths)[hdfs://localhost:9000/user/tdat1/nyc/curated_q1], PartitionFilters: [], PushedFilters: [IsNotNull(fare_amount), GreaterThan(fare_amount,10.0)], ReadSchema: struct<VendorID:int,tpep_pickup_datetime:timestamp_ntz,tpep_dropoff_datetime:timestamp_ntz,passen...
+
+
+  lines containing InMemoryTableScan or InMemoryRelation:
+    +- InMemoryTableScan [PULocationID#7, fare_amount#10]
+    +- InMemoryRelation [VendorID#0, tpep_pickup_datetime#1, tpep_dropoff_datetime#2, passenger_count#3L, trip_distance#4, RatecodeID#5L, store_and_fwd_flag#6, PULocationID#7, DOLocationID#8, payment_type#9L, fare_amount#10, extra#11, mta_tax#12, tip_amount#13, tolls_amount#14, improvement_surcharge#15, total_amount#16, congestion_surcharge#17, Airport_fee#18, pickup_date#19, pickup_hour#20, trip_minutes#21], StorageLevel(disk, memory, deserialized, 1 replicas)
+    +- InMemoryTableScan [PULocationID#7, fare_amount#10]
+    +- InMemoryRelation [VendorID#0, tpep_pickup_datetime#1, tpep_dropoff_datetime#2, passenger_count#3L, trip_distance#4, RatecodeID#5L, store_and_fwd_flag#6, PULocationID#7, DOLocationID#8, payment_type#9L, fare_amount#10, extra#11, mta_tax#12, tip_amount#13, tolls_amount#14, improvement_surcharge#15, total_amount#16, congestion_surcharge#17, Airport_fee#18, pickup_date#19, pickup_hour#20, trip_minutes#21], StorageLevel(disk, memory, deserialized, 1 replicas)
+  columns held by the cache (InMemoryRelation, first [...] list): 22
+    [VendorID#0, tpep_pickup_datetime#1, tpep_dropoff_datetime#2, passenger_count#3L, trip_distance#4, RatecodeID#5L, store_and_fwd_flag#6, PULocationID#7, DOLocationID#8, payment_type#9L, fare_amount#10, extra#11, mta_tax#12, tip_amount#13, tolls_amount#14, improvement_surcharge#15, total_amount#16, congestion_surcharge#17, Airport_fee#18, pickup_date#19, pickup_hour#20, trip_minutes#21]
+  cached plan contains InMemoryTableScan: yes; contains FileScan parquet: yes
+  results of P2 equal uncached vs cached (sorted, exact): PASS
+
+  ==== (c) storage, from http://localhost:4040/api/v1/applications/local-1795625521762/storage/rdd ====
+  RDD id 13
+    name: *(1) Filter (isnotnull(fare_amount#10) AND (fare_amount#10 > 10.0))
++- *(1) ColumnarToRow
+   +- FileScan parquet [VendorID#0,tpep_pickup_datetime#1,tpep_dropoff_datetime#2,passenger_count#3L,trip_distance#4,RatecodeID#5L,store_and_fwd_flag#6,PULocationID#7,DOLocationID#8,payment_type#9L,fare_amount#10,extra#11,mta_tax#12,tip_amount#13,tolls_amount#14,improvement_surcharge#15,total_amount#16,congestion_surcharge#17,Airport_fee#18,pickup_date#19,pickup_hour#20,trip_minutes#21] Batched: true, DataFilters: [isnotnull(fare_amount#10), (fare_amount#10 > 10.0)], Format: Parquet, Location: InMemoryFileIndex(1 paths)[hdfs://localhost:9000/user/tdat1/nyc/curated_q1], PartitionFilters: [], PushedFilters: [IsNotNull(fare_amount), GreaterThan(fare_amount,10.0)], ReadSchema: struct<VendorID:int,tpep_pickup_datetime:timestamp_ntz,tpep_dropoff_datetime:timestamp_ntz,passen...
+
+    storage level: Disk Memory Deserialized 1x Replicated
+    cached partitions: 4 / 4
+    memoryUsed: 75,361,104 bytes = 71.9 MiB
+    diskUsed:   176,059,369 bytes = 167.9 MiB
+    fully cached (numCachedPartitions == numPartitions): PASS
+    data distribution 10.255.255.254:45491: memoryUsed 75,361,104 bytes, memoryRemaining 379,896,204 bytes, diskUsed 176,059,369 bytes
+
+  screenshot: figures/lab02_ex08_storage.png (Storage tab)
+  screenshot: figures/lab02_ex08_storage_detail.png (RDD 13 details page)
+
+  cache empty at end: True
+  This run measures no time; it records plans and cache size only.
+
