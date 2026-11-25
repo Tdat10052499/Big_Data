@@ -1,0 +1,21 @@
+Wed Nov 25 16:28:20 UTC 2026
+
+  prediction file: ex05_prediction.txt (218 bytes), present before measuring
+  settings: master local[4], spark.sql.adaptive.enabled=false
+
+  plan with spark.sql.shuffle.partitions=2 (Exchange lines):
+    +- Exchange SinglePartition, ENSURE_REQUIREMENTS, [plan_id=39]
+    +- Exchange hashpartitioning(PULocationID#7, DOLocationID#8, pickup_hour#20, 2), ENSURE_REQUIREMENTS, [plan_id=34]
+  plan with spark.sql.shuffle.partitions=8 (Exchange lines):
+    +- Exchange SinglePartition, ENSURE_REQUIREMENTS, [plan_id=97]
+    +- Exchange hashpartitioning(PULocationID#7, DOLocationID#8, pickup_hour#20, 8), ENSURE_REQUIREMENTS, [plan_id=92]
+
+  groups produced by the wide aggregation: 230,729
+  round order: 2,8 | 8,2 | 2,8
+
+  shuffle partitions  warm-up s   run 1 s   run 2 s   run 3 s    best s
+                   2      1.725     0.538     0.490     0.444     0.444
+                   8      0.665     0.453     0.456     0.368     0.368
+
+  best(2) / best(8) = 1.21
+
