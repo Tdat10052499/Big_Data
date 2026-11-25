@@ -1,0 +1,42 @@
+Wed Nov 25 17:37:04 UTC 2026
+:: loading settings :: url = jar:file:/opt/spark/jars/ivy-2.5.3.jar!/org/apache/ivy/core/settings/ivysettings.xml
+
+  lateness_s = cast(sent_at as double) - cast(event_time as double), millisecond precision
+  events read from topic taxi-trips: 20,000
+  percentiles are exact (Spark SQL percentile, not percentile_approx)
+
+  all events of the 20,000 events in topic taxi-trips: count 20,000  (100.00% of the 20,000 events in topic taxi-trips)
+    min lateness_s     0.001   topic taxi-trips, all events of the 20,000 events in topic taxi-trips
+    median lateness_s  2.954   topic taxi-trips, all events of the 20,000 events in topic taxi-trips
+    p95 lateness_s     641.000   topic taxi-trips, all events of the 20,000 events in topic taxi-trips
+    p99 lateness_s     657.000   topic taxi-trips, all events of the 20,000 events in topic taxi-trips
+    max lateness_s     660.000   topic taxi-trips, all events of the 20,000 events in topic taxi-trips
+  is_late = true, of the 20,000 events in topic taxi-trips: count 3,007  (15.04% of the 20,000 events in topic taxi-trips)
+    min lateness_s     600.000   topic taxi-trips, is_late = true, of the 20,000 events in topic taxi-trips
+    median lateness_s  631.000   topic taxi-trips, is_late = true, of the 20,000 events in topic taxi-trips
+    p95 lateness_s     657.700   topic taxi-trips, is_late = true, of the 20,000 events in topic taxi-trips
+    p99 lateness_s     660.000   topic taxi-trips, is_late = true, of the 20,000 events in topic taxi-trips
+    max lateness_s     660.000   topic taxi-trips, is_late = true, of the 20,000 events in topic taxi-trips
+  is_late = false, of the 20,000 events in topic taxi-trips: count 16,993  (84.97% of the 20,000 events in topic taxi-trips)
+    min lateness_s     0.001   topic taxi-trips, is_late = false, of the 20,000 events in topic taxi-trips
+    median lateness_s  2.519   topic taxi-trips, is_late = false, of the 20,000 events in topic taxi-trips
+    p95 lateness_s     4.758   topic taxi-trips, is_late = false, of the 20,000 events in topic taxi-trips
+    p99 lateness_s     4.952   topic taxi-trips, is_late = false, of the 20,000 events in topic taxi-trips
+    max lateness_s     4.999   topic taxi-trips, is_late = false, of the 20,000 events in topic taxi-trips
+
+  candidate watermarks, share of events each would discard, as % of the 20,000 events in topic taxi-trips
+  (a) simple: events with lateness_s > W
+  (b) arrival-order: events in Kafka timestamp, partition, offset order; an event is discarded
+      if its event_time < (running max event_time of the events before it) - W.
+      This ignores Spark's per-batch watermark granularity (Spark advances the watermark
+      only between micro-batches), so it is an estimate, not what a query would report.
+         W  (a) events  (a) share  (b) events  (b) share
+     1 min       3,007    15.04%       3,007    15.04%   of the 20,000 events in topic taxi-trips
+     2 min       3,007    15.04%       3,007    15.04%   of the 20,000 events in topic taxi-trips
+     5 min       3,007    15.04%       3,007    15.04%   of the 20,000 events in topic taxi-trips
+    10 min       2,949    14.74%       2,949    14.74%   of the 20,000 events in topic taxi-trips
+    11 min           0     0.00%           0     0.00%   of the 20,000 events in topic taxi-trips
+    12 min           0     0.00%           0     0.00%   of the 20,000 events in topic taxi-trips
+    15 min           0     0.00%           0     0.00%   of the 20,000 events in topic taxi-trips
+
+spark-submit exit 0
