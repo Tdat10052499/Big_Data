@@ -1,0 +1,72 @@
+Wed Nov 25 16:31:10 UTC 2026
+Exercise 7: final executed plans (executedPlan().toString(), taken after .collect() on the DataFrame of the last scored run)
+
+==== auto (BroadcastHashJoin) ====
+AdaptiveSparkPlan isFinalPlan=true
++- == Final Plan ==
+   *(3) HashAggregate(keys=[Borough#62], functions=[count(1)], output=[Borough#62, trips#757L])
+   +- AQEShuffleRead coalesced
+      +- ShuffleQueryStage 1
+         +- Exchange hashpartitioning(Borough#62, 200), ENSURE_REQUIREMENTS, [plan_id=1226]
+            +- *(2) HashAggregate(keys=[Borough#62], functions=[partial_count(1)], output=[Borough#62, count#761L])
+               +- *(2) Project [Borough#62]
+                  +- *(2) BroadcastHashJoin [DOLocationID#8], [LocationID#69], LeftOuter, BuildRight, false
+                     :- *(2) ColumnarToRow
+                     :  +- FileScan parquet [DOLocationID#8] Batched: true, DataFilters: [], Format: Parquet, Location: InMemoryFileIndex(1 paths)[hdfs://localhost:9000/user/tdat1/nyc/curated_q1], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<DOLocationID:int>
+                     +- BroadcastQueryStage 0
+                        +- BroadcastExchange HashedRelationBroadcastMode(List(cast(input[0, int, true] as bigint)),false), [plan_id=1175]
+                           +- *(1) Project [cast(LocationID#61 as int) AS LocationID#69, Borough#62]
+                              +- *(1) Filter isnotnull(cast(LocationID#61 as int))
+                                 +- FileScan csv [LocationID#61,Borough#62] Batched: false, DataFilters: [isnotnull(cast(LocationID#61 as int))], Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://localhost:9000/user/tdat1/nyc/ref/taxi_zone_lookup.csv], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<LocationID:string,Borough:string>
++- == Initial Plan ==
+   HashAggregate(keys=[Borough#62], functions=[count(1)], output=[Borough#62, trips#757L])
+   +- Exchange hashpartitioning(Borough#62, 200), ENSURE_REQUIREMENTS, [plan_id=1154]
+      +- HashAggregate(keys=[Borough#62], functions=[partial_count(1)], output=[Borough#62, count#761L])
+         +- Project [Borough#62]
+            +- BroadcastHashJoin [DOLocationID#8], [LocationID#69], LeftOuter, BuildRight, false
+               :- FileScan parquet [DOLocationID#8] Batched: true, DataFilters: [], Format: Parquet, Location: InMemoryFileIndex(1 paths)[hdfs://localhost:9000/user/tdat1/nyc/curated_q1], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<DOLocationID:int>
+               +- BroadcastExchange HashedRelationBroadcastMode(List(cast(input[0, int, true] as bigint)),false), [plan_id=1149]
+                  +- Project [cast(LocationID#61 as int) AS LocationID#69, Borough#62]
+                     +- Filter isnotnull(cast(LocationID#61 as int))
+                        +- FileScan csv [LocationID#61,Borough#62] Batched: false, DataFilters: [isnotnull(cast(LocationID#61 as int))], Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://localhost:9000/user/tdat1/nyc/ref/taxi_zone_lookup.csv], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<LocationID:string,Borough:string>
+
+
+==== forced (SortMergeJoin) ====
+AdaptiveSparkPlan isFinalPlan=true
++- == Final Plan ==
+   *(6) HashAggregate(keys=[Borough#62], functions=[count(1)], output=[Borough#62, trips#843L])
+   +- AQEShuffleRead coalesced
+      +- ShuffleQueryStage 2
+         +- Exchange hashpartitioning(Borough#62, 200), ENSURE_REQUIREMENTS, [plan_id=1418]
+            +- *(5) HashAggregate(keys=[Borough#62], functions=[partial_count(1)], output=[Borough#62, count#847L])
+               +- *(5) Project [Borough#62]
+                  +- *(5) SortMergeJoin [DOLocationID#8], [LocationID#69], LeftOuter
+                     :- *(3) Sort [DOLocationID#8 ASC NULLS FIRST], false, 0
+                     :  +- AQEShuffleRead coalesced
+                     :     +- ShuffleQueryStage 0
+                     :        +- Exchange hashpartitioning(DOLocationID#8, 200), ENSURE_REQUIREMENTS, [plan_id=1312]
+                     :           +- *(1) ColumnarToRow
+                     :              +- FileScan parquet [DOLocationID#8] Batched: true, DataFilters: [], Format: Parquet, Location: InMemoryFileIndex(1 paths)[hdfs://localhost:9000/user/tdat1/nyc/curated_q1], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<DOLocationID:int>
+                     +- *(4) Sort [LocationID#69 ASC NULLS FIRST], false, 0
+                        +- AQEShuffleRead coalesced
+                           +- ShuffleQueryStage 1
+                              +- Exchange hashpartitioning(LocationID#69, 200), ENSURE_REQUIREMENTS, [plan_id=1324]
+                                 +- *(2) Project [cast(LocationID#61 as int) AS LocationID#69, Borough#62]
+                                    +- *(2) Filter isnotnull(cast(LocationID#61 as int))
+                                       +- FileScan csv [LocationID#61,Borough#62] Batched: false, DataFilters: [isnotnull(cast(LocationID#61 as int))], Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://localhost:9000/user/tdat1/nyc/ref/taxi_zone_lookup.csv], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<LocationID:string,Borough:string>
++- == Initial Plan ==
+   HashAggregate(keys=[Borough#62], functions=[count(1)], output=[Borough#62, trips#843L])
+   +- Exchange hashpartitioning(Borough#62, 200), ENSURE_REQUIREMENTS, [plan_id=1283]
+      +- HashAggregate(keys=[Borough#62], functions=[partial_count(1)], output=[Borough#62, count#847L])
+         +- Project [Borough#62]
+            +- SortMergeJoin [DOLocationID#8], [LocationID#69], LeftOuter
+               :- Sort [DOLocationID#8 ASC NULLS FIRST], false, 0
+               :  +- Exchange hashpartitioning(DOLocationID#8, 200), ENSURE_REQUIREMENTS, [plan_id=1275]
+               :     +- FileScan parquet [DOLocationID#8] Batched: true, DataFilters: [], Format: Parquet, Location: InMemoryFileIndex(1 paths)[hdfs://localhost:9000/user/tdat1/nyc/curated_q1], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<DOLocationID:int>
+               +- Sort [LocationID#69 ASC NULLS FIRST], false, 0
+                  +- Exchange hashpartitioning(LocationID#69, 200), ENSURE_REQUIREMENTS, [plan_id=1276]
+                     +- Project [cast(LocationID#61 as int) AS LocationID#69, Borough#62]
+                        +- Filter isnotnull(cast(LocationID#61 as int))
+                           +- FileScan csv [LocationID#61,Borough#62] Batched: false, DataFilters: [isnotnull(cast(LocationID#61 as int))], Format: CSV, Location: InMemoryFileIndex(1 paths)[hdfs://localhost:9000/user/tdat1/nyc/ref/taxi_zone_lookup.csv], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<LocationID:string,Borough:string>
+
+

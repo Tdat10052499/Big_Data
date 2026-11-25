@@ -1,0 +1,47 @@
+Wed Nov 25 16:30:56 UTC 2026
+
+  prediction file: ex07_prediction.txt (218 bytes), present before measuring
+  settings: master local[4]
+    spark.sql.autoBroadcastJoinThreshold = 10485760b
+    spark.sql.adaptive.autoBroadcastJoinThreshold = None
+    spark.sql.adaptive.enabled = true
+    spark.sql.shuffle.partitions = 200
+
+  auto run done; final plan contains isFinalPlan=true: yes
+  join operator chosen automatically (final plan): BroadcastHashJoin
+  forced: sort merge join, because auto is BroadcastHashJoin; set spark.sql.autoBroadcastJoinThreshold=-1 and spark.sql.adaptive.autoBroadcastJoinThreshold=-1
+
+  round order: auto,forced | forced,auto | auto,forced
+
+  strategy                       warm-up s   run 1 s   run 2 s   run 3 s    best s
+  auto (BroadcastHashJoin)           0.421     0.307     0.249     0.234     0.234
+  forced (SortMergeJoin)             1.959     1.122     1.278     1.283     1.122
+
+  slower: forced (SortMergeJoin), faster: auto (BroadcastHashJoin)
+  best(slower) / best(faster) = 4.80
+
+  results identical between auto and forced: PASS
+  trips per Borough (dropoff zone):
+    Bronx                             46,125
+    Brooklyn                         313,858
+    EWR                               20,266
+    Manhattan                      7,641,147
+    N/A                               31,763
+    Queens                           387,174
+    Staten Island                      1,766
+    Unknown                           38,588
+    total                          8,480,687
+
+  plans written to runs/ex07_plans.log
+  ---- auto (BroadcastHashJoin): final plan, isFinalPlan=true: yes ----
+    +- Exchange hashpartitioning(Borough#62, 200), ENSURE_REQUIREMENTS, [plan_id=1226]
+    +- *(2) BroadcastHashJoin [DOLocationID#8], [LocationID#69], LeftOuter, BuildRight, false
+    +- BroadcastExchange HashedRelationBroadcastMode(List(cast(input[0, int, true] as bigint)),false), [plan_id=1175]
+  ---- forced (SortMergeJoin): final plan, isFinalPlan=true: yes ----
+    +- Exchange hashpartitioning(Borough#62, 200), ENSURE_REQUIREMENTS, [plan_id=1418]
+    +- *(5) SortMergeJoin [DOLocationID#8], [LocationID#69], LeftOuter
+    :        +- Exchange hashpartitioning(DOLocationID#8, 200), ENSURE_REQUIREMENTS, [plan_id=1312]
+    +- Exchange hashpartitioning(LocationID#69, 200), ENSURE_REQUIREMENTS, [plan_id=1324]
+
+  timings written to out/parts/ex07.csv
+

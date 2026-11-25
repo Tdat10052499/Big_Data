@@ -1,0 +1,3 @@
+exercise,measurement,setting,warmup_s,run1_s,run2_s,run3_s,best_s,source_log
+ex07,"join zones on DOLocationID, trips per Borough",auto (BroadcastHashJoin),0.421,0.307,0.249,0.234,0.234,runs/ex07_join.log
+ex07,"join zones on DOLocationID, trips per Borough",forced (SortMergeJoin),1.959,1.122,1.278,1.283,1.122,runs/ex07_join.log
